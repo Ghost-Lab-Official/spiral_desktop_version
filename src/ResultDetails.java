@@ -27,7 +27,12 @@ public class ResultDetails extends JFrame {
         p2.setLayout(layout);
 
         // Declaration of objects of JLabel class.
-        JLabel resutlDetailTitle;
+        JLabel resultDetailsTitle, likes;
+        JPanel resultDetailsInfo = new JPanel(new GridLayout(2,1));
+//        resultDetailsInfo.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        resultDetailsInfo.setBackground(Color.WHITE);
+        resultDetailsInfo.setPreferredSize(new Dimension(300,100));
+        p2.add(resultDetailsInfo);
 
         // Declaration of objects of JTextField class.
         JTextField tname, tsalary, tcode, tdesig;
@@ -37,8 +42,8 @@ public class ResultDetails extends JFrame {
 
         // Initialization of object
         // "one" of JLabel class.
-        resutlDetailTitle = new JLabel("Amakosi-Ish Kevin", SwingConstants.CENTER);
-        resutlDetailTitle.setVerticalAlignment(SwingConstants.TOP);
+        resultDetailsTitle = new JLabel("Amakosi-Ish Kevin\n\n", SwingConstants.CENTER);
+        likes = new JLabel("Likes: 38.8k", SwingConstants.CENTER);
 
         // Initialization of object
         // "tname" of JTextField class.
@@ -77,7 +82,8 @@ public class ResultDetails extends JFrame {
         buttonExit = new JButton("EXIT");
 
         // Adding Jlabel "one" on JFrame.
-        p2.add(resutlDetailTitle);
+        resultDetailsInfo.add(resultDetailsTitle);
+        resultDetailsInfo.add(likes);
 
         // Adding JTextField "tname" on JFrame.
 //        p1.add(tname);
