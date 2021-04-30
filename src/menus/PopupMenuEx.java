@@ -1,4 +1,4 @@
-package com.zetcode;
+package menus;
 
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;

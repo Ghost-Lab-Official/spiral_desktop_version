@@ -1,4 +1,4 @@
-package com.zetcode;
+package menus;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
