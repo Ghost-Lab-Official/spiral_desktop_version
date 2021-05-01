@@ -1,4 +1,4 @@
 # spiral_desktop_version
-##Tech Stack
+## Tech Stack
 * Java
 * Swing
