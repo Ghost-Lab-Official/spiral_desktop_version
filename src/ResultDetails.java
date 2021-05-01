@@ -1,4 +1,4 @@
-// Java program to illustrate the GridLayout
+// Result details page
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,97 +23,31 @@ public class ResultDetails extends JFrame {
         p2.setBackground(Color.WHITE);
         p2.setPreferredSize(new Dimension(900, 480));
 
-        // set the layout
-        p2.setLayout(layout);
-
         // Declaration of objects of JLabel class.
-        JLabel resultDetailsTitle, likes;
-        JPanel resultDetailsInfo = new JPanel(new GridLayout(2,1));
-//        resultDetailsInfo.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        resultDetailsInfo.setBackground(Color.WHITE);
-        resultDetailsInfo.setPreferredSize(new Dimension(300,100));
-        p2.add(resultDetailsInfo);
-
-        // Declaration of objects of JTextField class.
-        JTextField tname, tsalary, tcode, tdesig;
-
-        // Declaration of objects of JButton class.
-        JButton buttonSave, buttonExit;
+        JLabel resultDetailsTitle, likes, resultDetailsDescription;
+        JPanel descriptionPanel = new JPanel(new GridLayout(4, 4));
+        descriptionPanel.setPreferredSize(new Dimension(400, 480));
+        descriptionPanel.setBackground(Color.BLUE);
+        descriptionPanel.setBorder(BorderFactory.createEmptyBorder(40,40,20,40));
+        p2.setBackground(Color.WHITE);
 
         // Initialization of object
         // "one" of JLabel class.
-        resultDetailsTitle = new JLabel("Amakosi-Ish Kevin\n\n", SwingConstants.CENTER);
-        likes = new JLabel("Likes: 38.8k", SwingConstants.CENTER);
-
-        // Initialization of object
-        // "tname" of JTextField class.
-//        tname = new JTextField(20);
-
-        // Initialization of object
-        // "two" of JLabel class.
-//        two = new JLabel("CODE");
-
-        // Initialization of object
-        // "tcode" of JTextField class.
-//        tcode = new JTextField(20);
-
-        // Initialization of object
-        // "three" of JLabel class.
-//        three = new JLabel("DESIGNATION");
-
-        // Initialization of object
-        // "tdesig" of JTextField class.
-//        tdesig = new JTextField(20);
-
-        // Initialization of object
-        // "four" of JLabel class.
-//        four = new JLabel("SALARY");
-
-        // Initialization of object
-        // "tsalary" of JTextField class.
-//        tsalary = new JTextField(20);
-
-        // Initialization of object
-        // "buttonsave" of JButton class.
-        buttonSave = new JButton("SAVE");
-
-        // Initialization of object
-        // "buttonexit" of JButton class.
-        buttonExit = new JButton("EXIT");
+        resultDetailsTitle = new JLabel("Amakosi-Ish Kevin");
+        resultDetailsTitle.setFont(new Font("Inter", Font.BOLD,25));
+        likes = new JLabel("Likes: 38.8k");
+        resultDetailsTitle.setBounds(350,30,400,20);
+        likes.setBounds(400,60,80,20);
+        likes.setForeground(Color.decode("#878787"));
+        resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis fringilla lorem. Duis pretium arcu et diam convallis, et lacinia lectus fermentum Duis pretium arcu et diam convallis, et lacinia lectus fermentum</html>");
+        resultDetailsDescription.setBounds(230,50,450,250);
+        p2.setLayout(null);
+        p2.add(resultDetailsDescription);
 
         // Adding Jlabel "one" on JFrame.
-        resultDetailsInfo.add(resultDetailsTitle);
-        resultDetailsInfo.add(likes);
+        p2.add(resultDetailsTitle);
+        p2.add(likes);
 
-        // Adding JTextField "tname" on JFrame.
-//        p1.add(tname);
-
-        // Adding Jlabel "two" on JFrame.
-//        p1.add(two);
-
-        // Adding JTextField "tcode" on JFrame.
-//        p1.add(tcode);
-
-        // Adding Jlabel "three" on JFrame.
-//        p1.add(three);
-
-        // Adding JTextField "tdesig" on JFrame.
-//        p1.add(tdesig);
-
-        // Adding Jlabel "four" on JFrame.
-//        p1.add(four);
-
-        // Adding JTextField "tsalary" on JFrame.
-//        p1.add(tsalary);
-
-        // Adding JButton "buttonsave" on JFrame.
-//        p2.add(buttonSave);
-
-        // Adding JButton "buttonexit" on JFrame.
-//        p2.add(buttonExit);
-
-        // add the p1 object which
-        // refer to the Jpanel
         add(p1, "West");
 
         // add the p2 object which
@@ -132,7 +66,6 @@ public class ResultDetails extends JFrame {
     // Main Method
     public static void main(String args[])
     {
-
         // calling the constructor
         new ResultDetails();
     }
