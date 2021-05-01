@@ -1,2 +1,4 @@
 # spiral_desktop_version
-Using Swing 😉
+##Tech Stack
+* Java
+* Swing
