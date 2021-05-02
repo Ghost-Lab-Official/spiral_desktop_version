@@ -1,7 +1,6 @@
 package pages;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.IOException;
@@ -61,43 +60,43 @@ public class Signup {
         firstName.setFont(new Font("verdana", Font.PLAIN, 14));
         firstName.setForeground(Color.decode("#202020"));
         first = new JTextField();
-        first.setBounds(510,200,180,40);
-        first.setBorder(new LineBorder(Color.BLACK,1,true));
+        first.setBounds(510,190,180,40);
+        first.setBorder(new LineBorder(Color.GRAY,1,true));
         lastName = new JLabel("Last name");
         lastName.setBounds(730,150,150,40);
         lastName.setFont(new Font("verdana", Font.PLAIN, 14));
         lastName.setForeground(Color.decode("#202020"));
         last = new JTextField();
-        last.setBounds(730,200,180,40);
-        last.setBorder(new LineBorder(Color.BLACK,1,true));
+        last.setBounds(730,190,180,40);
+        last.setBorder(new LineBorder(Color.GRAY,1,true));
         email = new JLabel("Email");
-        email.setBounds(510,250,150,40);
+        email.setBounds(510,230,150,40);
         email.setForeground(Color.decode("#202020"));
         email.setFont(new Font("verdana", Font.PLAIN, 14));
         address = new JTextField();
-        address.setBounds(510,300,400,40);
-        address.setBorder(new LineBorder(Color.BLACK,1,true));
+        address.setBounds(510,270,400,40);
+        address.setBorder(new LineBorder(Color.GRAY,1,true));
         username = new JLabel("Username");
-        username.setBounds(510,350,150,40);
+        username.setBounds(510,310,150,40);
         username.setForeground(Color.decode("#202020"));
         username.setFont(new Font("verdana", Font.PLAIN, 14));
         name = new JTextField();
-        name.setBounds(510,400,400,40);
-        name.setBorder(new LineBorder(Color.BLACK,1,true));
+        name.setBounds(510,350,400,40);
+        name.setBorder(new LineBorder(Color.GRAY,1,true));
         password = new JLabel("Password");
-        password.setBounds(510,450,150,40);
+        password.setBounds(510,390,150,40);
         password.setForeground(Color.decode("#202020"));
         password.setFont(new Font("verdana", Font.PLAIN, 14));
         pass = new JPasswordField();
-        pass.setBounds(510,500,400,40);
-        pass.setBorder(new LineBorder(Color.BLACK,1,true));
+        pass.setBounds(510,430,400,40);
+        pass.setBorder(new LineBorder(Color.GRAY,1,true));
         location = new JLabel("Location");
-        location.setBounds(510,550,150,40);
+        location.setBounds(510,470,150,40);
         location.setForeground(Color.decode("#202020"));
         location.setFont(new Font("verdana", Font.PLAIN, 14));
         place = new JTextField();
-        place.setBounds(510,600,400,40);
-        place.setBorder(new LineBorder(Color.BLACK,1,true));
+        place.setBounds(510,510,400,40);
+        place.setBorder(new LineBorder(Color.GRAY,1,true));
 
 
 
