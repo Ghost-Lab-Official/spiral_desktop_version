@@ -1,6 +1,8 @@
 package pages;
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.IOException;
@@ -15,8 +17,8 @@ public class Signup {
     private JLabel username;
     private JLabel password;
     private JLabel location;
-//    private JLabel already;
-//    private JLabel login;
+    private JLabel already;
+    private JLabel login;
     private JLabel spiral;
     private JTextField first;
     private JTextField last;
@@ -26,7 +28,7 @@ public class Signup {
     private JTextField place;
     private JPanel titlePanel;
     private JPanel formPanel;
-
+    private JButton btn;
 
 
     public Signup()throws IOException{
@@ -34,7 +36,7 @@ public class Signup {
     }
     public void formInitiator()throws IOException {
         window = new JFrame("Signup Form");
-        window.setSize(1360,720);
+        window.setSize(1370,730);
         window.setLayout(null);
         window.setBackground(Color.WHITE);
 
@@ -97,9 +99,17 @@ public class Signup {
         place = new JTextField();
         place.setBounds(510,550,400,40);
         place.setBorder(new LineBorder(Color.BLACK,1,true));
-
-
-
+        btn = new JButton("Sign Up");
+        btn.setBounds(510,600,90,40);
+        btn.setBackground(Color.decode("#3674D0"));
+        btn.setForeground(Color.WHITE);
+        btn.setFont(new Font("verdana", Font.PLAIN, 15));
+        already = new JLabel("Already have an account?");
+        already.setForeground(Color.decode("#515151"));
+        already.setBounds(510,650,150,40);
+        login = new JLabel("Login");
+        login.setForeground(Color.decode("#3674D0"));
+        login.setBounds(660,650,50,40);
         window.add(spiral);
         window.add(welcome);
         window.add(title);
@@ -115,10 +125,15 @@ public class Signup {
         window.add(pass);
         window.add(location);
         window.add(place);
+        window.add(btn);
+        window.add(already);
+        window.add(login);
         window.add(titlePanel);
         window.add(formPanel);
         window.setVisible(true);
     }
+
+
 
     public static void main(String[] args) throws Exception {
         new Signup();
