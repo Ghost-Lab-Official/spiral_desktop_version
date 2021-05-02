@@ -37,7 +37,7 @@ public class CommentPanel extends JPanel {
         JLabel body=new JLabel(text);
         body.setFont(new Font("Verdana", Font.PLAIN, 10));
         body.setBounds(30,20,200,100);
-        ImageIcon icon = createImageIcon("/images/like.png","like");
+        ImageIcon icon = createImageIcon("src/images/like.png","like");
 
         JLabel likeIcon = new JLabel(icon);
         likeIcon.setBounds(140,10,40,25);
