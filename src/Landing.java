@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ButtonUI;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
 public class Landing extends JFrame{
@@ -10,6 +12,7 @@ public class Landing extends JFrame{
     private JButton registerButton;
     private JButton loginButton;
     private JTextField searchInput;
+    IconTextField searchField = new IconTextField();
 
     public Landing(){
         setTitle("Home");
@@ -33,7 +36,11 @@ public class Landing extends JFrame{
         JLabel welcomeText = new JLabel("Welcome to Spiral");
         JLabel instructionText = new JLabel("Search whatever you want");
 
-        appBrand.setFont(new Font("Nunito", Font.BOLD, 25));
+        ImageIcon icon = new ImageIcon("search-icon.png");
+        searchField.setIcon(icon);
+        searchField.setFont(new Font("Verdana", Font.PLAIN, 16));
+
+        appBrand.setFont(new Font("nunito", Font.BOLD, 25));
         appBrand.setForeground(textColor);
         headPanel.setPreferredSize(new Dimension(0, 80));
         headPanel.setBackground(bgColor);
@@ -52,15 +59,21 @@ public class Landing extends JFrame{
         registerButton.setBackground(textColor);
         registerButton.setForeground(Color.WHITE);
         registerButton.setFocusPainted(false);
-
+        registerButton.setFont(new Font("nunito", Font.PLAIN,15));
+        registerButton.setBorder(new RoundedBorder(40));
+        registerButton.setFocusPainted(false);
+        registerButton.setBorderPainted(false);
+//        registerButton.setContentAreaFilled(false);
+//        registerButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 //        registerButton.setBorder(BorderFactory.createCompoundBorder(
 //                new CustomBorder(),
-//                new EmptyBorder(new Insets(25, 10, 15, 25))
+//                new EmptyBorder(new Insets(2, 1, 1, 2))
 //        ));
 
 //        registerButton.setBorder(new RoundedBorder(5));
 
         loginButton.setBackground(bgColor);
+        loginButton.setFont(new Font("nunito",Font.PLAIN,17));
         loginButton.setForeground(textColor);
         loginButton.setBorder(null);
         loginButton.setFocusPainted(false);
@@ -68,13 +81,13 @@ public class Landing extends JFrame{
         JPanel bodyContent = new JPanel();
         BoxLayout boxLayout = new BoxLayout(bodyContent, BoxLayout.Y_AXIS);
 
-        welcomeText.setFont(new Font("Nunito", Font.BOLD, 30));
+        welcomeText.setFont(new Font("nunito", Font.BOLD, 30));
         welcomeText.setForeground(textColor);
 
         instructionText.setForeground(Color.GRAY);
-        instructionText.setFont(new Font("Nunito", Font.PLAIN, 14));
+        instructionText.setFont(new Font("nunito", Font.PLAIN, 15));
 
-        searchInput.setPreferredSize(new Dimension(400, 50));
+        searchField.setPreferredSize(new Dimension(400, 50));
 
         JPanel panel1 = new JPanel(new GridBagLayout());
         panel1.setBorder(BorderFactory.createEmptyBorder(0,0, 3, 0));
@@ -88,11 +101,11 @@ public class Landing extends JFrame{
         panel2.setBackground(bgColor);
         bodyContent.add(panel2);
 
-        searchInput.setBackground(Color.WHITE);
-        searchInput.setBorder(new RoundedBorder(50));
-        bodyContent.add(new JPanel(new GridBagLayout()).add(searchInput));
-
-
+        searchField.setBackground(bgColor);
+//        searchField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        searchField.setBorder(BorderFactory.createLineBorder(Color.GRAY,1,true));
+        searchField.setForeground(Color.BLACK);
+        bodyContent.add(new JPanel(new GridBagLayout()).add(searchField));
         bodyContent.setLayout(boxLayout);
         bodyContent.setBackground(bgColor);
         bodyPanel.setBackground(bgColor);
@@ -131,5 +144,90 @@ class CustomBorder extends AbstractBorder {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setStroke(new BasicStroke(12));
         g2d.drawRoundRect(x, y, width - 1, height - 1, 25, 25);
+    }
+}
+
+class IconTextComponentHelper {
+    private static final int ICON_SPACING = 4;
+
+    private Border mBorder;
+    private Icon mIcon;
+    private Border mOrigBorder;
+    private JTextComponent mTextComponent;
+
+    IconTextComponentHelper(JTextComponent component) {
+        mTextComponent = component;
+        mOrigBorder = component.getBorder();
+        mBorder = mOrigBorder;
+    }
+
+    Border getBorder() {
+        return mBorder;
+    }
+
+    void onPaintComponent(Graphics g) {
+        if (mIcon != null) {
+            Insets iconInsets = mOrigBorder.getBorderInsets(mTextComponent);
+            mIcon.paintIcon(mTextComponent, g, iconInsets.left, iconInsets.top);
+        }
+    }
+
+    void onSetBorder(Border border) {
+        mOrigBorder = border;
+
+        if (mIcon == null) {
+            mBorder = border;
+        } else {
+            Border margin = BorderFactory.createEmptyBorder(0, mIcon.getIconWidth() + ICON_SPACING, 0, 0);
+            mBorder = BorderFactory.createCompoundBorder(border, margin);
+        }
+    }
+
+    void onSetIcon(Icon icon) {
+        mIcon = icon;
+        resetBorder();
+    }
+
+    private void resetBorder() {
+        mTextComponent.setBorder(mOrigBorder);
+    }
+}
+
+class IconTextField extends JTextField {
+    private IconTextComponentHelper mHelper = new IconTextComponentHelper(this);
+
+    public IconTextField() {
+        super();
+    }
+
+    public IconTextField(int cols) {
+        super(cols);
+    }
+
+    private IconTextComponentHelper getHelper() {
+        if (mHelper == null)
+            mHelper = new IconTextComponentHelper(this);
+
+        return mHelper;
+    }
+
+    @Override
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        getHelper().onPaintComponent(graphics);
+    }
+
+    public void setIcon(Icon icon) {
+        getHelper().onSetIcon(icon);
+    }
+
+//    public void setIconSpacing(int spacing) {
+//        getHelper().onSetIconSpacing(spacing);
+//    }
+
+    @Override
+    public void setBorder(Border border) {
+        getHelper().onSetBorder(border);
+        super.setBorder(getHelper().getBorder());
     }
 }
