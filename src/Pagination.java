@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,31 +7,6 @@ import java.awt.event.WindowEvent;
 
 public class Pagination extends JPanel {
     public Pagination(){paginationBtn();}
-
-    private static class RoundedBorder implements Border {
-
-        private int radius;
-
-
-        RoundedBorder(int radius) {
-            this.radius = radius;
-        }
-
-
-        public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-        }
-
-
-        public boolean isBorderOpaque() {
-            return true;
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-        }
-    }
 
     public class ButtonActionListener implements ActionListener {
         public void actionPerformed (ActionEvent e){
@@ -57,10 +31,10 @@ public class Pagination extends JPanel {
     public void paginationBtn(){
 
         //Declaring buttons
-        JButton page1 = new JButton("1");
-        JButton page2 = new JButton("2");
-        JButton page3 = new JButton("3");
-        JButton page4 = new JButton("4");
+        CircleButton page1 = new CircleButton("1");
+        CircleButton page2 = new CircleButton("2");
+        CircleButton page3 = new CircleButton("3");
+        CircleButton page4 = new CircleButton("4");
         JButton etc = new JButton("...");
 
         //Removing background from buttons and other styles
@@ -95,14 +69,6 @@ public class Pagination extends JPanel {
         page3.addActionListener(new ButtonActionListener());
         page4.addActionListener(new ButtonActionListener());
         etc.addActionListener(new ButtonActionListener());
-
-        //Round the buttons
-        int x_pos = 100;
-        int y_pos = 10;
-        page1.setBounds(x_pos, y_pos, 30, 30);
-        page1.setBorder(new RoundedBorder(10)); //10 is the radius
-//        addBtn.setForeground(Color.BLUE);
-
 
         //Add buttons to page
         add(page1);
