@@ -1,4 +1,4 @@
-// Java program to illustrate the GridLayout
+package resultDetails;// Java program to illustrate the GridLayout
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -25,7 +25,7 @@ public class ResultDetails extends JFrame {
         TPanel.setLayout(null);
 
         JLabel  title= new JLabel("Comments");
-        title.setFont(new Font("Verdana", Font.BOLD, 27));
+        title.setFont(new Font("Montserrat", Font.BOLD,20));
         title.setBounds(100,40,200,30);
         TPanel.add(title);
         p1.add(TPanel);
@@ -34,11 +34,12 @@ public class ResultDetails extends JFrame {
 //        comments = new CommePanel[5];
         for (int i = 0;i<4;i++) {
             CommentPanel comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
+            comment.setFont(new Font("Nunito", Font.PLAIN,13));
             p1.add(comment);
         }
         JPanel lastPanel=new JPanel();
         lastPanel.setLayout(null);
-        JLabel more=new JLabel("Loadmore");
+        JLabel more=new JLabel("Load more");
         more.setBounds(150,10,100,30);
         more.setForeground(Color.decode("#3674D0"));
         Font font = more.getFont();
@@ -51,30 +52,17 @@ public class ResultDetails extends JFrame {
         CommentField.setColumns(20);
         CommentField.setPlaceholder("Add a comment!");
         CommentField.setBounds(0,50,300,55);
-        CommentField.setBorder(BorderFactory.createCompoundBorder(
-                CommentField.getBorder(),
+        CommentField.setBorder(BorderFactory.createCompoundBorder(CommentField.getBorder(),
                 BorderFactory.createEmptyBorder(3, 3, 3, 3)));
         CommentField.setMargin(new Insets(15, 15, 10, 15));
         final Font f = CommentField.getFont();
         CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
-//        JOptionPane.showMessageDialog(null, CommentField);
-
-//        JTextArea CommentField=new JTextArea("Add Comment");
-//        CommentField.setBounds(0,50,300,55);
-//        CommentField.setBorder(BorderFactory.createCompoundBorder(
-//                CommentField.getBorder(),
-//                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-//        CommentField.setMargin(new Insets(20, 20, 10, 10));
-
-//        CommentField.setBounds(0,50,300,55);
-//        CommentField.setBorder(null);
-//        CommentField.setMargin(new Insets(20, 20, 10, 10));
 
          JButton sendComment=new JButton("SEND");
          sendComment.setBounds(300,50,100,55);
          sendComment.setBackground(Color.decode("#C4C4C4"));
          sendComment.setBorder(null);
-         sendComment.setFont(new Font("Verdana", Font.BOLD, 15));
+         sendComment.setFont(new Font("Nunito", Font.BOLD, 15));
          lastPanel.add(CommentField);
          lastPanel.add(sendComment);
 
@@ -89,8 +77,9 @@ public class ResultDetails extends JFrame {
         // Initialization of object
         // "one" of JLabel class.
         resultDetailsTitle = new JLabel("Amakosi-Ish Kevin");
-        resultDetailsTitle.setFont(new Font("Inter", Font.BOLD,25));
+        resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
+        likes.setFont(new Font("Nunito", Font.PLAIN,12));
         resultDetailsTitle.setBounds(350,100,400,20);
         likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
@@ -98,7 +87,7 @@ public class ResultDetails extends JFrame {
         for (int i = 0;i<4;i++) {
 
             CommentPanel ratingStars = new CommentPanel();
-            ImageIcon image = ratingStars.createImageIconResisable("/images/star.png", "ratings", 15, 15);
+            ImageIcon image = ratingStars.createImageIconResizeable("/images/star.png", "ratings", 15, 15);
             JLabel rates = new JLabel(image);
             rates.setBounds(x, 135, 80, 20);
             p2.add(rates);
@@ -124,6 +113,7 @@ public class ResultDetails extends JFrame {
                 "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
 
         resultDetailsDescription.setBounds(230,150,450,400);
+        resultDetailsDescription.setFont(new Font("Nunito", Font.PLAIN,13));
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
         // Adding Jlabel "one" on JFrame.
