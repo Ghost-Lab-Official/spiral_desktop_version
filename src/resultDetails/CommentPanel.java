@@ -1,13 +1,14 @@
+package resultDetails;
+
 import javax.swing.*;
-import javax.xml.stream.events.Comment;
 import java.awt.*;
 
 public class CommentPanel extends JPanel {
 
     public CommentPanel() {
     }
-    public ImageIcon createImageIconResisable(String path,
-                                              String description,int w,int h) {
+    public ImageIcon createImageIconResizeable(String path,
+                                               String description, int w, int h) {
         java.net.URL imgURL = CommentPanel.class.getResource(path);
 
         if (imgURL != null) {

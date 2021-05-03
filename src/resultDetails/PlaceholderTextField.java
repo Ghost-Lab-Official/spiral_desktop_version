@@ -1,9 +1,10 @@
+package resultDetails;
+
 import java.awt.*;
 
         import javax.swing.*;
-        import javax.swing.text.Document;
 
-@SuppressWarnings("serial")
+
 public class PlaceholderTextField extends JTextField {
 
     public static void main(final String[] args) {
