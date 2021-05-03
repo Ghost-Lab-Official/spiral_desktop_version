@@ -11,8 +11,8 @@ public class ResultDetails extends JFrame {
         JPanel p1 = new JPanel();
         // set the layout
         p1.setLayout(new GridLayout(4, 2));
-        p1.setBackground(Color.decode("#F6F6F6"));
-        p1.setPreferredSize(new Dimension(400, 480));
+        p1.setBackground(Color.decode("#ffffff"));
+        p1.setPreferredSize(new Dimension(400, 200));
         // Creating Object of "FlowLayout" class
         FlowLayout layout = new FlowLayout();
         // Creating Object P2 of JPanel class
@@ -24,7 +24,7 @@ public class ResultDetails extends JFrame {
         JPanel TPanel=new JPanel();
         TPanel.setLayout(null);
 
-        JLabel  title= new JLabel("comments");
+        JLabel  title= new JLabel("Comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
         title.setBounds(100,30,200,30);
         TPanel.add(title);
@@ -32,13 +32,13 @@ public class ResultDetails extends JFrame {
 
 
 //        comments = new CommePanel[5];
-        for (int i = 0;i<3;i++) {
-            CommentPanel  comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
+        for (int i = 0;i<4;i++) {
+            CommentPanel comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
             p1.add(comment);
         }
-               JPanel lastPanel=new JPanel();
-          lastPanel.setLayout(null);
-       JLabel more=new JLabel("loadmore");
+        JPanel lastPanel=new JPanel();
+        lastPanel.setLayout(null);
+        JLabel more=new JLabel("loadmore");
         more.setBounds(150,0,100,30);
         more.setForeground(Color.decode("#3674D0"));
         Font font = more.getFont();
@@ -47,12 +47,18 @@ public class ResultDetails extends JFrame {
         more.setFont(font.deriveFont(attributes));
         lastPanel.add(more);
         JTextArea CommentField=new JTextArea("Add Comment");
-        CommentField.setBounds(0,74,300,55);
-        CommentField.setBorder(null);
+        CommentField.setBounds(0,50,300,55);
+        CommentField.setBorder(BorderFactory.createCompoundBorder(
+                CommentField.getBorder(),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         CommentField.setMargin(new Insets(20, 20, 10, 10));
 
+//        CommentField.setBounds(0,50,300,55);
+//        CommentField.setBorder(null);
+//        CommentField.setMargin(new Insets(20, 20, 10, 10));
+
          JButton sendComment=new JButton("SEND");
-         sendComment.setBounds(300,74,100,55);
+         sendComment.setBounds(300,50,100,55);
          sendComment.setBackground(Color.decode("#C4C4C4"));
          sendComment.setBorder(null);
          sendComment.setFont(new Font("Verdana", Font.BOLD, 15));
@@ -101,7 +107,7 @@ public class ResultDetails extends JFrame {
         p2.add(likes);
 
 
-        p1.setLayout (new GridLayout(5,1));
+        p1.setLayout (new GridLayout(7,1));
 
 
 
