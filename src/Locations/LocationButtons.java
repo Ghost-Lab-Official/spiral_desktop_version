@@ -33,7 +33,7 @@ public class LocationButtons {
 
 
         levelButton = new JButton("+ Add Level");
-//        levelButton.setBounds(10, 25, 55, 52);
+        levelButton.setBounds(10, 25, 55, 52);
         levelButton.setBackground(Color.decode("#CCCCCD"));
         levelButton.setFont(new Font("Nunito",Font.PLAIN,17));
         levelButton.setForeground(Color.decode("#323232"));
