@@ -27,6 +27,8 @@ public class RegisterLocationLevel extends JFrame {
 //        company name
         spiralLabel.setFont(new Font("Nunito", Font.BOLD, 40));
         spiralLabel.setForeground(Color.WHITE);
+        spiralLabel.setFont(new Font("Nunito", Font.BOLD,40));
+        spiralLabel.setForeground(Color.white);
 
 //        left panel
         leftPanel.setBackground(themeColor);
@@ -40,6 +42,14 @@ public class RegisterLocationLevel extends JFrame {
         DescriptLabelPanel.add(levelText, BorderLayout.SOUTH);
 
 //      right panel
+
+        //header
+        JLabel registerHeadingLabel = new JLabel("<html>Register Location <br/> Level </html>");
+        registerHeadingLabel.setForeground(themeColor);
+        registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
+        rightPanel.add(registerHeadingLabel);
+
+        //input fields
         JLabel levelName = new JLabel("Level name");
         JTextField levelNameInput = new JTextField();
         JLabel levelDescription = new JLabel("Description");
