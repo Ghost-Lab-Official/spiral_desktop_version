@@ -1,5 +1,6 @@
     package Locations;
     import javax.swing.*;
+    import javax.swing.border.LineBorder;
     import javax.swing.table.DefaultTableModel;
     import java.awt.*;
     import java.util.ArrayList;
@@ -21,12 +22,12 @@
 
         public void loadLocationTable(){
             String[][] locationsData = {{"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
-                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"}
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "Nyirangarama products","Active"},
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "gender is the concept that is still not un...","Active"},
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "balanced diet is on a good level in rwanda c..","Active"},
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "balanced diet is on a good level in rwanda c..","Active"},
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "Books that talk abount different subjects","Active"},
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "huye waterfall provides water for huye people","Active"}
             };
 
             panel2 = new JPanel();
@@ -43,6 +44,8 @@
             }
 
             JScrollPane sp = new JScrollPane(locationsTable);
+            locationsTable.setRowHeight(50);
+            locationsTable.setBorder(new LineBorder(Color.WHITE));
             sp.setPreferredSize(new Dimension(1175,400));
 
             panel2.setBackground(Color.WHITE);
