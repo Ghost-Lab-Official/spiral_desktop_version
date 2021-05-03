@@ -1,4 +1,5 @@
-package resultDetails;// Java program to illustrate the GridLayout
+package resultDetails;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -23,26 +24,14 @@ public class ResultDetails extends JFrame {
         p2.setLayout(layout);
         JPanel TPanel=new JPanel();
         TPanel.setLayout(null);
-
         JLabel  title= new JLabel("Comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-        title.setBounds(100,20,200,30);
-=======
         title.setBounds(100,40,200,30);
->>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
         TPanel.add(title);
         p1.add(TPanel);
-
-
 //        comments = new CommePanel[5];
         for (int i = 0;i<4;i++) {
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-            CommentPanel  comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
-
-=======
             CommentPanel comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
->>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
             p1.add(comment);
         }
         JPanel lastPanel=new JPanel();
@@ -55,14 +44,6 @@ public class ResultDetails extends JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         more.setFont(font.deriveFont(attributes));
         lastPanel.add(more);
-
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-        JTextArea CommentField=new JTextArea("Add Comment");
-        CommentField.setBounds(0,50,300,55);
-        CommentField.setBorder(null);
-        
-        CommentField.setMargin(new Insets(20, 20, 10, 10));
-=======
         final PlaceholderTextField CommentField = new PlaceholderTextField("");
         CommentField.setColumns(20);
         CommentField.setPlaceholder("Add a comment!");
@@ -74,19 +55,15 @@ public class ResultDetails extends JFrame {
         final Font f = CommentField.getFont();
         CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
 //        JOptionPane.showMessageDialog(null, CommentField);
-
 //        JTextArea CommentField=new JTextArea("Add Comment");
 //        CommentField.setBounds(0,50,300,55);
 //        CommentField.setBorder(BorderFactory.createCompoundBorder(
 //                CommentField.getBorder(),
 //                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 //        CommentField.setMargin(new Insets(20, 20, 10, 10));
-
 //        CommentField.setBounds(0,50,300,55);
 //        CommentField.setBorder(null);
 //        CommentField.setMargin(new Insets(20, 20, 10, 10));
->>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
-
          JButton sendComment=new JButton("SEND");
          sendComment.setBounds(300,50,100,55);
          sendComment.setBackground(Color.decode("#C4C4C4"));
@@ -94,9 +71,7 @@ public class ResultDetails extends JFrame {
          sendComment.setFont(new Font("Verdana", Font.BOLD, 15));
          lastPanel.add(CommentField);
          lastPanel.add(sendComment);
-
         p1.add(lastPanel);
-
         JLabel resultDetailsTitle, likes, resultDetailsDescription;
         JPanel descriptionPanel = new JPanel(new GridLayout(4, 4));
         descriptionPanel.setPreferredSize(new Dimension(400, 480));
@@ -113,7 +88,6 @@ public class ResultDetails extends JFrame {
         likes.setForeground(Color.decode("#878787"));
         int x=430;
         for (int i = 0;i<4;i++) {
-
             CommentPanel ratingStars = new CommentPanel();
             ImageIcon image = ratingStars.createImageIconResisable("/images/star.png", "ratings", 15, 15);
             JLabel rates = new JLabel(image);
@@ -121,7 +95,6 @@ public class ResultDetails extends JFrame {
             p2.add(rates);
             x+=20;
         }
-
         resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula\n" +
                 "blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis\n" +
                 "fringilla lorem. Duis pretium arcu et diam convallis, et lacinia lectus fermentum.\n" +
@@ -139,23 +112,13 @@ public class ResultDetails extends JFrame {
                 "id lectus suscipit suscipit in quis turpis. Sed auctor tempor dolor, vitae placerat\n" +
                 "rhoncus vel. Mauris tellus nisi, congue vitae fringilla id, condimentum vel tellus.\n" +
                 "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
-
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-        resultDetailsDescription.setBounds(230,90,450,250);
-=======
         resultDetailsDescription.setBounds(230,150,450,400);
->>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
         // Adding Jlabel "one" on JFrame.
         p2.add(resultDetailsTitle);
         p2.add(likes);
-
-
         p1.setLayout (new GridLayout(6,1));
-
-
-
         add(p1, "West");
         add(p2, "East");
         // Function to set visible
