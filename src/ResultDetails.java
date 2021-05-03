@@ -12,7 +12,7 @@ public class ResultDetails extends JFrame {
         // set the layout
         p1.setLayout(new GridLayout(4, 2));
         p1.setBackground(Color.decode("#ffffff"));
-        p1.setPreferredSize(new Dimension(400, 200));
+        p1.setPreferredSize(new Dimension(400, 480));
         // Creating Object of "FlowLayout" class
         FlowLayout layout = new FlowLayout();
         // Creating Object P2 of JPanel class
@@ -26,7 +26,7 @@ public class ResultDetails extends JFrame {
 
         JLabel  title= new JLabel("Comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
-        title.setBounds(100,30,200,30);
+        title.setBounds(100,20,200,30);
         TPanel.add(title);
         p1.add(TPanel);
 
@@ -38,7 +38,7 @@ public class ResultDetails extends JFrame {
         }
         JPanel lastPanel=new JPanel();
         lastPanel.setLayout(null);
-        JLabel more=new JLabel("loadmore");
+        JLabel more=new JLabel("Loadmore");
         more.setBounds(150,0,100,30);
         more.setForeground(Color.decode("#3674D0"));
         Font font = more.getFont();
@@ -46,12 +46,25 @@ public class ResultDetails extends JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         more.setFont(font.deriveFont(attributes));
         lastPanel.add(more);
-        JTextArea CommentField=new JTextArea("Add Comment");
+
+        final PlaceholderTextField CommentField = new PlaceholderTextField("");
+        CommentField.setColumns(20);
+        CommentField.setPlaceholder("Add a comment!");
         CommentField.setBounds(0,50,300,55);
         CommentField.setBorder(BorderFactory.createCompoundBorder(
                 CommentField.getBorder(),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+                BorderFactory.createEmptyBorder(3, 3, 3, 3)));
         CommentField.setMargin(new Insets(20, 20, 10, 10));
+        final Font f = CommentField.getFont();
+        CommentField.setFont(new Font(f.getName(), f.getStyle(), 15));
+//        JOptionPane.showMessageDialog(null, CommentField);
+
+//        JTextArea CommentField=new JTextArea("Add Comment");
+//        CommentField.setBounds(0,50,300,55);
+//        CommentField.setBorder(BorderFactory.createCompoundBorder(
+//                CommentField.getBorder(),
+//                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+//        CommentField.setMargin(new Insets(20, 20, 10, 10));
 
 //        CommentField.setBounds(0,50,300,55);
 //        CommentField.setBorder(null);
@@ -78,9 +91,17 @@ public class ResultDetails extends JFrame {
         resultDetailsTitle = new JLabel("Amakosi-Ish Kevin");
         resultDetailsTitle.setFont(new Font("Inter", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
-        resultDetailsTitle.setBounds(350,30,400,20);
-        likes.setBounds(400,60,80,20);
+        resultDetailsTitle.setBounds(350,100,400,20);
+        likes.setBounds(400,140,80,20);
         likes.setForeground(Color.decode("#878787"));
+
+
+        CommentPanel ratingStars = new CommentPanel();
+        ImageIcon image = ratingStars.createImageIconResisable("/images/star.png","ratings",15,15);
+        JLabel rates = new JLabel(image);
+        rates.setBounds(450,140,80,20);
+        p2.add(rates);
+
         resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula\n" +
                 "blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis\n" +
                 "fringilla lorem. Duis pretium arcu et diam convallis, et lacinia lectus fermentum.\n" +
@@ -88,18 +109,18 @@ public class ResultDetails extends JFrame {
                 "Proin lacinia nisi vitae tortor scelerisque fringilla. Fusce in gravida nulla. In quis\n" +
                 "orci ut ex condimentum faucibus nec sed odio. Nulla et turpis mollis, aliquet nib\n" +
                 "id, pharetra massa. Duis finibus ante quis scelerisque luctus.\n" +
-                "\n" +
+                "\n <br><br>" +
                 "Mauris vehicula ante vel erat accumsan, eu ultrices elit porttitor. Aliquam accum\n" +
                 "urna nec condimentum suscipit. Fusce eleifend massa cursus elementum pulvin \n" +
                 "Vivamus quis quam luctus, porta metus at, pharetra mi. Quisque diam sapien, p\n" +
-                "uere eu suscipit eu, convallis nec magna. \n" +
+                "uere eu suscipit eu, convallis nec magna. \n <br><br>" +
                 "\n" +
                 "Cras luctus sagittis feugiat. Vestibului amet dapibus nulla. Integer faucibus id m\n" +
                 "id lectus suscipit suscipit in quis turpis. Sed auctor tempor dolor, vitae placerat\n" +
                 "rhoncus vel. Mauris tellus nisi, congue vitae fringilla id, condimentum vel tellus.\n" +
                 "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
-        
-        resultDetailsDescription.setBounds(230,90,450,250);
+
+        resultDetailsDescription.setBounds(230,150,450,400);
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
         // Adding Jlabel "one" on JFrame.
@@ -107,7 +128,7 @@ public class ResultDetails extends JFrame {
         p2.add(likes);
 
 
-        p1.setLayout (new GridLayout(7,1));
+        p1.setLayout (new GridLayout(6,1));
 
 
 
@@ -118,7 +139,7 @@ public class ResultDetails extends JFrame {
         setVisible(true);
         // this Keyword refers to current
         // object. Function to set size of JFrame.
-        this.setSize(1920, 768);
+        this.setSize(1920, 670);
     }
     // Main Method
     public static void main(String args[])
