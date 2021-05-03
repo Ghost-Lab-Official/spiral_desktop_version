@@ -145,7 +145,7 @@ public class ResultDetails extends JFrame {
         this.setSize(1920, 670);
     }
     // Main Method
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         // calling the constructor
         new ResultDetails();
