@@ -18,6 +18,8 @@ public class RegisterLocationLevel extends JFrame {
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
+        spiralLabel.setFont(new Font("Nunito", Font.BOLD,40));
+        spiralLabel.setForeground(Color.white);
 
 //        left panel
         leftPanel.setBackground(themeColor);
@@ -34,6 +36,13 @@ public class RegisterLocationLevel extends JFrame {
 //      add panel to window
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
+
+
+        //header
+        JLabel registerHeadingLabel = new JLabel("<html>Register Location <br/> Level </html>");
+        registerHeadingLabel.setForeground(themeColor);
+        registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
+        rightPanel.add(registerHeadingLabel);
     }
 
     public static void main(String[] args) {
