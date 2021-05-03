@@ -1,3 +1,5 @@
+package resultDetails;
+
 import javax.swing.*;
 import javax.xml.stream.events.Comment;
 import java.awt.*;
@@ -6,12 +8,12 @@ public class CommentPanel extends JPanel {
 
     private static ImageIcon createImageIcon(String path,
                                              String description) {
-        java.net.URL imgURL = Comment.class.getResource(path);
+        java.net.URL imgURL = CommentPanel.class.getResource(path);
 
         if (imgURL != null) {
             ImageIcon imageIcon = new ImageIcon(imgURL, description);
             Image image=imageIcon.getImage();
-            Image newimg = image.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
+            Image newimg = image.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
             imageIcon=new ImageIcon(newimg);
             return imageIcon;
         } else {
@@ -37,7 +39,7 @@ public class CommentPanel extends JPanel {
         JLabel body=new JLabel(text);
         body.setFont(new Font("Verdana", Font.PLAIN, 10));
         body.setBounds(30,20,200,100);
-        ImageIcon icon = createImageIcon("src/images/like.png","like");
+        ImageIcon icon = createImageIcon("/images/like.png","like");
 
         JLabel likeIcon = new JLabel(icon);
         likeIcon.setBounds(140,10,40,25);

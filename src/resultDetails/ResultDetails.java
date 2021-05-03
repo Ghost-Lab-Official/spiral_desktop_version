@@ -1,4 +1,4 @@
-// Java program to illustrate the GridLayout
+package resultDetails;// Java program to illustrate the GridLayout
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -26,14 +26,15 @@ public class ResultDetails extends JFrame {
 
         JLabel  title= new JLabel("comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
-        title.setBounds(100,30,200,30);
+        title.setBounds(100,20,200,30);
         TPanel.add(title);
         p1.add(TPanel);
 
 
 //        comments = new CommePanel[5];
-        for (int i = 0;i<3;i++) {
+        for (int i = 0;i<4;i++) {
             CommentPanel  comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
+
             p1.add(comment);
         }
                JPanel lastPanel=new JPanel();
@@ -46,13 +47,15 @@ public class ResultDetails extends JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         more.setFont(font.deriveFont(attributes));
         lastPanel.add(more);
+
         JTextArea CommentField=new JTextArea("Add Comment");
-        CommentField.setBounds(0,74,300,55);
+        CommentField.setBounds(0,50,300,55);
         CommentField.setBorder(null);
+        
         CommentField.setMargin(new Insets(20, 20, 10, 10));
 
          JButton sendComment=new JButton("SEND");
-         sendComment.setBounds(300,74,100,55);
+         sendComment.setBounds(300,50,100,55);
          sendComment.setBackground(Color.decode("#C4C4C4"));
          sendComment.setBorder(null);
          sendComment.setFont(new Font("Verdana", Font.BOLD, 15));
@@ -92,7 +95,7 @@ public class ResultDetails extends JFrame {
                 "id lectus suscipit suscipit in quis turpis. Sed auctor tempor dolor, vitae placerat\n" +
                 "rhoncus vel. Mauris tellus nisi, congue vitae fringilla id, condimentum vel tellus.\n" +
                 "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
-        
+
         resultDetailsDescription.setBounds(230,90,450,250);
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
@@ -101,7 +104,7 @@ public class ResultDetails extends JFrame {
         p2.add(likes);
 
 
-        p1.setLayout (new GridLayout(5,1));
+        p1.setLayout (new GridLayout(6,1));
 
 
 
@@ -112,7 +115,7 @@ public class ResultDetails extends JFrame {
         setVisible(true);
         // this Keyword refers to current
         // object. Function to set size of JFrame.
-        this.setSize(1920, 768);
+        this.setSize(1920, 670);
     }
     // Main Method
     public static void main(String args[])
