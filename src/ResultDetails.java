@@ -26,7 +26,7 @@ public class ResultDetails extends JFrame {
 
         JLabel  title= new JLabel("Comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
-        title.setBounds(100,20,200,30);
+        title.setBounds(100,40,200,30);
         TPanel.add(title);
         p1.add(TPanel);
 
@@ -39,7 +39,7 @@ public class ResultDetails extends JFrame {
         JPanel lastPanel=new JPanel();
         lastPanel.setLayout(null);
         JLabel more=new JLabel("Loadmore");
-        more.setBounds(150,0,100,30);
+        more.setBounds(150,10,100,30);
         more.setForeground(Color.decode("#3674D0"));
         Font font = more.getFont();
         Map attributes = font.getAttributes();
@@ -54,9 +54,9 @@ public class ResultDetails extends JFrame {
         CommentField.setBorder(BorderFactory.createCompoundBorder(
                 CommentField.getBorder(),
                 BorderFactory.createEmptyBorder(3, 3, 3, 3)));
-        CommentField.setMargin(new Insets(20, 20, 10, 10));
+        CommentField.setMargin(new Insets(15, 15, 10, 15));
         final Font f = CommentField.getFont();
-        CommentField.setFont(new Font(f.getName(), f.getStyle(), 15));
+        CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
 //        JOptionPane.showMessageDialog(null, CommentField);
 
 //        JTextArea CommentField=new JTextArea("Add Comment");
@@ -92,15 +92,18 @@ public class ResultDetails extends JFrame {
         resultDetailsTitle.setFont(new Font("Inter", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
         resultDetailsTitle.setBounds(350,100,400,20);
-        likes.setBounds(400,140,80,20);
+        likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
+        int x=430;
+        for (int i = 0;i<4;i++) {
 
-
-        CommentPanel ratingStars = new CommentPanel();
-        ImageIcon image = ratingStars.createImageIconResisable("/images/star.png","ratings",15,15);
-        JLabel rates = new JLabel(image);
-        rates.setBounds(450,140,80,20);
-        p2.add(rates);
+            CommentPanel ratingStars = new CommentPanel();
+            ImageIcon image = ratingStars.createImageIconResisable("/images/star.png", "ratings", 15, 15);
+            JLabel rates = new JLabel(image);
+            rates.setBounds(x, 135, 80, 20);
+            p2.add(rates);
+            x+=20;
+        }
 
         resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula\n" +
                 "blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis\n" +
