@@ -11,7 +11,7 @@ public class ResultDetails extends JFrame {
         JPanel p1 = new JPanel();
         // set the layout
         p1.setLayout(new GridLayout(4, 2));
-        p1.setBackground(Color.decode("#F6F6F6"));
+        p1.setBackground(Color.decode("#ffffff"));
         p1.setPreferredSize(new Dimension(400, 480));
         // Creating Object of "FlowLayout" class
         FlowLayout layout = new FlowLayout();
@@ -24,23 +24,31 @@ public class ResultDetails extends JFrame {
         JPanel TPanel=new JPanel();
         TPanel.setLayout(null);
 
-        JLabel  title= new JLabel("comments");
+        JLabel  title= new JLabel("Comments");
         title.setFont(new Font("Verdana", Font.BOLD, 27));
+<<<<<<< HEAD:src/resultDetails/ResultDetails.java
         title.setBounds(100,20,200,30);
+=======
+        title.setBounds(100,40,200,30);
+>>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
         TPanel.add(title);
         p1.add(TPanel);
 
 
 //        comments = new CommePanel[5];
         for (int i = 0;i<4;i++) {
+<<<<<<< HEAD:src/resultDetails/ResultDetails.java
             CommentPanel  comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
 
+=======
+            CommentPanel comment = new CommentPanel("Izere kerie","That song was on fire We can't wait next track !!",12);
+>>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
             p1.add(comment);
         }
-               JPanel lastPanel=new JPanel();
-          lastPanel.setLayout(null);
-       JLabel more=new JLabel("loadmore");
-        more.setBounds(150,0,100,30);
+        JPanel lastPanel=new JPanel();
+        lastPanel.setLayout(null);
+        JLabel more=new JLabel("Loadmore");
+        more.setBounds(150,10,100,30);
         more.setForeground(Color.decode("#3674D0"));
         Font font = more.getFont();
         Map attributes = font.getAttributes();
@@ -48,11 +56,36 @@ public class ResultDetails extends JFrame {
         more.setFont(font.deriveFont(attributes));
         lastPanel.add(more);
 
+<<<<<<< HEAD:src/resultDetails/ResultDetails.java
         JTextArea CommentField=new JTextArea("Add Comment");
         CommentField.setBounds(0,50,300,55);
         CommentField.setBorder(null);
         
         CommentField.setMargin(new Insets(20, 20, 10, 10));
+=======
+        final PlaceholderTextField CommentField = new PlaceholderTextField("");
+        CommentField.setColumns(20);
+        CommentField.setPlaceholder("Add a comment!");
+        CommentField.setBounds(0,50,300,55);
+        CommentField.setBorder(BorderFactory.createCompoundBorder(
+                CommentField.getBorder(),
+                BorderFactory.createEmptyBorder(3, 3, 3, 3)));
+        CommentField.setMargin(new Insets(15, 15, 10, 15));
+        final Font f = CommentField.getFont();
+        CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
+//        JOptionPane.showMessageDialog(null, CommentField);
+
+//        JTextArea CommentField=new JTextArea("Add Comment");
+//        CommentField.setBounds(0,50,300,55);
+//        CommentField.setBorder(BorderFactory.createCompoundBorder(
+//                CommentField.getBorder(),
+//                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+//        CommentField.setMargin(new Insets(20, 20, 10, 10));
+
+//        CommentField.setBounds(0,50,300,55);
+//        CommentField.setBorder(null);
+//        CommentField.setMargin(new Insets(20, 20, 10, 10));
+>>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
 
          JButton sendComment=new JButton("SEND");
          sendComment.setBounds(300,50,100,55);
@@ -75,9 +108,20 @@ public class ResultDetails extends JFrame {
         resultDetailsTitle = new JLabel("Amakosi-Ish Kevin");
         resultDetailsTitle.setFont(new Font("Inter", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
-        resultDetailsTitle.setBounds(350,30,400,20);
-        likes.setBounds(400,60,80,20);
+        resultDetailsTitle.setBounds(350,100,400,20);
+        likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
+        int x=430;
+        for (int i = 0;i<4;i++) {
+
+            CommentPanel ratingStars = new CommentPanel();
+            ImageIcon image = ratingStars.createImageIconResisable("/images/star.png", "ratings", 15, 15);
+            JLabel rates = new JLabel(image);
+            rates.setBounds(x, 135, 80, 20);
+            p2.add(rates);
+            x+=20;
+        }
+
         resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula\n" +
                 "blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis\n" +
                 "fringilla lorem. Duis pretium arcu et diam convallis, et lacinia lectus fermentum.\n" +
@@ -85,18 +129,22 @@ public class ResultDetails extends JFrame {
                 "Proin lacinia nisi vitae tortor scelerisque fringilla. Fusce in gravida nulla. In quis\n" +
                 "orci ut ex condimentum faucibus nec sed odio. Nulla et turpis mollis, aliquet nib\n" +
                 "id, pharetra massa. Duis finibus ante quis scelerisque luctus.\n" +
-                "\n" +
+                "\n <br><br>" +
                 "Mauris vehicula ante vel erat accumsan, eu ultrices elit porttitor. Aliquam accum\n" +
                 "urna nec condimentum suscipit. Fusce eleifend massa cursus elementum pulvin \n" +
                 "Vivamus quis quam luctus, porta metus at, pharetra mi. Quisque diam sapien, p\n" +
-                "uere eu suscipit eu, convallis nec magna. \n" +
+                "uere eu suscipit eu, convallis nec magna. \n <br><br>" +
                 "\n" +
                 "Cras luctus sagittis feugiat. Vestibului amet dapibus nulla. Integer faucibus id m\n" +
                 "id lectus suscipit suscipit in quis turpis. Sed auctor tempor dolor, vitae placerat\n" +
                 "rhoncus vel. Mauris tellus nisi, congue vitae fringilla id, condimentum vel tellus.\n" +
                 "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
 
+<<<<<<< HEAD:src/resultDetails/ResultDetails.java
         resultDetailsDescription.setBounds(230,90,450,250);
+=======
+        resultDetailsDescription.setBounds(230,150,450,400);
+>>>>>>> 213c7e7ddfb50b572502f6501a45060ea965f004:src/ResultDetails.java
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
         // Adding Jlabel "one" on JFrame.

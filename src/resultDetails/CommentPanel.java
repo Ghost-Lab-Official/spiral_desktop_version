@@ -6,7 +6,24 @@ import java.awt.*;
 
 public class CommentPanel extends JPanel {
 
-    private static ImageIcon createImageIcon(String path,
+    public CommentPanel() {
+    }
+    public ImageIcon createImageIconResisable(String path,
+                                              String description,int w,int h) {
+        java.net.URL imgURL = CommentPanel.class.getResource(path);
+
+        if (imgURL != null) {
+            ImageIcon imageIcon = new ImageIcon(imgURL, description);
+            Image image=imageIcon.getImage();
+            Image newimg = image.getScaledInstance(w, h,  Image.SCALE_SMOOTH);
+            imageIcon=new ImageIcon(newimg);
+            return imageIcon;
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+    public ImageIcon createImageIcon(String path,
                                              String description) {
         java.net.URL imgURL = CommentPanel.class.getResource(path);
 
