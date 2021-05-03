@@ -1,4 +1,4 @@
-package menus;
+package pages;
 import java.awt.*;
 import java.io.IOException;
 import javax.swing.*;
