@@ -60,7 +60,7 @@ public class CircleButton extends JButton{
     @Override
     public Dimension getPreferredSize(){
         FontMetrics metrics = getGraphics().getFontMetrics(getFont());
-        int minDiameter = 10 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());
+        int minDiameter = 15 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());
         return new Dimension(minDiameter, minDiameter);
     }
 
@@ -89,7 +89,7 @@ public class CircleButton extends JButton{
             g.setColor(Color.BLUE);
         }
         else{
-            g.setColor(Color.BLACK);
+            g.setColor(Color.lightGray);
         }
         g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
 
