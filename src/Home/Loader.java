@@ -10,18 +10,18 @@ import javax.swing.plaf.LayerUI;
 public class Loader {
     static final WaitLayerUI layerUI = new WaitLayerUI();
 
-    JFrame frame = new JFrame("JLayer With Animated Gif");
+    JFrame frame = new JFrame("Loading spiral content ....");
 
     public Loader() {
         JPanel panel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(400, 300);
+                return new Dimension(400, 400);
             }
         };
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.decode("#283A6D"));
-        
+
         JLabel waitLable=new JLabel("<html><font size='6' color=white>Please wait...</font></html>",JLabel.CENTER);
         waitLable.setFont(new Font("Verdana", Font.PLAIN, 25));
         waitLable.setForeground(Color.white);
@@ -49,7 +49,7 @@ public class Loader {
         };
 
         Timer timer = new Timer(6000,managePlay);
-        timer.setInitialDelay(5000);
+        timer.setInitialDelay(10000);
         timer.setRepeats(false);
         timer.start();
 
