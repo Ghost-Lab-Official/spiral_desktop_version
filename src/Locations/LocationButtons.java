@@ -1,6 +1,7 @@
     package Locations;
     import javax.swing.*;
     import javax.swing.border.LineBorder;
+    import javax.swing.table.DefaultTableCellRenderer;
     import javax.swing.table.DefaultTableModel;
     import java.awt.*;
     import java.util.ArrayList;
@@ -46,6 +47,19 @@
             JScrollPane sp = new JScrollPane(locationsTable);
             locationsTable.setRowHeight(50);
             locationsTable.setBorder(new LineBorder(Color.WHITE));
+            locationsTable.setShowVerticalLines(false);
+            locationsTable.setIntercellSpacing(new Dimension(0,0));
+            locationsTable.getTableHeader().setBackground(Color.WHITE);
+            locationsTable.getTableHeader().setPreferredSize(new Dimension(sp.getWidth(),40));
+            locationsTable.getTableHeader().setFont(new Font("Nunito",Font.BOLD,14));
+
+            for(int i=0; i < locationsTable.getColumnCount(); i++) {
+                if (i != 2) {
+                    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+                    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+                    locationsTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+                }
+            }
             sp.setPreferredSize(new Dimension(1175,400));
 
             panel2.setBackground(Color.WHITE);
