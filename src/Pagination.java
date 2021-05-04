@@ -44,7 +44,7 @@ public class Pagination extends JPanel {
         page4.setContentAreaFilled(false);
         etc.setContentAreaFilled(false);
         etc.setBorderPainted(false);//Removing border
-        etc.setMargin(new Insets(0,0,0,0));//Set margin
+        etc.setMargin(new Insets(0,0,15,0));//Set margin
         etc.setFont(new Font("Arial", Font.PLAIN, 30));//Set font size
         etc.setForeground(Color.blue);
 
