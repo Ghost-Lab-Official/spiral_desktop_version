@@ -20,9 +20,8 @@ public class Loader {
             }
         };
         panel.setLayout(new BorderLayout());
-        panel.setBackground(Color.BLUE);
-
-
+        panel.setBackground(Color.decode("#283A6D"));
+        
         JLabel waitLable=new JLabel("<html><font size='6' color=white>Please wait...</font></html>",JLabel.CENTER);
         waitLable.setFont(new Font("Verdana", Font.PLAIN, 25));
         waitLable.setForeground(Color.white);
