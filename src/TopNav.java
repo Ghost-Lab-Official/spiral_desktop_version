@@ -54,11 +54,10 @@ public class TopNav{
         searchPanel.setBackground(Color.decode("#F8F8F8"));
         JTextField searchInput=new JTextField("Search",30);
         searchInput.setBorder(new EmptyBorder(0,30,0,0));
-
-        searchInput.setPreferredSize(new Dimension(1,25));
+        searchInput.setPreferredSize(new Dimension(800,40));
         searchInput.setBorder(new LineBorder(Color.gray,1,true));
         searchPanel.add(searchInput);
-        searchPanel.setPreferredSize(new Dimension(800,50));
+
         navPanel.add(searchPanel,BorderLayout.CENTER);
 
 
