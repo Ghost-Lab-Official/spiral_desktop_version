@@ -15,7 +15,7 @@ public class Pagination extends JPanel {
             if(actionCommand.equals("Go to page 1")){
 
             }else if(actionCommand.equals("Go to page 2")){
-
+                
             }else if(actionCommand.equals("Go to page 3")){
 
             }else if(actionCommand.equals("Go to page 4")){
