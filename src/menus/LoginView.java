@@ -68,10 +68,10 @@ public class LoginView extends JFrame{
 		loginButton.setBounds(10, 10, 120, 50);
 		loginButton.setBorder(BorderFactory.createCompoundBorder(
 		        new CustomBorder(),
-		        new EmptyBorder(new Insets(25, 20, 25, 25))
+		        new EmptyBorder(new Insets(20, 20, 20, 25))
 		));
-		emailInput.setBorder(new RoundedBorder(15));
-		passwordInput.setBorder(new RoundedBorder(15));
+		emailInput.setBorder(new RoundedBorder(0));
+		passwordInput.setBorder(new RoundedBorder(0));
 		
 		JPanel emailLabelPanel = new JPanel();
 		emailLabelPanel.setBackground(Color.WHITE);
