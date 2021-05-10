@@ -20,7 +20,7 @@ public class RegisterLocation extends JFrame {
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
         JButton createBtn = new JButton("Register");
-        JLabel levelText = new JLabel("<html>This is where you could register your?<br/> <font color='#3674D0'>Sign Up.</font></html>");
+        JLabel levelText = new JLabel("<html>This is where you could register your?<br/> <font color='#3674D0'>Location</font></html>");
         JPanel CreateButtonPanel = new JPanel(new BorderLayout());
         JPanel DescriptLabelPanel = new JPanel();
 
@@ -110,6 +110,6 @@ public class RegisterLocation extends JFrame {
     }
 
     public static void main(String[] args) {
-        new RegisterLocationLevel();
+        new RegisterLocation();
     }
 }
