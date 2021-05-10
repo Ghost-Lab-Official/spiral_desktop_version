@@ -3,7 +3,7 @@ package result_list;
 import javax.swing.*;
 import java.awt.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-public class Result_details {
+public class ResultDetails {
     private JFrame window;
 
     private Container container;
@@ -23,7 +23,119 @@ public class Result_details {
     private JLabel description3;
     private JLabel lsubTitle3;
 
-    public Result_details() {
+    public JFrame getWindow() {
+        return window;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
+    public Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(Container container) {
+        this.container = container;
+    }
+
+    public JLabel getTitle() {
+        return title;
+    }
+
+    public void setTitle(JLabel title) {
+        this.title = title;
+    }
+
+    public JLabel getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(JLabel subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public JLabel getDescription() {
+        return description;
+    }
+
+    public void setDescription(JLabel description) {
+        this.description = description;
+    }
+
+    public JLabel getLsubTitle() {
+        return lsubTitle;
+    }
+
+    public void setLsubTitle(JLabel lsubTitle) {
+        this.lsubTitle = lsubTitle;
+    }
+
+    public JLabel getTitle2() {
+        return title2;
+    }
+
+    public void setTitle2(JLabel title2) {
+        this.title2 = title2;
+    }
+
+    public JLabel getSubTitle2() {
+        return subTitle2;
+    }
+
+    public void setSubTitle2(JLabel subTitle2) {
+        this.subTitle2 = subTitle2;
+    }
+
+    public JLabel getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(JLabel description2) {
+        this.description2 = description2;
+    }
+
+    public JLabel getLsubTitle2() {
+        return lsubTitle2;
+    }
+
+    public void setLsubTitle2(JLabel lsubTitle2) {
+        this.lsubTitle2 = lsubTitle2;
+    }
+
+    public JLabel getTitle3() {
+        return title3;
+    }
+
+    public void setTitle3(JLabel title3) {
+        this.title3 = title3;
+    }
+
+    public JLabel getSubTitle3() {
+        return subTitle3;
+    }
+
+    public void setSubTitle3(JLabel subTitle3) {
+        this.subTitle3 = subTitle3;
+    }
+
+    public JLabel getDescription3() {
+        return description3;
+    }
+
+    public void setDescription3(JLabel description3) {
+        this.description3 = description3;
+    }
+
+    public JLabel getLsubTitle3() {
+        return lsubTitle3;
+    }
+
+    public void setLsubTitle3(JLabel lsubTitle3) {
+        this.lsubTitle3 = lsubTitle3;
+    }
+
+    public ResultDetails() {
 
 
     window= new JFrame();
@@ -116,19 +228,12 @@ public class Result_details {
         description3.setSize(700, 130);
         description3.setLocation(60, 580);
         container.add(description3);
-        window.setVisible(true);
+        window.setVisible(false);
 
 }
     public static String convertToMultiline(String orig)
     {
         return "<html>" + orig.replaceAll("\n", "<br>");
-    }
-
-    public static void main(String [] args)throws Exception{
-
-        Result_details description= new Result_details();
-
-
     }
 }
 

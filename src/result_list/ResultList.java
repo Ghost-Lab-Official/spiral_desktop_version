@@ -1,5 +1,6 @@
 package result_list;
 
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -85,6 +86,7 @@ public class ResultList extends JFrame{
         mainPanel.add(leftPanel, BorderLayout.CENTER);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.setBackground(Color.WHITE);
+        leftPanel.add(new ResultDetails().getContainer());
 
 
         add(mainPanel);
