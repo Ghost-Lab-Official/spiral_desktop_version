@@ -152,7 +152,7 @@ public class ResultDetails {
           title.setFont(new Font("Arial", Font.BOLD, 23));
           title.setSize(500, 30);
           title.setLocation(60, 40);
-          title.setForeground(Color.blue);
+          title.setForeground(Color.decode("#0074DB"));
           container.add(title);
 
         subTitle= new JLabel("http://www.ecosia.org >");
@@ -182,7 +182,7 @@ public class ResultDetails {
         title2.setFont(new Font("Arial", Font.BOLD, 23));
         title2.setSize(500, 30);
         title2.setLocation(60, 280);
-        title2.setForeground(Color.blue);
+        title2.setForeground(Color.decode("#0074DB"));
         container.add(title2);
 
 
@@ -211,7 +211,7 @@ public class ResultDetails {
         title3.setFont(new Font("Arial", Font.BOLD, 23));
         title3.setSize(500, 30);
         title3.setLocation(60, 520);
-        title3.setForeground(Color.blue);
+        title3.setForeground(Color.decode("#0074DB"));
         container.add(title3);
 
 
