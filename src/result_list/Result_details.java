@@ -30,7 +30,7 @@ public class Result_details {
           window.setTitle("Result Details");
           window.setBounds(300, 10, 800, 800);
           window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-          window.setResizable(false);
+          window.setResizable(true);
           container = window.getContentPane();
           container.setBackground(Color.white);
           container.setLayout(null);
