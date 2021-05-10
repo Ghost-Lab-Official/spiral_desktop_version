@@ -8,7 +8,7 @@ public class RegisterLocation extends JFrame {
     private static final Color themeColor = Color.decode("#3674D0");
 
     RegisterLocation(){
-        super("Create New Location Level");
+        super("Create New Location");
         setSize(1000,650);
         initUI();
         setLocationRelativeTo(null);
@@ -44,16 +44,19 @@ public class RegisterLocation extends JFrame {
 //      right panel
 
         //header
-        JLabel registerHeadingLabel = new JLabel("<html>Register Location <br/> Level </html>");
+        JLabel registerHeadingLabel = new JLabel("<html>Register Location</html>");
         registerHeadingLabel.setForeground(themeColor);
         registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
         rightPanel.add(registerHeadingLabel);
 
         //input fields
-        JLabel levelName = new JLabel("Level name");
+        JLabel levelName = new JLabel("Location name");
         JTextField levelNameInput = new JTextField();
         JLabel levelDescription = new JLabel("Description");
         JTextField levelDescrInput = new JTextField();
+
+        JLabel gpsAddress = new JLabel("Location GPS");
+        JTextField gpsAddressInput = new JTextField();
 
 //        styling the input labels
         levelName.setFont(new Font("Verdana",Font.PLAIN,16));
@@ -81,6 +84,8 @@ public class RegisterLocation extends JFrame {
         rightPanel.add(levelNameInput);
         rightPanel.add(levelDescrLabelPanel);
         rightPanel.add(levelDescrInput);
+        rightPanel.add(gpsAddress);
+        rightPanel.add(gpsAddressInput);
 
         createBtn.setPreferredSize(new Dimension(150,50));
         createBtn.setForeground(Color.WHITE);
