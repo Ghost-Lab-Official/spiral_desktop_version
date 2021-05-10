@@ -116,11 +116,6 @@ public class Result_details {
         description3.setSize(700, 130);
         description3.setLocation(60, 580);
         container.add(description3);
-
-
-
-
-
         window.setVisible(true);
 
 }
