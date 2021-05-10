@@ -1,4 +1,6 @@
     package Locations;
+    import resultDetails.CommentPanel;
+
     import javax.swing.*;
     import javax.swing.border.LineBorder;
     import javax.swing.table.DefaultTableCellRenderer;
@@ -20,9 +22,44 @@
         public LocationButtons() {
             LocationsInit();
         }
+        public ImageIcon createImageIconResizeable(String path,
+                                                   String description, int w, int h) {
+            java.net.URL imgURL = CommentPanel.class.getResource(path);
+
+            if (imgURL != null) {
+                ImageIcon imageIcon = new ImageIcon(imgURL, description);
+                Image image=imageIcon.getImage();
+                Image newimg = image.getScaledInstance(w, h,  Image.SCALE_SMOOTH);
+                imageIcon=new ImageIcon(newimg);
+                return imageIcon;
+            } else {
+                System.err.println("Couldn't find file: " + path);
+                return null;
+            }
+        }
+        public ImageIcon createImageIcon(String path,
+                                         String description) {
+            java.net.URL imgURL = CommentPanel.class.getResource(path);
+
+            if (imgURL != null) {
+                ImageIcon imageIcon = new ImageIcon(imgURL, description);
+                Image image=imageIcon.getImage();
+                Image newimg = image.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
+                imageIcon=new ImageIcon(newimg);
+                return imageIcon;
+            } else {
+                System.err.println("Couldn't find file: " + path);
+                return null;
+            }
+        }
 
         public void loadLocationTable(){
-            String[][] locationsData = {{"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
+            ImageIcon delete = createImageIcon("/images/si-delete.png","delete");
+            JLabel deleteIcon = new JLabel(delete);
+            deleteIcon.setBounds(140,10,40,25);
+//            JButton deleteButton = new JButton((Action) deleteIcon);
+            String[][] locationsData = {
+                    {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
                     {"Nyabihu", "2.5547° S, 29.6035° E", "Nyirangarama products","Active"},
                     {"Nyabihu", "2.5547° S, 29.6035° E", "gender is the concept that is still not un...","Active"},
                     {"Nyabihu", "2.5547° S, 29.6035° E", "balanced diet is on a good level in rwanda c..","Active"},
@@ -102,9 +139,8 @@
 //            locationButton.setBorder(new RoundedBorder(10));
             locationButton.setFocusPainted(false);
             panel1.add(locationButton);
-
             loadLocationTable();
-
+//            window.add(deleteIcon);
             window.add(panel1, BorderLayout.NORTH);
             window.add(panel2, BorderLayout.NORTH);
             window.setVisible(true);
