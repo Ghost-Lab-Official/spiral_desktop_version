@@ -140,7 +140,6 @@
             locationButton.setFocusPainted(false);
             panel1.add(locationButton);
             loadLocationTable();
-//            window.add(deleteIcon);
             window.add(panel1, BorderLayout.NORTH);
             window.add(panel2, BorderLayout.NORTH);
             window.setVisible(true);
