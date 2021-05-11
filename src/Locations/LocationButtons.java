@@ -6,6 +6,7 @@
     import javax.swing.table.DefaultTableCellRenderer;
     import javax.swing.table.DefaultTableModel;
     import java.awt.*;
+    import java.awt.image.BufferedImage;
     import java.util.ArrayList;
 
     public class LocationButtons {
@@ -54,9 +55,9 @@
         }
 
         public void loadLocationTable(){
-            ImageIcon delete = createImageIcon("/images/si-delete.png","delete");
-            JLabel deleteIcon = new JLabel(delete);
-            deleteIcon.setBounds(140,10,40,25);
+//            ImageIcon delete = createImageIcon("/images/si-delete.png","delete");
+//            JLabel deleteIcon = new JLabel(delete);
+//            deleteIcon.setBounds(140,10,40,25);
 //            JButton deleteButton = new JButton((Action) deleteIcon);
             String[][] locationsData = {
                     {"Nyabihu", "2.5547° S, 29.6035° E", "rwanda coding academy is a school i...","Active"},
@@ -78,7 +79,8 @@
             locationsTable.setModel(model);
             for (int i = 0; i < locationsData.length; i++) {
                 String[] currentRow = locationsData[i];
-                model.addRow(new Object[]{currentRow[0],currentRow[1],currentRow[2],currentRow[3]});
+                ImageIcon delete = createImageIcon("/images/si-delete.png","delete");
+                model.addRow(new Object[]{currentRow[0],currentRow[1],currentRow[2],currentRow[3],delete});
             }
 
             JScrollPane sp = new JScrollPane(locationsTable);
