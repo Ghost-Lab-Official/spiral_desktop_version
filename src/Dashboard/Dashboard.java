@@ -16,6 +16,7 @@ public class Dashboard {
     JPanel recentRegisterdSpots;
     // nav bar
     JLabel Dashboard;
+    ImageIcon icon;
 
     public Dashboard(){
     dashBoard = new JFrame("Dashboard");
@@ -24,7 +25,8 @@ public class Dashboard {
     Dashboard = new JLabel("Dashboard");
     Dashboard.setBounds(40,40,200,100);
     Dashboard.setFont(new Font("Roboto",Font.BOLD,20));
-    Dashboard.setBackground(Color.WHITE);
+    Dashboard.setForeground(Color.white);
+    imageIcon();
     sideBar.add(Dashboard);
     users = new JPanel();
     locations = new JPanel();
@@ -65,6 +67,21 @@ public class Dashboard {
     dashBoard.setLayout(null);
     dashBoard.setSize(1920,900);
     dashBoard.setVisible(true);
+ }
+ public static ImageIcon createImageIcon(String path){
+ java.net.URL imageUrl = Dashboard.class.getResource(path);
+   if(imageUrl !=null){
+       return  new ImageIcon(imageUrl);
+   }
+   else{
+       System.out.println("check your image path: "+path);
+       return null;
+   }
+ }
+ private void  imageIcon(){
+        ImageIcon icon = createImageIcon("src\\images\\Dashboard.png");
+     JLabel dashboardIcon = new JLabel(icon);
+     sideBar.add(dashboardIcon);
  }
 
  public static void main(String args[]) throws IOException{
