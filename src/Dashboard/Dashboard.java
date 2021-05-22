@@ -14,10 +14,18 @@ public class Dashboard {
     JPanel bestRatedSpot;
     JPanel topPopularLocation;
     JPanel recentRegisterdSpots;
+    // nav bar
+    JLabel Dashboard;
 
     public Dashboard(){
     dashBoard = new JFrame("Dashboard");
     sideBar = new JPanel();
+    sideBar.setLayout(null);
+    Dashboard = new JLabel("Dashboard");
+    Dashboard.setBounds(40,40,200,100);
+    Dashboard.setFont(new Font("Roboto",Font.BOLD,20));
+    Dashboard.setBackground(Color.WHITE);
+    sideBar.add(Dashboard);
     users = new JPanel();
     locations = new JPanel();
     spots = new JPanel();
