@@ -1,6 +1,9 @@
 package Dashboard;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Dashboard {
@@ -13,21 +16,70 @@ public class Dashboard {
     JPanel mostViewedSpots;
     JPanel bestRatedSpot;
     JPanel topPopularLocation;
-    JPanel recentRegisterdSpots;
-    // nav bar
-    JLabel Dashboard;
-    ImageIcon icon;
-
-    public Dashboard(){
+    JPanel recentRegisteredSpots;
+    JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel;
+    JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel;
+    ImageIcon icon1,icon2,icon3,icon4,icon5;
+    BufferedImage img1,img2,img3,img4,img5;
+    public Dashboard() throws IOException {
     dashBoard = new JFrame("Dashboard");
     sideBar = new JPanel();
     sideBar.setLayout(null);
-    Dashboard = new JLabel("Dashboard");
-    Dashboard.setBounds(40,40,200,100);
-    Dashboard.setFont(new Font("Roboto",Font.BOLD,20));
-    Dashboard.setForeground(Color.white);
-    imageIcon();
-    sideBar.add(Dashboard);
+    DashboardLabel = new JLabel("Dashboard");
+    DashboardLabel.setFont(new Font("Roboto",Font.BOLD,20));
+    DashboardLabel.setForeground(Color.white);
+    img1 = ImageIO.read(new File("src\\images\\Dashboard.png"));
+    icon1 = new ImageIcon(img1.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
+    dashboardIconLabel= new JLabel();
+    dashboardIconLabel.setBounds(20,70,20,20);
+    dashboardIconLabel.setIcon(icon1);
+    DashboardLabel.setBounds(50,70,250,20);
+    UserLabel = new JLabel("Users");
+    UserLabel.setFont(new Font("Roboto",Font.BOLD,20));
+    UserLabel.setForeground(Color.white);
+    img2 = ImageIO.read(new File("src\\images\\users.png"));
+    icon2 = new ImageIcon(img2.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
+    usersIconLabel = new JLabel();
+    usersIconLabel.setBounds(20,120,20,20);
+    usersIconLabel.setIcon(icon2);
+    UserLabel.setBounds(50,120,250,20);
+    BillingsLabel = new JLabel("Billings");
+    BillingsLabel.setFont(new Font("Roboto",Font.BOLD,20));
+    BillingsLabel.setForeground(Color.white);
+    img3 = ImageIO.read(new File("src\\images\\Billing.png"));
+    icon3 = new ImageIcon(img3.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
+    billingsIconLabel = new JLabel();
+    billingsIconLabel.setBounds(20,200,20,20);
+    billingsIconLabel.setIcon(icon3);
+    BillingsLabel.setBounds(50,200,250,25);
+    LocationsLabel = new JLabel("Locations");
+    LocationsLabel.setFont(new Font("Roboto",Font.BOLD,20));
+    LocationsLabel.setForeground(Color.white);
+    img4 = ImageIO.read(new File("src\\images\\Locations.png"));
+    icon4 = new ImageIcon(img4.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
+    locationsIconLabel = new JLabel();
+    locationsIconLabel.setBounds(20,270,250,25);
+    locationsIconLabel.setIcon(icon4);
+    LocationsLabel.setBounds(50,270,250,25);
+    SpotsLLabel = new JLabel("Spots");
+    SpotsLLabel.setFont(new Font("Roboto",Font.BOLD,20));
+    SpotsLLabel.setForeground(Color.white);
+    img5 = ImageIO.read(new File("src\\images\\icons8_tripadvisor_64px 2.png"));
+    icon5 = new ImageIcon(img5.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
+    spotsIconLabel = new JLabel();
+    spotsIconLabel.setBounds(20,350,250,25);
+    spotsIconLabel.setIcon(icon5);
+    SpotsLLabel.setBounds(50,350,250,25);
+    sideBar.add(dashboardIconLabel);
+    sideBar.add(DashboardLabel);
+    sideBar.add(usersIconLabel);
+    sideBar.add(UserLabel);
+    sideBar.add(billingsIconLabel);
+    sideBar.add(BillingsLabel);
+    sideBar.add(locationsIconLabel);
+    sideBar.add(LocationsLabel);
+    sideBar.add(spotsIconLabel);
+    sideBar.add(SpotsLLabel);
     users = new JPanel();
     locations = new JPanel();
     spots = new JPanel();
@@ -35,7 +87,7 @@ public class Dashboard {
     mostViewedSpots = new JPanel();
     bestRatedSpot = new JPanel();
     topPopularLocation = new JPanel();
-    recentRegisterdSpots = new JPanel();
+    recentRegisteredSpots = new JPanel();
     sideBar.setBounds(0,80,200,700);
     sideBar.setBackground(Color.decode("#3674d0"));
     users.setBounds(300,130,200,100);
@@ -52,8 +104,8 @@ public class Dashboard {
     bestRatedSpot.setBounds(300,450,180,150);
     topPopularLocation.setBackground(Color.white);
     topPopularLocation.setBounds(550,285,300,300);
-    recentRegisterdSpots.setBackground(Color.white);
-    recentRegisterdSpots.setBounds(900,285,300,380);
+    recentRegisteredSpots.setBackground(Color.white);
+    recentRegisteredSpots.setBounds(900,285,300,380);
 
     dashBoard.add(sideBar);
     dashBoard.add(users);
@@ -63,27 +115,11 @@ public class Dashboard {
     dashBoard.add(mostViewedSpots);
     dashBoard.add(bestRatedSpot);
     dashBoard.add(topPopularLocation);
-    dashBoard.add(recentRegisterdSpots);
+    dashBoard.add(recentRegisteredSpots);
     dashBoard.setLayout(null);
     dashBoard.setSize(1920,900);
     dashBoard.setVisible(true);
  }
- public static ImageIcon createImageIcon(String path){
- java.net.URL imageUrl = Dashboard.class.getResource(path);
-   if(imageUrl !=null){
-       return  new ImageIcon(imageUrl);
-   }
-   else{
-       System.out.println("check your image path: "+path);
-       return null;
-   }
- }
- private void  imageIcon(){
-        ImageIcon icon = createImageIcon("src\\images\\Dashboard.png");
-     JLabel dashboardIcon = new JLabel(icon);
-     sideBar.add(dashboardIcon);
- }
-
  public static void main(String args[]) throws IOException{
         new Dashboard();
  }
