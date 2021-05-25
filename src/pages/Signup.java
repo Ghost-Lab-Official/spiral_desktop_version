@@ -36,7 +36,7 @@ public class Signup {
     }
     public void formInitiator()throws IOException {
         window = new JFrame("Signup Form");
-        window.setSize(1370,730);
+        window.setSize(1380,730);
         window.setLayout(null);
         window.setBackground(Color.WHITE);
 
