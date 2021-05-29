@@ -7,7 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CircleButton extends JButton{
+public class CircleButton extends JButton {
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
