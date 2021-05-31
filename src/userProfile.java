@@ -3,15 +3,15 @@ import java.awt.*;
 
 public class userProfile extends JFrame {
 
-    private JPanel sideBar;
-    private JPanel mainPanel;
-    private JPanel leftPanel;
-    private JPanel sideMenu;
-    private JLabel logo;
-    private JLabel menuTitle;
-    private JMenuBar sideMenuContents;
-    private final Color textColor = Color.decode("#3674D0");
-    private final Color bgColor = Color.decode("#F2F6FF");
+    public JPanel sideBar;
+    public JPanel mainPanel;
+    public JPanel leftPanel;
+    public JPanel sideMenu;
+    public JLabel logo;
+    public JLabel menuTitle;
+    public JMenuBar sideMenuContents;
+    public final Color textColor = Color.decode("#3674D0");
+    public final Color bgColor = Color.decode("#F2F6FF");
 
     public userProfile(){
         setTitle("user profile");
