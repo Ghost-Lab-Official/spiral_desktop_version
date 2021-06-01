@@ -1,110 +1,80 @@
 package pages;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-
-public class RegisterLocationLevel extends JFrame {
-    private static final Color themeColor = Color.decode("#3674D0");
-
-    RegisterLocationLevel(){
-      super("Create New Location Level");
-      setSize(1000,650);
-      initUI();
-      setLocationRelativeTo(null);
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
-      setVisible(true);
+import java.io.IOException;
+public class RegisterLocationLevel {
+    private JFrame registerLocationLevelWindow;
+    private JLabel title;
+    private JLabel levelName;
+    private JLabel description;
+    private JLabel text;
+    private JLabel spiralHeading;
+    private JTextField levelText;
+    private JTextArea descriptionText;
+    private JPanel titlePanel;
+    private JPanel formPanel;
+    private JButton button;
+    public RegisterLocationLevel()throws IOException{
+        formGui();
     }
-    void initUI(){
-        JPanel leftPanel = new JPanel();
-        JPanel rightPanel = new JPanel();
-        JLabel spiralLabel = new JLabel("Spiral");
-        JButton createBtn = new JButton("Register");
-        JLabel levelText = new JLabel("<html>This is where you could register your?<br/> <font color='#3674D0'>Sign Up.</font></html>");
-        JPanel CreateButtonPanel = new JPanel(new BorderLayout());
-        JPanel DescriptLabelPanel = new JPanel();
-
-//        company name
-        spiralLabel.setFont(new Font("Nunito", Font.BOLD, 40));
-        spiralLabel.setForeground(Color.WHITE);
-        spiralLabel.setFont(new Font("Nunito", Font.BOLD,40));
-        spiralLabel.setForeground(Color.white);
-
-//        left panel
-        leftPanel.setBackground(themeColor);
-        leftPanel.add(spiralLabel);
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 120, 10, 120));
-        leftPanel.setLayout(new GridBagLayout());
-
-
-        DescriptLabelPanel.setBackground(Color.WHITE);
-        DescriptLabelPanel.setLayout(new BorderLayout());
-        DescriptLabelPanel.add(levelText, BorderLayout.SOUTH);
-
-//      right panel
-
-        //header
-        JLabel registerHeadingLabel = new JLabel("<html>Register Location <br/> Level </html>");
-        registerHeadingLabel.setForeground(themeColor);
-        registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
-        rightPanel.add(registerHeadingLabel);
-
-        //input fields
-        JLabel levelName = new JLabel("Level name");
-        JTextField levelNameInput = new JTextField();
-        JLabel levelDescription = new JLabel("Description");
-        JTextField levelDescrInput = new JTextField();
-
-//        styling the input labels
-        levelName.setFont(new Font("Verdana",Font.PLAIN,16));
-        levelDescription.setFont(new Font("Verdana",Font.PLAIN,16));
-
-//      styling the input fields
-        levelNameInput.setBorder(new RoundedBorder(15));
-        levelDescrInput.setBorder(new RoundedBorder(15));
-
-        rightPanel.setLayout(new GridLayout(9,1, 0, 10));
-        rightPanel.setBackground(Color.WHITE);
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(30, 120, 30, 120));
-
-        JPanel levelNameLabelPanel = new JPanel();
-        levelNameLabelPanel.setBackground(Color.WHITE);
-        levelNameLabelPanel.setLayout(new BorderLayout());
-        levelNameLabelPanel.add(levelName,BorderLayout.SOUTH);
-
-        JPanel levelDescrLabelPanel = new JPanel();
-        levelDescrLabelPanel.setBackground(Color.WHITE);
-        levelDescrLabelPanel.setLayout(new BorderLayout());
-        levelDescrLabelPanel.add(levelDescription,BorderLayout.SOUTH);
-
-        rightPanel.add(levelNameLabelPanel);
-        rightPanel.add(levelNameInput);
-        rightPanel.add(levelDescrLabelPanel);
-        rightPanel.add(levelDescrInput);
-
-                createBtn.setPreferredSize(new Dimension(150,50));
-        createBtn.setForeground(Color.WHITE);
-        createBtn.setBackground(themeColor);
-        createBtn.setFont(new Font("Nunito",Font.BOLD,16));
-        createBtn.setBounds(10, 10, 120, 50);
-        createBtn.setBorder(BorderFactory.createCompoundBorder(
-                new CustomBorder(),
-                new EmptyBorder(new Insets(25, 20, 25, 25))
-        ));
-
-        CreateButtonPanel.setBackground(Color.WHITE);
-        CreateButtonPanel.add(createBtn, BorderLayout.WEST);
-
-        rightPanel.add(CreateButtonPanel);
-        rightPanel.add(DescriptLabelPanel);
-
-        // panel to window 
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
-
+    public void formGui()throws IOException {
+        registerLocationLevelWindow = new JFrame("Register Location Level Form");
+        registerLocationLevelWindow.setSize(1370,730);
+        registerLocationLevelWindow.setLayout(null);
+        registerLocationLevelWindow.setBackground(Color.WHITE);
+        titlePanel = new JPanel();
+        titlePanel.setBounds(0,0,400,720);
+        titlePanel.setBackground(Color.decode("#3674D0"));
+        spiralHeading = new JLabel("Spiral");
+        spiralHeading.setFont(new Font("Nunito", Font.BOLD, 30));
+        spiralHeading.setForeground(Color.white);
+        spiralHeading.setBounds(150,300,120,40);
+        formPanel = new JPanel();
+        formPanel.setBounds(400,0,960,720);
+        formPanel.setBackground(Color.white);
+        title = new JLabel("<html>Register Location<br/> Level</html>");
+        title.setBounds(510,15,400,150);
+        title.setFont(new Font("verdana", Font.PLAIN, 30));
+        title.setForeground(Color.decode("#3674D0"));
+        levelName = new JLabel("Level name");
+        levelName.setBounds(510,200,150,40);
+        levelName.setForeground(Color.decode("#202020"));
+        levelName.setFont(new Font("verdana", Font.PLAIN, 14));
+        levelText = new JTextField();
+        levelText.setBounds(510,250,400,40);
+        levelText.setBorder(new LineBorder(Color.BLACK,1,true));
+        description = new JLabel("Description");
+        description.setBounds(510,300,150,40);
+        description.setForeground(Color.decode("#202020"));
+        description.setFont(new Font("verdana", Font.PLAIN, 14));
+        descriptionText = new JTextArea();
+        descriptionText.setBounds(510,350,400,40);
+        descriptionText.setBorder(new LineBorder(Color.BLACK,1,true));
+        button = new JButton("Register");
+        button.setBounds(510,450,200,50);
+        button.setBackground(Color.decode("#3674D0"));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("verdana", Font.PLAIN, 15));
+        button.setBorder(new LineBorder(Color.white,1,true));
+        text = new JLabel("<html>This is where you could register<br/> <p style=\"color:#3674D0;\">location level...</p></html>");
+        text.setForeground(Color.decode("#515151"));
+        text.setBounds(510,500,300,40);
+        registerLocationLevelWindow.add(spiralHeading);
+        registerLocationLevelWindow.add(title);
+        registerLocationLevelWindow.add(levelName);
+        registerLocationLevelWindow.add(levelText);
+        registerLocationLevelWindow.add(description);
+        registerLocationLevelWindow.add(descriptionText);
+        registerLocationLevelWindow.add(button);
+        registerLocationLevelWindow.add(text);
+        registerLocationLevelWindow.add(titlePanel);
+        registerLocationLevelWindow.add(formPanel);
+        registerLocationLevelWindow.setVisible(true);
     }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new RegisterLocationLevel();
     }
 }
