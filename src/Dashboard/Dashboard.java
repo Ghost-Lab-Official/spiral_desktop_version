@@ -17,11 +17,13 @@ public class Dashboard {
     JPanel bestRatedSpot;
     JPanel topPopularLocation;
     JPanel recentRegisteredSpots;
-    JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel,SettingsLabel,LogoutLabel,Users2Label,Locations2Label,spots2Label,billing2Label,RecentRegisterdSpotsLabel,recentRegisterdSpotsLabel,recentTimeLabel,bestRatedSpotLabel,bestRated2SpotLabel,bestRated3SpotLabel,
-            bestRated4SpotLabel,bestRated5SpotLabel,bestRated6SpotLabel,bestRated7SpotLabel,bestRated8SpotLabel;
-    JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel,settingsIconLabel,logoutIconLabel,users2IconLabel,locations2IconLabel,spots2IconLabel,billing2IconLabel,RecentRegisterdIconLabel,bestRatedIconSpotLabel,bestRated2IconSpotLabel;
+    JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel,SettingsLabel,LogoutLabel,Users2Label,Locations2Label,spots2Label,billing2Label,RecentRegisterdSpotsLabel,recentRegisterdSpotsLabel,recentTimeLabel,bestRatedSpotLabel,bestRated2SpotLabel,bestRated3SpotLabel, bestRated4SpotLabel,bestRated5SpotLabel,bestRated6SpotLabel,bestRated7SpotLabel,bestRated8SpotLabel,mostViewedSpotsLabel,mostViewedSpotsLabel2;
+    JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel,settingsIconLabel,logoutIconLabel,users2IconLabel,locations2IconLabel,spots2IconLabel,billing2IconLabel,RecentRegisterdIconLabel,bestRatedIconSpotLabel,bestRated2IconSpotLabel,progressBar;
     ImageIcon icon1,icon2,icon3,icon4,icon5,icon6,icon7,icon8,icon9,icon10,icon11,icon12,icon13;
     BufferedImage img1,img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13;
+    JProgressBar mostViewedSpotPb;
+    JScrollPane scrollBar;
+    Container container;
     public Dashboard() throws IOException {
     dashBoard = new JFrame("Dashboard");
     sideBar = new JPanel();
@@ -172,6 +174,24 @@ public class Dashboard {
     billing.add(billing2Label);
     mostViewedSpots.setBackground(Color.white);
     mostViewedSpots.setBounds(300,280,180,150);
+    mostViewedSpots.setLayout(null);
+    mostViewedSpotsLabel = new JLabel("Most viewed spots");
+    mostViewedSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
+    mostViewedSpotsLabel.setForeground(Color.gray);
+    mostViewedSpotsLabel.setBounds(20,-70,200,200);
+    mostViewedSpotsLabel2 = new JLabel("RCA:");
+    mostViewedSpotsLabel2.setFont(new Font("Roboto",Font.BOLD,12));
+    mostViewedSpotsLabel2.setForeground(Color.black);
+    mostViewedSpotsLabel2.setBounds(20,-40,200,200);
+    progressBar = new JLabel();
+    progressBar.setBounds(40,-40,200,200);
+    mostViewedSpotPb = new JProgressBar(0,2000);
+    mostViewedSpotPb.setBounds(40,40,160,30);
+    mostViewedSpotPb.setValue(0);
+    mostViewedSpotPb.setStringPainted(true);
+    progressBar.add(mostViewedSpotPb);
+    mostViewedSpots.add(mostViewedSpotsLabel);
+    mostViewedSpots.add(mostViewedSpotsLabel2);
     bestRatedSpot.setBackground(Color.white);
     bestRatedSpot.setBounds(300,450,180,150);
     bestRatedSpot.setLayout(null);
@@ -333,20 +353,36 @@ public class Dashboard {
         recentRegisteredSpots.add(RecentRegisterdIconLabel);
         recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
         recentRegisteredSpots.add(recentTimeLabel);
-    dashBoard.add(sideBar);
-    dashBoard.add(users);
-    dashBoard.add(locations);
-    dashBoard.add(spots);
-    dashBoard.add(billing);
-    dashBoard.add(mostViewedSpots);
-    dashBoard.add(bestRatedSpot);
-    dashBoard.add(topPopularLocation);
-    dashBoard.add(recentRegisteredSpots);
-    dashBoard.setLayout(null);
-    dashBoard.setSize(1920,900);
-    dashBoard.setVisible(true);
+        container = new Container();
+        container.add(sideBar);
+        container.add(users);
+        container.add(locations);
+        container.add(spots);
+        container.add(billing);
+        container.add(mostViewedSpots);
+        container.add(bestRatedSpot);
+        container.add(topPopularLocation);
+        container.add(recentRegisteredSpots);
+        scrollBar = new JScrollPane(container,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        container.setLayout(null);
+        dashBoard.add(scrollBar);
+        dashBoard.setSize(1920,1200);
+        dashBoard.setVisible(true);
+ }
+ public void setProgressBarValue(){
+        int i=0;
+        try{
+          while (i<=100){
+           mostViewedSpotPb.setValue(i+10);
+           Thread.sleep(1000);
+           i+=20;
+          }
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
  }
  public static void main(String args[]) throws IOException{
-        new Dashboard();
+       Dashboard dashboard = new Dashboard();
+       dashboard.setProgressBarValue();
  }
 }
