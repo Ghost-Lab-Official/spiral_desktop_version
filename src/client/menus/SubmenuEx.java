@@ -1,20 +1,15 @@
-package menus;
+package client.menus;
 
-import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 
-public class  ShortcutsEx extends JFrame {
+public class SubmenuEx extends JFrame {
 
-    public ShortcutsEx() {
+    public SubmenuEx() {
 
         initUI();
     }
@@ -23,7 +18,7 @@ public class  ShortcutsEx extends JFrame {
 
         createMenuBar();
 
-        setTitle("Mnemonics and accelerators");
+        setTitle("Submenu");
         setSize(360, 250);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -39,28 +34,30 @@ public class  ShortcutsEx extends JFrame {
         var iconExit = new ImageIcon("src/resources/exit.png");
 
         var fileMenu = new JMenu("File");
-        fileMenu.setMnemonic(KeyEvent.VK_F);
+        var impMenu = new JMenu("Import");
 
-        var newMenuItem = new JMenuItem(new MenuItemAction("New", iconNew,
-                KeyEvent.VK_N));
+        var newsMenuItem = new JMenuItem("Import newsfeed list...");
+        var bookmarksMenuItem = new JMenuItem("Import bookmarks...");
+        var importMailMenuItem = new JMenuItem("Import mail...");
 
-        var openMenuItem = new JMenuItem(new MenuItemAction("Open", iconOpen,
-                KeyEvent.VK_O));
+        impMenu.add(newsMenuItem);
+        impMenu.add(bookmarksMenuItem);
+        impMenu.add(importMailMenuItem);
 
-        var saveMenuItem = new JMenuItem(new MenuItemAction("Save", iconSave,
-                KeyEvent.VK_S));
+        var newMenuItem = new JMenuItem("New", iconNew);
+        var openMenuItem = new JMenuItem("Open", iconOpen);
+        var saveMenuItem = new JMenuItem("Save", iconSave);
 
         var exitMenuItem = new JMenuItem("Exit", iconExit);
-        exitMenuItem.setMnemonic(KeyEvent.VK_E);
         exitMenuItem.setToolTipText("Exit application");
-        exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
-                InputEvent.CTRL_DOWN_MASK));
 
         exitMenuItem.addActionListener((event) -> System.exit(0));
 
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
+        fileMenu.addSeparator();
+        fileMenu.add(impMenu);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
 
@@ -69,28 +66,11 @@ public class  ShortcutsEx extends JFrame {
         setJMenuBar(menuBar);
     }
 
-    private class MenuItemAction extends AbstractAction {
-
-        public MenuItemAction(String text, ImageIcon icon,
-                              Integer mnemonic) {
-            super(text);
-
-            putValue(SMALL_ICON, icon);
-            putValue(MNEMONIC_KEY, mnemonic);
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            System.out.println(e.getActionCommand());
-        }
-    }
-
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
 
-            var ex = new ShortcutsEx();
+            var ex = new SubmenuEx();
             ex.setVisible(true);
         });
     }

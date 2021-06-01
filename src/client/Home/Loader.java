@@ -1,4 +1,4 @@
-package Home;
+package client.Home;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

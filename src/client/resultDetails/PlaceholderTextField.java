@@ -1,4 +1,4 @@
-package resultDetails;
+package client.resultDetails;
 
 import java.awt.*;
 

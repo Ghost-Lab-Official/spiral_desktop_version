@@ -1,4 +1,4 @@
-package resultDetails;// Java program to illustrate the GridLayout
+package client.resultDetails;// Java program to illustrate the GridLayout
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -87,7 +87,7 @@ public class ResultDetails extends JFrame {
         for (int i = 0;i<4;i++) {
 
             CommentPanel ratingStars = new CommentPanel();
-            ImageIcon image = ratingStars.createImageIconResizeable("/images/star.png", "ratings", 15, 15);
+            ImageIcon image = ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 15, 15);
             JLabel rates = new JLabel(image);
             rates.setBounds(x, 135, 80, 20);
             p2.add(rates);

@@ -1,4 +1,4 @@
-package pages;
+package client.pages;
 
 import javax.swing.*;
 import java.awt.BasicStroke;
@@ -14,7 +14,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
-import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;

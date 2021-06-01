@@ -1,4 +1,4 @@
-package result_list;
+package client.result_list;
 
 
 import java.awt.*;

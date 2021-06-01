@@ -1,4 +1,4 @@
-package menus;
+package client.menus;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
