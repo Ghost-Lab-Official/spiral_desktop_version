@@ -1,4 +1,4 @@
-package menus;
+package client.menus;
 
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;

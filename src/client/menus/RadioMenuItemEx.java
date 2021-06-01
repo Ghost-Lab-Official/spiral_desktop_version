@@ -1,4 +1,4 @@
-package menus;
+package client.menus;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;

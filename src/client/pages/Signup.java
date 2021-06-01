@@ -1,8 +1,6 @@
-package pages;
+package client.pages;
 
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.IOException;

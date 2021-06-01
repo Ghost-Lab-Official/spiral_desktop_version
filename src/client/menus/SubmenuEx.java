@@ -1,4 +1,4 @@
-package menus;
+package client.menus;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

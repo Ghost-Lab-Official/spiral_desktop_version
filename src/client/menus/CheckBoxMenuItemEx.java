@@ -1,4 +1,4 @@
-package menus;
+package client.menus;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
