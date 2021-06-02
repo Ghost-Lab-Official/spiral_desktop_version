@@ -1,5 +1,4 @@
 package Locations;
-import  resultDetails.CommentPanel;
 
 
 import java.sql.*;
