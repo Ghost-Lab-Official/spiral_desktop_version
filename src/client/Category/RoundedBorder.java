@@ -1,4 +1,4 @@
-package Category;
+package client.Category;
 
 import javax.swing.border.Border;
 import java.awt.*;

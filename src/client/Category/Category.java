@@ -1,4 +1,4 @@
-package Category;
+package client.Category;
 
 public class Category {
     private String id;

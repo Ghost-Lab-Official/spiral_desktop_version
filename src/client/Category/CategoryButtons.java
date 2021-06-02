@@ -1,4 +1,4 @@
-    package Category;
+    package client.Category;
 
     import client.resultDetails.CommentPanel;
 
