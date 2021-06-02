@@ -31,7 +31,7 @@ public class Dashboard {
     DashboardLabel = new JLabel("Dashboard");
     DashboardLabel.setFont(new Font("Roboto",Font.BOLD,20));
     DashboardLabel.setForeground(Color.white);
-    img1 = ImageIO.read(new File("src\\images\\Dashboard.png"));
+    img1 = ImageIO.read(new File("src/client/images/Dashboard.png"));
     icon1 = new ImageIcon(img1.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
     dashboardIconLabel= new JLabel();
     dashboardIconLabel.setBounds(20,70,20,20);
@@ -40,7 +40,7 @@ public class Dashboard {
     UserLabel = new JLabel("Users");
     UserLabel.setFont(new Font("Roboto",Font.BOLD,20));
     UserLabel.setForeground(Color.white);
-    img2 = ImageIO.read(new File("src\\images\\users.png"));
+    img2 = ImageIO.read(new File("src\\client\\images\\users.png"));
     icon2 = new ImageIcon(img2.getScaledInstance(25,25,BufferedImage.SCALE_DEFAULT));
     usersIconLabel = new JLabel();
     usersIconLabel.setBounds(20,110,40,40);
@@ -49,7 +49,7 @@ public class Dashboard {
     BillingsLabel = new JLabel("Billings");
     BillingsLabel.setFont(new Font("Roboto",Font.BOLD,20));
     BillingsLabel.setForeground(Color.white);
-    img3 = ImageIO.read(new File("src\\images\\Billing.png"));
+    img3 = ImageIO.read(new File("src\\client\\images\\Billing.png"));
     icon3 = new ImageIcon(img3.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
     billingsIconLabel = new JLabel();
     billingsIconLabel.setBounds(20,200,20,20);
@@ -58,7 +58,7 @@ public class Dashboard {
     LocationsLabel = new JLabel("Locations");
     LocationsLabel.setFont(new Font("Roboto",Font.BOLD,20));
     LocationsLabel.setForeground(Color.white);
-    img4 = ImageIO.read(new File("src\\images\\Locations.png"));
+    img4 = ImageIO.read(new File("src\\client\\images\\Locations.png"));
     icon4 = new ImageIcon(img4.getScaledInstance(25,30,BufferedImage.SCALE_DEFAULT));
     locationsIconLabel = new JLabel();
     locationsIconLabel.setBounds(20,260,280,40);
@@ -67,7 +67,7 @@ public class Dashboard {
     SpotsLLabel = new JLabel("Spots");
     SpotsLLabel.setFont(new Font("Roboto",Font.BOLD,20));
     SpotsLLabel.setForeground(Color.white);
-    img5 = ImageIO.read(new File("src\\images\\icons8_tripadvisor_64px 2.png"));
+    img5 = ImageIO.read(new File("src\\client\\images\\icons8_tripadvisor_64px 2.png"));
     icon5 = new ImageIcon(img5.getScaledInstance(30,30,BufferedImage.SCALE_DEFAULT));
     spotsIconLabel = new JLabel();
     spotsIconLabel.setBounds(20,350,250,25);
@@ -77,7 +77,7 @@ public class Dashboard {
     SettingsLabel = new JLabel("Settings");
     SettingsLabel.setFont(new Font("Roboto",Font.BOLD,20));
     SettingsLabel.setForeground(Color.white);
-    img6 = ImageIO.read(new File("src\\images\\settings.png"));
+    img6 = ImageIO.read(new File("src\\client\\images\\settings.png"));
     icon6 = new ImageIcon(img6.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
     settingsIconLabel = new JLabel();
     settingsIconLabel.setBounds(20,420,250,25);
@@ -87,7 +87,7 @@ public class Dashboard {
     LogoutLabel.setBounds(50,520,250,25);
     LogoutLabel.setFont(new Font("Roboto",Font.BOLD,20));
     LogoutLabel.setForeground(Color.white);
-    img7 = ImageIO.read(new File("src\\images\\logout.jpg"));
+    img7 = ImageIO.read(new File("src\\client\\images\\logout.jpg"));
     icon7 = new ImageIcon(img7.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
     logoutIconLabel = new JLabel();
     logoutIconLabel.setBounds(20,520,250,25);
@@ -119,7 +119,7 @@ public class Dashboard {
     users.setBounds(300,130,200,100);
     users.setLayout(null);
     users.setBackground(Color.decode("#fe3f3f"));
-    img8 = ImageIO.read(new File("src\\images\\users2.png"));
+    img8 = ImageIO.read(new File("src\\client\\images\\users2.png"));
     icon8 = new ImageIcon(img8.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
     users2IconLabel = new JLabel();
     users2IconLabel.setBounds(80,15,400,40);
@@ -133,7 +133,7 @@ public class Dashboard {
     locations.setBackground(Color.decode("#cd45d0"));
     locations.setBounds(550,130,200,100);
     locations.setLayout(null);
-    img9 = ImageIO.read(new File("src\\images\\locations2.png"));
+    img9 = ImageIO.read(new File("src\\client\\images\\locations2.png"));
     icon9 = new ImageIcon(img9.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
     locations2IconLabel = new JLabel();
     locations2IconLabel.setBounds(80,15,400,40);
@@ -147,7 +147,7 @@ public class Dashboard {
     spots.setBackground(Color.decode("#42af60"));
     spots.setBounds(800,130,200,100);
     spots.setLayout(null);
-    img10 =  ImageIO.read(new File("src\\images\\icons8_tripadvisor_64px 2.png"));
+    img10 =  ImageIO.read(new File("src\\client\\images\\icons8_tripadvisor_64px 2.png"));
     icon10 = new ImageIcon(img10.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
     spots2IconLabel = new JLabel();
     spots2IconLabel.setBounds(80,15,400,40);
@@ -161,7 +161,7 @@ public class Dashboard {
     billing.setBackground(Color.decode("#4e5ef2"));
     billing.setBounds(1050,130,200,100);
     billing.setLayout(null);
-    img11 = ImageIO.read(new File("src\\images\\billing2.png"));
+    img11 = ImageIO.read(new File("src\\client\\images\\billing2.png"));
     icon11 = new ImageIcon(img11.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
     billing2IconLabel = new JLabel();
     billing2IconLabel.setBounds(80,15,400,40);
@@ -203,7 +203,7 @@ public class Dashboard {
     bestRatedIconSpotLabel.setFont(new Font("Roboto",Font.BOLD,12));
     bestRatedIconSpotLabel.setForeground(Color.black);
     bestRatedIconSpotLabel.setBounds(20,-40,200,200);
-    img13 = ImageIO.read(new File("src\\images\\star.png"));
+    img13 = ImageIO.read(new File("src\\client\\images\\star.png"));
     icon13 = new ImageIcon(img13.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
     bestRated2SpotLabel = new JLabel();
     bestRated2SpotLabel.setBounds(48,-40,200,200);
@@ -249,7 +249,7 @@ public class Dashboard {
     recentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
     recentRegisterdSpotsLabel.setForeground(Color.gray);
     recentRegisterdSpotsLabel.setBounds(30,-80,400,200);
-    img12 = ImageIO.read(new File("src\\images\\recentSpots1.png"));
+    img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
     icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
     RecentRegisterdIconLabel = new JLabel();
     RecentRegisterdIconLabel.setBounds(20,50,400,40);
@@ -267,7 +267,7 @@ public class Dashboard {
     recentRegisteredSpots.add(recentTimeLabel);
 
 
-        img12 = ImageIO.read(new File("src\\images\\recentSpots1.png"));
+        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
         icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
         RecentRegisterdIconLabel = new JLabel();
         RecentRegisterdIconLabel.setBounds(20,100,400,40);
@@ -285,7 +285,7 @@ public class Dashboard {
         recentRegisteredSpots.add(recentTimeLabel);
 
 
-        img12 = ImageIO.read(new File("src\\images\\recentSpots1.png"));
+        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
         icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
         RecentRegisterdIconLabel = new JLabel();
         RecentRegisterdIconLabel.setBounds(20,150,400,40);
@@ -303,7 +303,7 @@ public class Dashboard {
         recentRegisteredSpots.add(recentTimeLabel);
 
 
-        img12 = ImageIO.read(new File("src\\images\\recentSpots1.png"));
+        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
         icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
         RecentRegisterdIconLabel = new JLabel();
         RecentRegisterdIconLabel.setBounds(20,200,400,40);
@@ -320,7 +320,7 @@ public class Dashboard {
         recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
         recentRegisteredSpots.add(recentTimeLabel);
 
-        img12 = ImageIO.read(new File("src\\images\\recentSpots1.png"));
+        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
         icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
         RecentRegisterdIconLabel = new JLabel();
         RecentRegisterdIconLabel.setBounds(20,250,400,40);
