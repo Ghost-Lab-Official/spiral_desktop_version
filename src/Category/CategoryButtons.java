@@ -1,5 +1,6 @@
     package Category;
-    import resultDetails.CommentPanel;
+
+    import client.resultDetails.CommentPanel;
 
     import javax.swing.*;
     import javax.swing.border.LineBorder;
@@ -78,7 +79,7 @@
             categoriesTable.setModel(model);
             for (int i = 0; i < locationsData.length; i++) {
                 String[] currentRow = locationsData[i];
-                ImageIcon delete = createImageIcon("/images/delete.png","delete");
+                ImageIcon delete = createImageIcon("/client/images/delete.png","delete");
                 model.addRow(new Object[]{currentRow[0],currentRow[1],currentRow[2],currentRow[3],delete});
             }
 
