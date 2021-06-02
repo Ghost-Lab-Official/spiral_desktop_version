@@ -13,40 +13,94 @@ import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import DbController.CloudStorageConnectionHandler;
+
+import java.sql.*;
+
 
 public class Login extends JFrame {
     private static final long serialVersionUID = 4924551093376342051L;
     private static final Color themeColor = Color.decode("#3674D0");
-    private int radius;
+	private Connection con;
+	JTextField emailInput;
+	JTextField passwordInput;
+    
+    public class ActionLstn implements ActionListener {
 
-    public Login() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			switch (e.getActionCommand()) {
+			case "LOGIN":
+				userLogin();
+				break;
+
+			default:
+				System.out.println("Invalid action");
+				break;
+			}
+		}
+    	
+    }
+    
+    public void userLogin() {
+    	String email = emailInput.getText();
+    	String password = passwordInput.getText();
+    	if(email.equals("") || password.equals("")) {
+    		System.out.println("Enter email and Password");
+    	}else {
+    		try {
+				PreparedStatement stmt = con.prepareStatement("SELECT * FROM users_table WHERE email=?");
+				stmt.setString(1, email);
+				ResultSet result = stmt.executeQuery();
+				String storedPassord = null;
+				while(result.next()) {
+					storedPassord = result.getString("password");
+				}
+				if(password.equals(storedPassord)) {
+					System.out.println("Login Successful");
+				}else {
+					System.out.println("Invalid Email Or Password");
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+    	}
+    }
+
+    public Login() throws Exception {
         super("Login To Spiral");
         setSize(1000,650);
+        CloudStorageConnectionHandler DbHandler = new CloudStorageConnectionHandler();
+        con= DbHandler.getConnection();
+        emailInput = new JTextField();
+        passwordInput = new JTextField();
         initUI();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
-    public void initUI() {
+    public void initUI() throws Exception {
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JLabel spLabel = new JLabel("Spiral");
         JLabel welcomeLabel = new JLabel("Welcome to Spiral");
         JLabel loginHeadingLabel = new JLabel("Log into your Account");
         JLabel emailInputLabel = new JLabel("E-mail or username");
-        JTextField emailInput = new JTextField();
         JLabel passwordInputLabel = new JLabel("Password");
-        JTextField passwordInput = new JTextField();
         JButton loginButton = new JButton("Log in");
         JLabel signUpLabel = new JLabel("<html>Don't have account? <font color='blue'>Sign Up.</font></html>");
         JLabel forgotPasswordLabel = new JLabel("Forgot your Password?");
-        loginButton.setPreferredSize(new Dimension(150,50));
+        loginButton.setPreferredSize(new Dimension(150,30));
+        loginButton.setSize(new Dimension(150,50));
 
         spLabel.setFont(new Font("nunito", Font.BOLD, 40));
         spLabel.setForeground(Color.WHITE);
@@ -59,8 +113,8 @@ public class Login extends JFrame {
         welcomeLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
         loginHeadingLabel.setForeground(themeColor);
         loginHeadingLabel.setFont(new Font("Nunito", Font.BOLD, 25));
-        emailInputLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
-        passwordInputLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
+        emailInputLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        passwordInputLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
         forgotPasswordLabel.setForeground(themeColor);
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(themeColor);
@@ -70,6 +124,8 @@ public class Login extends JFrame {
                 new CustomBorder(),
                 new EmptyBorder(new Insets(25, 20, 25, 25))
         ));
+        loginButton.setActionCommand("LOGIN");
+        loginButton.addActionListener(new ActionLstn());
         emailInput.setBorder(new RoundedBorder(15));
         passwordInput.setBorder(new RoundedBorder(15));
 
@@ -108,7 +164,7 @@ public class Login extends JFrame {
         rightPanel.add(loginButtonPanel);
         rightPanel.add(signUpLabel);
         rightPanel.add(forgotPasswordLabel);
-        rightPanel.setLayout(new GridLayout(9,1, 0, 10));
+        rightPanel.setLayout(new GridLayout(9,1, 0, 12));
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setBorder(BorderFactory.createEmptyBorder(30, 120, 30, 120));
 
@@ -123,7 +179,11 @@ public class Login extends JFrame {
 
             @Override
             public void run() {
-                new Login();
+                try {
+					new Login();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
             }
         });
     }

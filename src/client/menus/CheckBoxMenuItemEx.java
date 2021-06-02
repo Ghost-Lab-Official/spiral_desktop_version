@@ -13,7 +13,11 @@ import javax.swing.JMenuBar;
 
 public class CheckBoxMenuItemEx extends JFrame {
 
-    private JLabel statusBar;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel statusBar;
 
     public CheckBoxMenuItemEx() {
 
