@@ -3,9 +3,12 @@ package client.Home;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
+import client.Landing;
+
 
 public class Loader {
     static final WaitLayerUI layerUI = new WaitLayerUI();
@@ -45,13 +48,21 @@ public class Loader {
             public void actionPerformed(ActionEvent e) {
                 layerUI.stop();
                 panel.remove(waitLable);
+//                layerUI.eventDispatched(new WindowEvent(,WindowEvent.WINDOW_CLOSING));
+
+
+                Landing landing   =new Landing();
+                landing.initUI();
             }
         };
 
         Timer timer = new Timer(6000,managePlay);
-        timer.setInitialDelay(10000);
+
+        timer.setInitialDelay(1000);
         timer.setRepeats(false);
         timer.start();
+
+//        layerUI.stop();
 
 
     }
@@ -69,6 +80,7 @@ public class Loader {
             @Override
             public void run() {
                 Loader loading_Test = new Loader();
+
             }
         });
 
