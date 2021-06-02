@@ -1,11 +1,9 @@
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.ButtonUI;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.*;
+
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
@@ -15,7 +13,7 @@ public class Landing extends JFrame{
     IconTextField searchField = new IconTextField();
 
     public Landing(){
-        setTitle("Home");
+        setTitle("client/Home");
         setSize(1000,600);
         initUI();
         setLocationRelativeTo(null);
