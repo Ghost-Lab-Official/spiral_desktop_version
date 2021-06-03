@@ -9,7 +9,7 @@ public class RegisterLocation extends JFrame {
 
     RegisterLocation(){
         super("Create New Location");
-        setSize(1370,730);
+        setSize(1000,650);
         initUI();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
