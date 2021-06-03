@@ -16,10 +16,14 @@ public class Loader {
     JFrame frame = new JFrame("Loading spiral content ....");
 
     public Loader() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+
         JPanel panel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(400, 400);
+                return new Dimension(width, height);
             }
         };
         panel.setLayout(new BorderLayout());
@@ -48,7 +52,9 @@ public class Loader {
             public void actionPerformed(ActionEvent e) {
                 layerUI.stop();
                 panel.remove(waitLable);
-//                layerUI.eventDispatched(new WindowEvent(,WindowEvent.WINDOW_CLOSING));
+                Window win = SwingUtilities.getWindowAncestor(panel);
+                win.dispose();
+//     layerUI.eventDispatched(new WindowEvent(panel,WindowEvent.WINDOW_CLOSING));
 
 
                 Landing landing   =new Landing();
@@ -58,7 +64,7 @@ public class Loader {
 
         Timer timer = new Timer(6000,managePlay);
 
-        timer.setInitialDelay(1000);
+        timer.setInitialDelay(9000);
         timer.setRepeats(false);
         timer.start();
 
