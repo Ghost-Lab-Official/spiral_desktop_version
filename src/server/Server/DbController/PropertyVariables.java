@@ -73,6 +73,6 @@ public class PropertyVariables {
         properties.setProperty("dbPort",getDbPort().toString());
         properties.setProperty("serverPort",getPort().toString());
 
-        properties.store(new FileWriter("config.properties"),null);
+        properties.store(new FileWriter("src/server/config.properties"),null);
     }
 }

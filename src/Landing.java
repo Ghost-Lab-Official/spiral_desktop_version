@@ -1,3 +1,4 @@
+import client.ClientMain.ClientServerConnector;
 import client.pages.RegisterLocation;
 import client.result_list.ResultList;
 import server.Server.Middleware.UserAuthMiddleware;
@@ -12,6 +13,7 @@ import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  * @author Mutoni Uwingeneye Denyse
@@ -118,7 +120,12 @@ public class Landing extends JFrame{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER){
                     String searchStr = searchField.getText();
-                    String sql = "SELECT * from Spot_table WHERE spot_name LIKE '%" + searchStr + "%' OR spot_description LIKE '%" + searchStr + "%' AND status = 1 ORDER BY viewers DESC LIMIT 10";
+                    try {
+                        searchSpot(searchStr);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+//                    String sql = "SELECT * from Spot_table WHERE spot_name LIKE '%" + searchStr + "%' OR spot_description LIKE '%" + searchStr + "%' AND status = 1 ORDER BY viewers DESC LIMIT 10";
 //                    System.out.   println(searchStr);
 //                    ResultList resultList = new ResultList();
 //                    resultList.initUI();
@@ -144,6 +151,73 @@ public class Landing extends JFrame{
     public static void main(String[] args) {
         new Landing();
     }
+    public static void searchSpot(String searchKey) throws Exception{
+        try {
+            RequestBody requestBody = new RequestBody();
+            requestBody.setUrl("/search");
+            requestBody.setAction("getSpots");
+
+            Spot spotToSend = new Spot();
+            System.out.print("Search a spot: ");
+
+            spotToSend.setSpotName(searchKey);
+            requestBody.setObject(spotToSend);
+
+            ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+            System.out.println(responseBody.getResponse());
+            boolean found = false;
+            Integer index = 0;
+            for (Object response : responseBody.getResponse()) {
+                index++;
+                found = true;
+                Spot spot = (Spot) response;
+                String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0,20) + "..." : spot.getSpotDescription();
+                System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" +  showDesc);
+            }
+
+            if (!found) {
+                System.out.println("No spots Found.");
+            } else {
+//                displaySpot(spotsList);
+            }
+        }catch (Exception e){
+            System.out.println("Error occured" + e.getMessage());
+        }
+    }
+
+//    public static void searchSpot(String searchKey) throws Exception{
+//        try {
+//            RequestBody requestBody = new RequestBody();
+//            requestBody.setUrl("/search");
+//            requestBody.setAction("getSpots");
+//
+//            Spot spotToSend = new Spot();
+//            System.out.print("Search a spot: ");
+//            //        create user log
+//
+//            spotToSend.setSpotName(searchKey);
+//            requestBody.setObject(spotToSend);
+//
+//            ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+//            System.out.println(responseBody);
+//            boolean found = false;
+//            Integer index = 0;
+//            for (Object response : responseBody.getResponse()) {
+//                index++;
+//                found = true;
+//                Spot spot = (Spot) response;
+//                String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0,20) + "..." : spot.getSpotDescription();
+////                spotsList.add(spot);
+//            }
+//
+//            if (!found) {
+//                System.out.println("No spots Found.");
+//            } else {
+//            }
+//        }catch (Exception e){
+//            System.out.println("Error occured : " + e.getMessage());
+//        }
+//    }
 }
 class RoundedBorder implements Border {
     private int radius;
@@ -250,5 +324,6 @@ class IconTextField extends JTextField {
         getHelper().onSetBorder(border);
         super.setBorder(getHelper().getBorder());
     }
+
 }
 
