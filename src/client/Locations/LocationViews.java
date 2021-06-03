@@ -1,6 +1,9 @@
 package client.Locations;
 import client.resultDetails.CommentPanel;
+import client.pages.RegisterLocation;
+import client.pages.RegisterLocationLevel;
 
+import java.io.IOException;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -153,6 +156,14 @@ public class LocationViews {
                 new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+        levelButton.addActionListener(e -> {
+            window.setVisible(false);
+            try {
+                new RegisterLocationLevel();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
 
 
 
@@ -167,6 +178,10 @@ public class LocationViews {
                 new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+        locationButton.addActionListener(e -> {
+            window.setVisible(false);
+            new RegisterLocation();
+        });
 
 
 
