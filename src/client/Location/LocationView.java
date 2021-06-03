@@ -1,5 +1,4 @@
-package client.Locations;
-import client.resultDetails.CommentPanel;
+package client.Location;
 
 import java.sql.*;
 import javax.swing.*;
@@ -8,8 +7,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
+import server.Server.DbController.CloudStorageConnectionHandler;
+//import  server.Server.DbController.PropertyVariables;
 
-public class LocationViews {
+public class LocationView {
     private JFrame  window;
     private JPanel  panelHeader;
     private JPanel  mainPanel;
@@ -17,37 +18,16 @@ public class LocationViews {
     private JButton levelButton;
     private JButton locationButton;
     private JPanel panel2;
-
     private JTable locationsTable;
 
 
-    String url = "jdbc:mysql://localhost:3306/2YQ7auowc7";
-    String userName = "root";
-    String password = "";
+    private Connection con;
 
-    public LocationViews() {
+    public LocationView() throws Exception {
         LocationsInit();
     }
-//    public ImageIcon createImageIconResizeable(String path,
-//                                               String description, int w, int h) {
-//        java.net.URL imgURL = CommentPanel.class.getResource(path);
-//
-//        if (imgURL != null) {
-//            ImageIcon imageIcon = new ImageIcon(imgURL, description);
-//            Image image=imageIcon.getImage();
-//            Image newimg = image.getScaledInstance(w, h,  Image.SCALE_SMOOTH);
-//            imageIcon=new ImageIcon(newimg);
-//            return imageIcon;
-//        } else {
-//            System.err.println("Couldn't find file: " + path);
-//            return null;
-//        }
-//    }
-
-
 
     public void loadLocationTable(){
-
 
         panel2 = new JPanel();
         panel2.setBounds(50, 110, 1175, 500);
@@ -60,8 +40,6 @@ public class LocationViews {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
         locationsTable.setModel(model);
-
-
 
 
         JScrollPane sp = new JScrollPane(locationsTable);
@@ -80,11 +58,10 @@ public class LocationViews {
 
         try
         {
-//           ` Class.forName(driverName);`
-            Connection con = DriverManager.getConnection(url, userName, password);
             String sql = "select location_name,location_GPS,description,status from locations";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
             int i =0;
             while(rs.next())
             {
@@ -116,13 +93,15 @@ public class LocationViews {
                     JOptionPane.ERROR_MESSAGE);
         }
 
-        sp.setPreferredSize(new Dimension(1175,400));
+        sp.setPreferredSize(new Dimension(1000,400));
 
         panel2.setBackground(Color.WHITE);
         panel2.add(sp);
     };
 
-    public void LocationsInit() {
+    public void LocationsInit() throws Exception {
+        CloudStorageConnectionHandler DbHandler = new CloudStorageConnectionHandler();
+        con= DbHandler.getConnection();
         window = new JFrame("Location buttons");
         window.setSize(1375, 735);
         window.setLayout(null);
@@ -150,7 +129,7 @@ public class LocationViews {
         levelButton.setBackground(Color.gray);
         levelButton.setFocusPainted(false);
         levelButton.setBorder(BorderFactory.createCompoundBorder(
-                new LocationViews.CustomBorder(),
+                new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
 
@@ -164,7 +143,7 @@ public class LocationViews {
         locationButton.setForeground(Color.WHITE);
         locationButton.setFocusPainted(false);
         locationButton.setBorder(BorderFactory.createCompoundBorder(
-                new LocationViews.CustomBorder(),
+                new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
 
@@ -193,9 +172,8 @@ public class LocationViews {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        new LocationViews();
+        new LocationView();
     }
 }
-
