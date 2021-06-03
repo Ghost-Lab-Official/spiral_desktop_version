@@ -14,14 +14,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Dashboard {
     JFrame dashBoard;
     JPanel sideBar,users,locations,spots,billing,mostViewedSpots,bestRatedSpot,topPopularLocation,recentRegisteredSpots,billing2;
-    ChartPanel lineChart;
+    ChartPanel BarChart;
     JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel,SettingsLabel,LogoutLabel,Users2Label,Locations2Label,spots2Label,billing2Label,RecentRegisterdSpotsLabel,recentRegisterdSpotsLabel,recentTimeLabel,bestRatedSpotLabel,bestRated2SpotLabel,bestRated3SpotLabel, bestRated4SpotLabel,bestRated5SpotLabel,bestRated6SpotLabel,bestRated7SpotLabel,bestRated8SpotLabel,mostViewedSpotsLabel,mostViewedSpotsLabel2;
     JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel,settingsIconLabel,logoutIconLabel,users2IconLabel,locations2IconLabel,spots2IconLabel,billing2IconLabel,RecentRegisterdIconLabel,bestRatedIconSpotLabel,bestRated2IconSpotLabel,progressBar;
     ImageIcon icon1,icon2,icon3,icon4,icon5,icon6,icon7,icon8,icon9,icon10,icon11,icon12,icon13;
@@ -343,9 +341,9 @@ public class Dashboard {
        billing2.setLayout(null);
 
        DefaultCategoryDataset dataset = usersLineChart();
-       chart = ChartFactory.createLineChart("Users of the system","year","Number of users",dataset, PlotOrientation.VERTICAL,true,false,false);
-       lineChart = new ChartPanel(chart);
-       lineChart.setBounds(200,260,540,400);
+       chart = ChartFactory.createBarChart("Spots of the system","Year of registration","Number of spots",dataset, PlotOrientation.VERTICAL,true,false,false);
+       BarChart = new ChartPanel(chart);
+       BarChart.setBounds(200,260,540,400);
         container = new Container();
         container.add(sideBar);
         container.add(users);
@@ -355,7 +353,7 @@ public class Dashboard {
         container.add(bestRatedSpot);
         container.add(recentRegisteredSpots);
         container.add(billing2);
-        container.add(lineChart);
+        container.add(BarChart);
         container.setLayout(null);
         scrollBar = new JScrollBar();
         scrollBar.setBounds(100,100, 50,100);
@@ -366,19 +364,18 @@ public class Dashboard {
  }
 
   public DefaultCategoryDataset usersLineChart(){
-   String uniqueUsers = "Users";
+   String uniqueUsers = "Spots";
     DefaultCategoryDataset dataset  = new DefaultCategoryDataset();
-      List<Set> values = new ArrayList<Set>();
+      List<List> values = new ArrayList<List>();
       values = SpotReportsActions.printDataOnLineChart();
-      System.out.println("size of array is: " + values.size());
-      Set<Integer> spotsData = new HashSet<Integer>();
-      Set<Integer> yearsData = new HashSet<Integer>();
+      List<Integer> spotsData = new ArrayList<>();
+      List<Integer> yearsData = new ArrayList<>();
       spotsData = values.get(0);
       yearsData = values.get(1);
-      for(Integer spots: spotsData){
-         for(Integer years: yearsData){
-             dataset.addValue(spots,uniqueUsers,years);
-         }
+      for (int i = 0; i <  spotsData.size() ; i++) {
+
+          dataset.addValue(Double.parseDouble(spotsData.get(i).toString()),uniqueUsers,yearsData.get(i).toString());
+
       }
       return dataset;
   }

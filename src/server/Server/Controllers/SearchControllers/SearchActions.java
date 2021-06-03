@@ -260,6 +260,5 @@ public class SearchActions {
         } catch (Exception e) {
             return popularSearchesObject;
         }
-
     }
 }
