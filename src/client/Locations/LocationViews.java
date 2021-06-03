@@ -119,7 +119,7 @@ public class LocationViews {
                     JOptionPane.ERROR_MESSAGE);
         }
 
-        sp.setPreferredSize(new Dimension(1175,400));
+        sp.setPreferredSize(new Dimension(1175,500));
 
         panel2.setBackground(Color.WHITE);
         panel2.add(sp);
