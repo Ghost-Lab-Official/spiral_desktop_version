@@ -3,15 +3,23 @@ import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.*;
 
+/**
+ * @author Mutoni Uwingeneye Denyse
+ */
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     private JButton registerButton;
     private JButton loginButton;
-    private JTextField searchInput;
     IconTextField searchField = new IconTextField();
-
+//    ActionListener callPanels = new ActionListener(){
+//        @Override
+//        public void actionPerfomed(ActionEvent e){
+//
+//        }
+//    }
     public Landing(){
         setTitle("client/Home");
         setSize(1000,600);
@@ -28,7 +36,7 @@ public class Landing extends JFrame{
 
         registerButton = new JButton("Register");
         loginButton = new JButton("Login");
-        searchInput = new JTextField("Search whatever you want");
+//        searchInput.setActionCommand("SEARCH");
 
         JLabel appBrand = new JLabel("Spiral");
         JLabel welcomeText = new JLabel("Welcome to Spiral");
@@ -61,15 +69,6 @@ public class Landing extends JFrame{
         registerButton.setBorder(new RoundedBorder(40));
         registerButton.setFocusPainted(false);
         registerButton.setBorderPainted(false);
-//        registerButton.setContentAreaFilled(false);
-//        registerButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-//        registerButton.setBorder(BorderFactory.createCompoundBorder(
-//                new CustomBorder(),
-//                new EmptyBorder(new Insets(2, 1, 1, 2))
-//        ));
-
-//        registerButton.setBorder(new RoundedBorder(5));
-
         loginButton.setBackground(bgColor);
         loginButton.setFont(new Font("nunito",Font.PLAIN,17));
         loginButton.setForeground(textColor);
@@ -103,16 +102,32 @@ public class Landing extends JFrame{
 //        searchField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         searchField.setBorder(BorderFactory.createLineBorder(Color.GRAY,1,true));
         searchField.setForeground(Color.BLACK);
+
+        searchField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                    String searchStr = searchField.getText();
+                    System.out.println(searchStr);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         bodyContent.add(new JPanel(new GridBagLayout()).add(searchField));
         bodyContent.setLayout(boxLayout);
         bodyContent.setBackground(bgColor);
         bodyPanel.setBackground(bgColor);
         bodyPanel.add(bodyContent);
-
         headPanel.add(headLeftPanel, BorderLayout.WEST);
         headPanel.add(headRightPanel, BorderLayout.EAST);
         contentPanel.add(headPanel, BorderLayout.NORTH);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
+//        contentPanel.add(searchButton,BorderLayout.CENTER);
         add(contentPanel);
     }
 
@@ -218,10 +233,6 @@ class IconTextField extends JTextField {
     public void setIcon(Icon icon) {
         getHelper().onSetIcon(icon);
     }
-
-//    public void setIconSpacing(int spacing) {
-//        getHelper().onSetIconSpacing(spacing);
-//    }
 
     @Override
     public void setBorder(Border border) {
