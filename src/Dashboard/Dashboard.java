@@ -1,29 +1,29 @@
 package Dashboard;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 public class Dashboard {
     JFrame dashBoard;
-    JPanel sideBar;
-    JPanel users;
-    JPanel locations;
-    JPanel spots;
-    JPanel billing;
-    JPanel mostViewedSpots;
-    JPanel bestRatedSpot;
-    JPanel topPopularLocation;
-    JPanel recentRegisteredSpots;
+    JPanel sideBar,users,locations,spots,billing,mostViewedSpots,bestRatedSpot,topPopularLocation,recentRegisteredSpots,billing2;
+    ChartPanel lineChart;
     JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel,SettingsLabel,LogoutLabel,Users2Label,Locations2Label,spots2Label,billing2Label,RecentRegisterdSpotsLabel,recentRegisterdSpotsLabel,recentTimeLabel,bestRatedSpotLabel,bestRated2SpotLabel,bestRated3SpotLabel, bestRated4SpotLabel,bestRated5SpotLabel,bestRated6SpotLabel,bestRated7SpotLabel,bestRated8SpotLabel,mostViewedSpotsLabel,mostViewedSpotsLabel2;
     JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel,settingsIconLabel,logoutIconLabel,users2IconLabel,locations2IconLabel,spots2IconLabel,billing2IconLabel,RecentRegisterdIconLabel,bestRatedIconSpotLabel,bestRated2IconSpotLabel,progressBar;
     ImageIcon icon1,icon2,icon3,icon4,icon5,icon6,icon7,icon8,icon9,icon10,icon11,icon12,icon13;
     BufferedImage img1,img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13;
     JProgressBar mostViewedSpotPb;
-    JScrollPane scrollBar;
+    JScrollBar scrollBar;
     Container container;
+    JFreeChart chart;
     public Dashboard() throws IOException {
     dashBoard = new JFrame("Dashboard");
     sideBar = new JPanel();
@@ -112,8 +112,8 @@ public class Dashboard {
     billing = new JPanel();
     mostViewedSpots = new JPanel();
     bestRatedSpot = new JPanel();
-    topPopularLocation = new JPanel();
     recentRegisteredSpots = new JPanel();
+    billing2 = new JPanel();
     sideBar.setBounds(0,80,200,700);
     sideBar.setBackground(Color.decode("#3674d0"));
     users.setBounds(300,130,200,100);
@@ -172,28 +172,8 @@ public class Dashboard {
     billing2Label.setBounds(80,20,100,100);
     billing.add(billing2IconLabel);
     billing.add(billing2Label);
-    mostViewedSpots.setBackground(Color.white);
-    mostViewedSpots.setBounds(300,280,180,150);
-    mostViewedSpots.setLayout(null);
-    mostViewedSpotsLabel = new JLabel("Most viewed spots");
-    mostViewedSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-    mostViewedSpotsLabel.setForeground(Color.gray);
-    mostViewedSpotsLabel.setBounds(20,-70,200,200);
-    mostViewedSpotsLabel2 = new JLabel("RCA:");
-    mostViewedSpotsLabel2.setFont(new Font("Roboto",Font.BOLD,12));
-    mostViewedSpotsLabel2.setForeground(Color.black);
-    mostViewedSpotsLabel2.setBounds(20,-40,200,200);
-    progressBar = new JLabel();
-    progressBar.setBounds(40,-40,200,200);
-    mostViewedSpotPb = new JProgressBar(0,2000);
-    mostViewedSpotPb.setBounds(40,40,160,30);
-    mostViewedSpotPb.setValue(0);
-    mostViewedSpotPb.setStringPainted(true);
-    progressBar.add(mostViewedSpotPb);
-    mostViewedSpots.add(mostViewedSpotsLabel);
-    mostViewedSpots.add(mostViewedSpotsLabel2);
     bestRatedSpot.setBackground(Color.white);
-    bestRatedSpot.setBounds(300,450,180,150);
+    bestRatedSpot.setBounds(750,285,180,150);
     bestRatedSpot.setLayout(null);
     bestRatedSpotLabel = new JLabel("Best rated spot");
     bestRatedSpotLabel.setFont(new Font("Roboto",Font.BOLD,15));
@@ -240,10 +220,8 @@ public class Dashboard {
     bestRatedSpot.add(bestRated6SpotLabel);
     bestRatedSpot.add(bestRated7SpotLabel);
     bestRatedSpot.add(bestRated8SpotLabel);
-    topPopularLocation.setBackground(Color.white);
-    topPopularLocation.setBounds(550,285,300,300);
     recentRegisteredSpots.setBackground(Color.white);
-    recentRegisteredSpots.setBounds(900,285,300,380);
+    recentRegisteredSpots.setBounds(950,285,300,380);
     recentRegisteredSpots.setLayout(null);
     recentRegisterdSpotsLabel = new JLabel("Recent registered spots");
     recentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
@@ -353,36 +331,55 @@ public class Dashboard {
         recentRegisteredSpots.add(RecentRegisterdIconLabel);
         recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
         recentRegisteredSpots.add(recentTimeLabel);
+
+       billing2.setBackground(Color.white);
+       billing2.setBounds(1000,800,300,380);
+       billing2.setLayout(null);
+
+       DefaultCategoryDataset dataset = usersLineChart();
+       chart = ChartFactory.createLineChart("Users of the system","year","Number of users",dataset, PlotOrientation.VERTICAL,true,false,false);
+       lineChart = new ChartPanel(chart);
+       lineChart.setBounds(200,260,540,400);
         container = new Container();
         container.add(sideBar);
         container.add(users);
         container.add(locations);
         container.add(spots);
         container.add(billing);
-        container.add(mostViewedSpots);
         container.add(bestRatedSpot);
-        container.add(topPopularLocation);
         container.add(recentRegisteredSpots);
-        scrollBar = new JScrollPane(container,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        container.add(billing2);
+        container.add(lineChart);
         container.setLayout(null);
-        dashBoard.add(scrollBar);
-        dashBoard.setSize(1920,1200);
+        scrollBar = new JScrollBar();
+        scrollBar.setBounds(100,100, 50,100);
+        dashBoard.add(container);
+
+        dashBoard.setSize(1400,1700);
         dashBoard.setVisible(true);
  }
- public void setProgressBarValue(){
-        int i=0;
-        try{
-          while (i<=100){
-           mostViewedSpotPb.setValue(i+10);
-           Thread.sleep(1000);
-           i+=20;
-          }
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-        }
- }
+
+  public DefaultCategoryDataset usersLineChart(){
+   String uniqueUsers = "Unique Users";
+   String visitors = "Visitors";
+    DefaultCategoryDataset dataset  = new DefaultCategoryDataset();
+      dataset.addValue(200, uniqueUsers, "2016-12-19");
+      dataset.addValue(150, uniqueUsers, "2016-12-20");
+      dataset.addValue(100, uniqueUsers, "2016-12-21");
+      dataset.addValue(210, uniqueUsers, "2016-12-22");
+      dataset.addValue(200, uniqueUsers, "2016-12-21");
+      dataset.addValue(180, uniqueUsers, "2016-12-22");
+
+      dataset.addValue(210, visitors, "2016-12-19");
+      dataset.addValue(140, visitors, "2016-12-20");
+      dataset.addValue(120, visitors, "2016-12-21");
+      dataset.addValue(200, visitors, "2016-12-22");
+      dataset.addValue(220, visitors, "2016-12-21");
+      dataset.addValue(180, visitors, "2016-12-22");
+      return dataset;
+  }
+
  public static void main(String args[]) throws IOException{
        Dashboard dashboard = new Dashboard();
-       dashboard.setProgressBarValue();
  }
 }
