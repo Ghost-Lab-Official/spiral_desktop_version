@@ -1,5 +1,7 @@
 package client.pages;
 
+import org.mindrot.jbcrypt.BCrypt;
+import server.Server.Controllers.UserModuleControllers.UsersActions;
 import server.Server.Model.User;
 
 import javax.swing.*;
@@ -9,12 +11,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import server.Server.DbController.CloudStorageConnectionHandler;
 
 public class UpdatePasswordInfo extends JFrame {
     private JLabel newPasswordLabel, confirmNewPasswordLabel, titleLabel;
-    private JTextField newPasswordInput;
-    private JTextField confirmNewPasswordInput;
+    private JPasswordField newPasswordInput;
+    private JPasswordField confirmNewPasswordInput;
     private JButton updateButton;
     Border borderLabel = BorderFactory.createEmptyBorder(0,0,5,50);
     Border passwordLabel = BorderFactory.createEmptyBorder(5,-50,0,0);
@@ -32,15 +37,20 @@ public class UpdatePasswordInfo extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String passText = newPasswordInput.getText();
                 String comfText = confirmNewPasswordInput.getText();
+
+                String email = "test@gmail.com";
                 if (passText.equals("") || comfText.equals("") && passText != comfText) {
                     System.out.println("Enter valid Password and it's confirmation");
                 } else {
                     try {
-
-//                        PreparedStatement statement = connection.prepareStatement("Update users_table set password=? where email=?");
-//                        statement.setString(1, passText);
-//                        statement.executeUpdate();
-                        JOptionPane.showMessageDialog(updateButton, "Password has been successfully changed");
+                        Connection conn = new CloudStorageConnectionHandler().getConnection();
+                        PreparedStatement updateSql=conn.prepareStatement("Update users_table SET password=? where email=?");
+                        updateSql.setString(1,hashPassword(passText));
+                        updateSql.setString(2,email);
+                        int PassUpdate=updateSql.executeUpdate();
+                        if (PassUpdate>0) {
+                            JOptionPane.showMessageDialog(updateButton, "Password has been successfully changed");
+                        }
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -51,6 +61,12 @@ public class UpdatePasswordInfo extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private String hashPassword(String password) {
+        System.out.println(BCrypt.gensalt(12));
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+
     }
 
     private void initUI() {
@@ -76,7 +92,7 @@ public class UpdatePasswordInfo extends JFrame {
         alignInput.setBorder(BorderFactory.createEmptyBorder(0,0,5,250));
         newPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
         newPasswordLabel.setForeground(Color.decode("#202020"));
-        newPasswordInput = new JTextField();
+        newPasswordInput = new JPasswordField();
         newPasswordInput.setPreferredSize(new Dimension(370, 40));
         newPasswordInput.setBorder(new RoundedBorder(10));
 
@@ -87,7 +103,7 @@ public class UpdatePasswordInfo extends JFrame {
         confirmNewPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
         confirmNewPasswordLabel.setForeground(Color.decode("#202020"));
 
-        confirmNewPasswordInput = new JTextField();
+        confirmNewPasswordInput = new JPasswordField();
         confirmNewPasswordInput.setPreferredSize(new Dimension(370, 40));
         confirmNewPasswordInput.setBorder(new RoundedBorder(10));
 
@@ -174,10 +190,6 @@ public class UpdatePasswordInfo extends JFrame {
         add(bottomPanel);
 
         pack();
-//
-//        setTitle("Update Password");
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null);
     }
 
     class RoundedBorder implements Border{
@@ -269,9 +281,6 @@ public class UpdatePasswordInfo extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             UpdatePasswordInfo ex = null;
-//            System.out.println("Enter your email");
-//            Scanner scanner = new Scanner(System.in);
-//            String email= scanner.nextLine();
             User user = new User();
             try {
                 ex = new UpdatePasswordInfo(user);
