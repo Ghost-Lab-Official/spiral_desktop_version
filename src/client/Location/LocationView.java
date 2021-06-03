@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
-import client.DbController.CloudStorageConnectionHandler;
-//import  client.DbController.PropertyVariables;
+import server.Server.DbController.CloudStorageConnectionHandler;
+//import  server.Server.DbController.PropertyVariables;
 
 public class LocationView {
     private JFrame  window;
@@ -129,7 +129,7 @@ public class LocationView {
         levelButton.setBackground(Color.gray);
         levelButton.setFocusPainted(false);
         levelButton.setBorder(BorderFactory.createCompoundBorder(
-                new LocationView.CustomBorder(),
+                new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
 
@@ -143,7 +143,7 @@ public class LocationView {
         locationButton.setForeground(Color.WHITE);
         locationButton.setFocusPainted(false);
         locationButton.setBorder(BorderFactory.createCompoundBorder(
-                new LocationView.CustomBorder(),
+                new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
 
