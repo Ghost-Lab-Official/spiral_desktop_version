@@ -194,7 +194,6 @@ public class LocationViews {
     }
 
     public static void main(String[] args) {
-
         new LocationViews();
     }
 }
