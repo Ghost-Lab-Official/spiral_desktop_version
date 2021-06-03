@@ -50,21 +50,21 @@ public class Loader {
         ActionListener managePlay=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+//                clossing the current class
                 layerUI.stop();
                 panel.remove(waitLable);
                 Window win = SwingUtilities.getWindowAncestor(panel);
                 win.dispose();
-//     layerUI.eventDispatched(new WindowEvent(panel,WindowEvent.WINDOW_CLOSING));
 
-
+                // then call the second class
                 Landing landing   =new Landing();
                 landing.initUI();
             }
         };
 
-        Timer timer = new Timer(6000,managePlay);
 
-        timer.setInitialDelay(9000);
+        Timer timer = new Timer(6000,managePlay);
+        timer.setInitialDelay(3000);
         timer.setRepeats(false);
         timer.start();
 

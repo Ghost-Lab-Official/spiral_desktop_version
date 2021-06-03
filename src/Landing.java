@@ -118,6 +118,7 @@ public class Landing extends JFrame{
     }
 
     public static void main(String[] args) {
+
         new Loader();
 //
 
