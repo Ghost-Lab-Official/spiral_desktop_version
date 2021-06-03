@@ -23,7 +23,7 @@ public class Loader {
         JPanel panel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(width, height);
+                return new Dimension(width,700);
             }
         };
         panel.setLayout(new BorderLayout());
