@@ -9,7 +9,7 @@ public class RegisterBill extends JFrame {
     private static final Color themeColor = Color.decode("#3674D0");
 
     RegisterBill(){
-        super("Create New Location");
+        super("Create new billing plan");
         setSize(1000,650);
         initUI();
         setLocationRelativeTo(null);
@@ -21,8 +21,7 @@ public class RegisterBill extends JFrame {
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
         JButton createBtn = new JButton("Register");
-        JLabel levelText = new JLabel("<html>This is where you could register your?<br/> <font color='#3674D0'>Location</font></html>");
-        JPanel CreateButtonPanel = new JPanel(new BorderLayout());
+       JPanel CreateButtonPanel = new JPanel(new BorderLayout());
         JPanel DescriptLabelPanel = new JPanel();
 
 //        company name
@@ -37,11 +36,6 @@ public class RegisterBill extends JFrame {
         leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 120, 10, 120));
         leftPanel.setLayout(new GridBagLayout());
 
-
-        DescriptLabelPanel.setBackground(Color.WHITE);
-        DescriptLabelPanel.setLayout(new BorderLayout());
-        DescriptLabelPanel.add(levelText, BorderLayout.SOUTH);
-
 //      right panel
 
         //header
@@ -51,42 +45,54 @@ public class RegisterBill extends JFrame {
         rightPanel.add(registerHeadingLabel);
 
         //input fields
-        JLabel levelName = new JLabel("Billing name");
-        JTextField levelNameInput = new JTextField();
-        JLabel levelDescription = new JLabel("Billing status");
-        JTextField levelDescrInput = new JTextField();
+        JLabel billingName = new JLabel("Billing name");
+        JTextField billingNameInput = new JTextField();
+        JLabel amount = new JLabel("Billing price");
+        JTextField amountInput = new JTextField();
 
-        JLabel gpsAddress = new JLabel("Functionalities");
-        JTextField gpsAddressInput = new JTextField();
+        
+        JLabel period = new JLabel("Billing period");
+        JTextField periodInput = new JTextField();
+
 
 //        styling the input labels
-        levelName.setFont(new Font("Verdana",Font.PLAIN,16));
-        levelDescription.setFont(new Font("Verdana",Font.PLAIN,16));
-
+        billingName.setFont(new Font("Verdana",Font.PLAIN,16));
+        amount.setFont(new Font("Verdana",Font.PLAIN,16));
+        period.setFont(new Font("Verdana",Font.PLAIN,16));
 //      styling the input fields
-        levelNameInput.setBorder(new RoundedBorder(15));
-        levelDescrInput.setBorder(new RoundedBorder(15));
+        billingNameInput.setBorder(new RoundedBorder(15));
+        amountInput.setBorder(new RoundedBorder(15));
+        periodInput.setBorder(new RoundedBorder(15));
 
         rightPanel.setLayout(new GridLayout(9,1, 0, 10));
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setBorder(BorderFactory.createEmptyBorder(30, 120, 30, 120));
 
-        JPanel levelNameLabelPanel = new JPanel();
-        levelNameLabelPanel.setBackground(Color.WHITE);
-        levelNameLabelPanel.setLayout(new BorderLayout());
-        levelNameLabelPanel.add(levelName,BorderLayout.SOUTH);
+        JPanel billingNameLabelPanel = new JPanel();
+        billingNameLabelPanel.setBackground(Color.WHITE);
+        billingNameLabelPanel.setLayout(new BorderLayout());
+        billingNameLabelPanel.add(billingName,BorderLayout.SOUTH);
 
-        JPanel levelDescrLabelPanel = new JPanel();
-        levelDescrLabelPanel.setBackground(Color.WHITE);
-        levelDescrLabelPanel.setLayout(new BorderLayout());
-        levelDescrLabelPanel.add(levelDescription,BorderLayout.SOUTH);
+        JPanel amountPanel = new JPanel();
+        amountPanel.setBackground(Color.WHITE);
+        amountPanel.setLayout(new BorderLayout());
+        amountPanel.add(amount,BorderLayout.SOUTH);
 
-        rightPanel.add(levelNameLabelPanel);
-        rightPanel.add(levelNameInput);
-        rightPanel.add(levelDescrLabelPanel);
-        rightPanel.add(levelDescrInput);
-        rightPanel.add(gpsAddress);
-        rightPanel.add(gpsAddressInput);
+        
+        JPanel periodPanel = new JPanel();
+        periodPanel.setBackground(Color.WHITE);
+        periodPanel.setLayout(new BorderLayout());
+        periodPanel.add(period,BorderLayout.SOUTH);
+
+
+
+        rightPanel.add(billingNameLabelPanel);
+        rightPanel.add(billingNameInput);
+        rightPanel.add(amountPanel);
+        rightPanel.add(amountInput);
+
+        rightPanel.add(periodPanel);
+        rightPanel.add(periodInput);
 
         createBtn.setPreferredSize(new Dimension(150,50));
         createBtn.setForeground(Color.WHITE);
@@ -102,7 +108,6 @@ public class RegisterBill extends JFrame {
         CreateButtonPanel.add(createBtn, BorderLayout.WEST);
 
         rightPanel.add(CreateButtonPanel);
-        rightPanel.add(DescriptLabelPanel);
 
         // panel to window
         add(leftPanel, BorderLayout.WEST);
