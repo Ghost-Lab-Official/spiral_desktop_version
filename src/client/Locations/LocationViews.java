@@ -1,5 +1,5 @@
 package client.Locations;
-
+import client.resultDetails.CommentPanel;
 
 import java.sql.*;
 import javax.swing.*;
