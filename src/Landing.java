@@ -1,3 +1,11 @@
+import client.pages.RegisterLocation;
+import client.result_list.ResultList;
+import server.Server.Middleware.UserAuthMiddleware;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.Spot;
+import server.Server.Model.UserLog;
+
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
@@ -106,12 +114,14 @@ public class Landing extends JFrame{
         searchField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
-
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER){
                     String searchStr = searchField.getText();
-                    System.out.println(searchStr);
+                    String sql = "SELECT * from Spot_table WHERE spot_name LIKE '%" + searchStr + "%' OR spot_description LIKE '%" + searchStr + "%' AND status = 1 ORDER BY viewers DESC LIMIT 10";
+//                    System.out.   println(searchStr);
+//                    ResultList resultList = new ResultList();
+//                    resultList.initUI();
                 }
             }
 
@@ -205,6 +215,7 @@ class IconTextComponentHelper {
         mTextComponent.setBorder(mOrigBorder);
     }
 }
+
 
 class IconTextField extends JTextField {
     private IconTextComponentHelper mHelper = new IconTextComponentHelper(this);
