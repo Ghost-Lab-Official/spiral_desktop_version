@@ -26,6 +26,7 @@ public class Dashboard {
     JFreeChart chart;
     public Dashboard() throws IOException {
     dashBoard = new JFrame("Dashboard");
+//    topNav= new JPanel();
     sideBar = new JPanel();
     sideBar.setLayout(null);
     DashboardLabel = new JLabel("Dashboard");
