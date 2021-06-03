@@ -1,5 +1,6 @@
 package client.pages;
 import client.DbController.CloudStorageConnectionHandler;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -49,10 +50,10 @@ public class RegisterLocationLevel {
                 stmt.setString(3, description);
                 int inserted = stmt.executeUpdate();
                 if(inserted == 1){
-                    System.out.println("Location level is inserted successfully!!");
+                    showMessageDialog(null, "Registeration is done successfully!!!");
                 }
                 else{
-                    System.out.println("Insert operation failed");
+                    showMessageDialog(null, "Something went wrong!!!");
                 }
             } catch ( SQLException e) {
                 e.printStackTrace();
