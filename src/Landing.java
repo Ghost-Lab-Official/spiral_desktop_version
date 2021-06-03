@@ -251,3 +251,4 @@ class IconTextField extends JTextField {
         super.setBorder(getHelper().getBorder());
     }
 }
+
