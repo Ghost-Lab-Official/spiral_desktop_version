@@ -1,5 +1,7 @@
 package client.pages;
 
+import server.Server.DbController.CloudStorageConnectionHandler;
+
 import javax.swing.*;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -20,7 +22,6 @@ import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import DbController.CloudStorageConnectionHandler;
 
 import java.sql.*;
 
@@ -213,7 +214,7 @@ class RoundedBorder implements Border{
     private int radius;
 
 
-    RoundedBorder(int radius) {
+    public RoundedBorder(int radius) {
         this.radius = radius;
     }
 
