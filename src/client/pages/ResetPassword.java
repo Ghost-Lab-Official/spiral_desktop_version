@@ -1,7 +1,8 @@
 package client.pages;
 
 import org.mindrot.jbcrypt.BCrypt;
-import server.Server.Controllers.UserModuleControllers.UsersActions;
+import server.Server.Controllers.UserModuleControllers.SendEmail;
+import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Model.User;
 
 import javax.swing.*;
@@ -12,46 +13,55 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Random;
 
-import server.Server.DbController.CloudStorageConnectionHandler;
-
-public class UpdatePasswordInfo extends JFrame {
-    private JLabel newPasswordLabel, confirmNewPasswordLabel, titleLabel;
-    private JPasswordField newPasswordInput;
-    private JPasswordField confirmNewPasswordInput;
-    private JButton updateButton;
-    Border borderLabel = BorderFactory.createEmptyBorder(0,0,5,50);
+public class ResetPassword extends JFrame {
+    private JLabel emailLabel, titleLabel;
+    private JTextField emailInput;
+    private JButton resetButton;
     Border passwordLabel = BorderFactory.createEmptyBorder(5,-50,0,0);
-    Border borderInput = BorderFactory.createEmptyBorder(0, 0, 20, 0);
+    Border borderInput = BorderFactory.createEmptyBorder(0, 0, 40, 0);
     JPanel alignInput = new JPanel(new BorderLayout());
-    JPanel alignInput2 = new JPanel(new BorderLayout());
-    public UpdatePasswordInfo(User user) throws Exception {
-        setTitle("/user/UpdatePassword");
+    public ResetPassword(User user) throws Exception {
+        setTitle("/user/RestPassword");
         setSize(1000, 700);
         setMinimumSize(new Dimension(700, 400));
         initUI();
-        updateButton.addActionListener(new ActionListener() {
+        resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String passText = newPasswordInput.getText();
-                String comfText = confirmNewPasswordInput.getText();
-
-                String email = "test@gmail.com";
-                if (passText.equals("") || comfText.equals("") && passText != comfText) {
+                String emailText = emailInput.getText();
+                if (emailText.equals("")) {
                     System.out.println("Enter valid Password and it's confirmation");
                 } else {
                     try {
                         Connection conn = new CloudStorageConnectionHandler().getConnection();
-                        PreparedStatement updateSql=conn.prepareStatement("Update users_table SET password=? where email=?");
-                        updateSql.setString(1,hashPassword(passText));
-                        updateSql.setString(2,email);
-                        int PassUpdate=updateSql.executeUpdate();
-                        if (PassUpdate>0) {
-                            JOptionPane.showMessageDialog(updateButton, "Password has been successfully changed");
-                        } else {
-                            JOptionPane.showMessageDialog(updateButton, "Password not updated");
+                        Statement CheckEmail = conn.createStatement();
+                        ResultSet check =CheckEmail.executeQuery("SELECT * from users_table WHERE email='" + emailText + "'");
+                        if(check.next()) {
+                            System.out.println("code sent to "+check.getString("email"));
+                        }else {
+                            System.out.println("No email found!");
+                            return;
                         }
+                        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        StringBuilder sb = new StringBuilder();
+                        Random random = new Random();
+                        int length = 7;
+
+                        for(int i = 0; i < length; i++) {
+                            int index = random.nextInt(alphabet.length());
+                            char randomChar = alphabet.charAt(index);
+                            sb.append(randomChar);
+                        }
+
+                        String randomString = sb.toString();
+
+                        new SendEmail().send("tzyelissa90@gmail.com","doordie16",emailText,
+                                "Verification Code","verification code:"+randomString);
+
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -84,36 +94,25 @@ public class UpdatePasswordInfo extends JFrame {
         passwordDataPanel.setBackground(null);
 
         alignInput.setBackground(null);
-        titleLabel = new JLabel("Update Password ");
+        titleLabel = new JLabel("Reset Password ");
         titleLabel.setFont(new Font("Nunito", Font.PLAIN, 22));
         titleLabel.setForeground(Color.decode("#3674D0"));
 
-        newPasswordLabel = new JLabel("Password");
-        alignInput.add(newPasswordLabel, BorderLayout.EAST);
-        alignInput.setBorder(BorderFactory.createEmptyBorder(0,0,5,250));
-        newPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
-        newPasswordLabel.setForeground(Color.decode("#202020"));
-        newPasswordInput = new JPasswordField();
-        newPasswordInput.setPreferredSize(new Dimension(370, 40));
-        newPasswordInput.setBorder(new RoundedBorder(10));
-
-        confirmNewPasswordLabel = new JLabel("Confirm Password");
-        alignInput2.setBackground(null);
-        alignInput2.setBorder(BorderFactory.createEmptyBorder(0,0,5,210));
-        alignInput2.add(confirmNewPasswordLabel, BorderLayout.EAST);
-        confirmNewPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
-        confirmNewPasswordLabel.setForeground(Color.decode("#202020"));
-
-        confirmNewPasswordInput = new JPasswordField();
-        confirmNewPasswordInput.setPreferredSize(new Dimension(370, 40));
-        confirmNewPasswordInput.setBorder(new RoundedBorder(10));
+        emailLabel = new JLabel("E-mail");
+        alignInput.add(emailLabel, BorderLayout.EAST);
+        alignInput.setBorder(BorderFactory.createEmptyBorder(0,0,10,280));
+        emailLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
+        emailLabel.setForeground(Color.decode("#202020"));
+        emailInput = new JTextField();
+        emailInput.setPreferredSize(new Dimension(370, 40));
+        emailInput.setBorder(new RoundedBorder(10));
 
 
-        updateButton = new JButton("Update");
-        updateButton.setBorder(null);
-        updateButton.setFont(new Font("Verdana", Font.PLAIN, 14));
-        updateButton.setPreferredSize(new Dimension(100, 55));
-        updateButton.setFocusPainted(false);
+        resetButton = new JButton("Send");
+        resetButton.setBorder(null);
+        resetButton.setFont(new Font("Verdana", Font.PLAIN, 14));
+        resetButton.setPreferredSize(new Dimension(100, 55));
+        resetButton.setFocusPainted(false);
 
 
         // Align labels and input to the center
@@ -123,9 +122,6 @@ public class UpdatePasswordInfo extends JFrame {
         JPanel newPasswordPanel = new JPanel(new GridBagLayout());
 
         JPanel newPasswordInputPanel = new JPanel(new GridBagLayout());
-        JPanel confirmNewPasswordPanel = new JPanel(new GridBagLayout());
-
-        JPanel confirmNewPasswordInputPanel = new JPanel(new GridBagLayout());
         JPanel updatePanel = new JPanel(new GridBagLayout());
 
         // Add labels and inputs to their panels
@@ -140,34 +136,23 @@ public class UpdatePasswordInfo extends JFrame {
 
         newPasswordPanel.setBorder(passwordLabel);
 
-        newPasswordInputPanel.add(newPasswordInput);
+        newPasswordInputPanel.add(emailInput);
         newPasswordInputPanel.setBackground(null);
         newPasswordInputPanel.setBorder(borderInput);
 
-        confirmNewPasswordPanel.add(alignInput2);
-        confirmNewPasswordPanel.setBackground(null);
-        confirmNewPasswordPanel.setBorder(borderLabel);
-
-        confirmNewPasswordInputPanel.add(confirmNewPasswordInput);
-        confirmNewPasswordInputPanel.setBackground(null);
-        confirmNewPasswordInputPanel.setBorder(borderInput);
-
-        updatePanel.add(updateButton);
+        updatePanel.add(resetButton);
         updatePanel.setBackground(null);
-        updateButton.setBorder(BorderFactory.createCompoundBorder(
+        resetButton.setBorder(BorderFactory.createCompoundBorder(
                 new CustomBorder(),
-                new EmptyBorder(new Insets(25, 25, 25, 25))
+                new EmptyBorder(new Insets(45, 25, 45, 25))
         ));
-        updateButton.setForeground(Color.decode("#FFFFFF"));
-        updateButton.setBackground(Color.decode("#3674D0"));
+        resetButton.setForeground(Color.decode("#FFFFFF"));
+        resetButton.setBackground(Color.decode("#3674D0"));
 
         // Add labels and inputs' labels to passwordDataPanel
         passwordDataPanel.add(titleLabelPanel);
         passwordDataPanel.add(newPasswordPanel);
         passwordDataPanel.add(newPasswordInputPanel);
-        passwordDataPanel.add(confirmNewPasswordPanel);
-
-        passwordDataPanel.add(confirmNewPasswordInputPanel);
         passwordDataPanel.add(updatePanel);
 
         // Add passwordDataPanel to allContentPanel
@@ -281,10 +266,10 @@ public class UpdatePasswordInfo extends JFrame {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            UpdatePasswordInfo ex = null;
+            ResetPassword ex = null;
             User user = new User();
             try {
-                ex = new UpdatePasswordInfo(user);
+                ex = new ResetPassword(user);
             } catch (Exception e) {
                 e.printStackTrace();
             }
