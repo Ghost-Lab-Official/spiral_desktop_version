@@ -85,9 +85,6 @@ public class ResetPassword extends JFrame {
         allContentPanel.setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 60));
         allContentPanel.setBackground(Color.WHITE);
 
-        // Border layout to align label east
-
-        // Align all items in vertical line
         JPanel passwordDataPanel = new JPanel();
         BoxLayout boxLayout = new BoxLayout(passwordDataPanel, BoxLayout.Y_AXIS);
         passwordDataPanel.setLayout(boxLayout);
@@ -98,7 +95,7 @@ public class ResetPassword extends JFrame {
         titleLabel.setFont(new Font("Nunito", Font.PLAIN, 22));
         titleLabel.setForeground(Color.decode("#3674D0"));
 
-        emailLabel = new JLabel("E-mail");
+        emailLabel = new JLabel(" Email");
         alignInput.add(emailLabel, BorderLayout.EAST);
         alignInput.setBorder(BorderFactory.createEmptyBorder(0,0,10,280));
         emailLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
