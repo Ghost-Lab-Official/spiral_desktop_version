@@ -1,5 +1,5 @@
 package Locations;
-import  resultDetails.CommentPanel;
+//import  resultDetails.CommentPanel;
 
 
 import java.sql.*;
@@ -10,6 +10,13 @@ import java.awt.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 
+
+
+/**
+ * Author :pauline ishimwe
+ * for location page
+ **
+ * */
 public class LocationViews {
     private JFrame  window;
     private JPanel  panelHeader;
@@ -29,21 +36,6 @@ public class LocationViews {
     public LocationViews() {
         LocationsInit();
     }
-//    public ImageIcon createImageIconResizeable(String path,
-//                                               String description, int w, int h) {
-//        java.net.URL imgURL = CommentPanel.class.getResource(path);
-//
-//        if (imgURL != null) {
-//            ImageIcon imageIcon = new ImageIcon(imgURL, description);
-//            Image image=imageIcon.getImage();
-//            Image newimg = image.getScaledInstance(w, h,  Image.SCALE_SMOOTH);
-//            imageIcon=new ImageIcon(newimg);
-//            return imageIcon;
-//        } else {
-//            System.err.println("Couldn't find file: " + path);
-//            return null;
-//        }
-//    }
 
 
 

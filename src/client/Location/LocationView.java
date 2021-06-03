@@ -1,5 +1,8 @@
 package client.Location;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -8,7 +11,15 @@ import java.awt.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 import server.Server.DbController.CloudStorageConnectionHandler;
+import  client.pages.RegisterLocation;
+import client.pages.RegisterLocationLevel;
 //import  server.Server.DbController.PropertyVariables;
+
+/**
+ * @Author : pauline ishimwe
+ * For view location page
+ * **/
+
 
 public class LocationView {
     private JFrame  window;
@@ -19,13 +30,37 @@ public class LocationView {
     private JButton locationButton;
     private JPanel panel2;
     private JTable locationsTable;
-
-
     private Connection con;
 
     public LocationView() throws Exception {
         LocationsInit();
     }
+
+    public class ActionListen implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            switch (e.getActionCommand()) {
+                case "ADD LOCATION":
+                    System.out.println("location");
+                    new RegisterLocation();
+                    break;
+                case "ADD LEVEL":
+                    System.out.println("new level");
+                    try {
+                        new RegisterLocationLevel();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid action");
+                    break;
+            }
+        }
+    }
+
 
     public void loadLocationTable(){
 
@@ -44,12 +79,15 @@ public class LocationView {
 
         JScrollPane sp = new JScrollPane(locationsTable);
         locationsTable.setRowHeight(50);
+//        locationsTable.setCellSelectionEnabled(false);
+
         locationsTable.setBorder(new LineBorder(Color.WHITE));
         locationsTable.setShowVerticalLines(false);
         locationsTable.setIntercellSpacing(new Dimension(0,0));
         locationsTable.getTableHeader().setBackground(Color.WHITE);
-        locationsTable.getTableHeader().setPreferredSize(new Dimension(sp.getWidth(),40));
+        locationsTable.getTableHeader().setPreferredSize(new Dimension(sp.getWidth(),50));
         locationsTable.getTableHeader().setFont(new Font("Nunito",Font.BOLD,14));
+
 
         String loc_name= "";
         String gps= "";
@@ -132,6 +170,9 @@ public class LocationView {
                 new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+        levelButton.setActionCommand("ADD LEVEL");
+        levelButton.addActionListener(new ActionListen());
+
 
 
 
@@ -146,6 +187,8 @@ public class LocationView {
                 new CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+        locationButton.setActionCommand("ADD LOCATION");
+        locationButton.addActionListener(new ActionListen());
 
 
 
