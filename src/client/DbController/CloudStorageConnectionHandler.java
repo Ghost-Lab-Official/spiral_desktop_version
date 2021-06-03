@@ -1,4 +1,4 @@
-package server.Server.DbController;
+package client.DbController;
 
 
 import java.sql.Connection;
@@ -8,11 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-
-import com.mysql.jdbc.CommunicationsException;
-
 import java.io.FileReader;
-import java.sql.*;
 import java.util.Properties;
 
 /**
@@ -25,14 +21,12 @@ public class CloudStorageConnectionHandler {
         Connection connection = null;
         FileReader reader = new FileReader("config.properties");
         Properties propertiesStored = new Properties();
-        propertiesStored.load(reader);
         try {
-            String url = propertiesStored.getProperty("dbUrl");
-            String username = propertiesStored.getProperty("dbUsername");
-            String password = propertiesStored.getProperty("dbPassword");
-
+//            String url = propertiesStored.getProperty("dbUrl");
+//            String username = propertiesStored.getProperty("dbUsername");
+//            String password = propertiesStored.getProperty("dbPassword");
              Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?autoReconnect=true&useSSL=false", "2YQ7auowc7", "Ro7fFhRVZY");
             // System.out.println("database connection is done ... ");
             return connection;
         }

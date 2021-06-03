@@ -1,4 +1,4 @@
-package server.Server.DbController;
+package client.DbController;
 import java.io.FileWriter;
 import java.util.Properties;
 
