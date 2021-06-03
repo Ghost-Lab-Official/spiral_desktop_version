@@ -1,5 +1,5 @@
     package client.Locations;
-    import client.resultDetails.resultDetails.CommentPanel;
+    import client.resultDetails.ResultDetails.CommentPanel;
     import resultDetails.CommentPanel;
 
     import javax.swing.*;
