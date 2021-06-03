@@ -6,9 +6,9 @@ package server.Server.Controllers.UserModuleControllers;
  */
 
 
-import server.Server.DbController.CloudStorageConnectionHandler;
-import server.Server.Model.ResponseStatus;
-import server.Server.Model.UserCategory;
+import server.Server.DbController.*;
+import server.Server.Model.*;
+//import server.Server.Model.UserCategory;
 
 import java.net.ConnectException;
 import java.sql.*;

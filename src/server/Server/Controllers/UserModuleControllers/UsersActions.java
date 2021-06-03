@@ -1,6 +1,6 @@
 package server.Server.Controllers.UserModuleControllers;
 
-import server.Server.DbController.CloudStorageConnectionHandler;
+import server.Server.DbController.*;
 import server.Server.Model.*;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -18,10 +17,7 @@ import java.util.regex.Pattern;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class UsersActions {
