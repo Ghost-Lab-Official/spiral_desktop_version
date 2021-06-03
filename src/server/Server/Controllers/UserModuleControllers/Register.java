@@ -5,6 +5,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import server.Server.DbController.CloudStorageConnectionHandler;
+
 
 
 /**
@@ -13,7 +15,7 @@ import java.sql.ResultSet;
  * @version 1.0
  */
 
-public class Register {
+public class Register{
     /**
      * @author Mutoni Uwingeneye Denyse
      * registerUser method is the function used for registering users
@@ -27,11 +29,11 @@ public class Register {
      * @param  location location of the user, of the type String
      *
      */
-    public void  registerUser(Connection connection,String firstName,String lastName,String userName, String email,
+    public boolean  registerUser(Connection connection,String firstName,String lastName,String userName, String email,
                               String gender,String birthDate,String password,String location) throws Exception{
         if(checkIfUserExist(connection,email)){
             System.out.println("Email is already used Please try using another email");
-            System.exit(0);
+            return false;
         }
         String securePassword = hashPassword(password);
         boolean matched = BCrypt.checkpw(password,securePassword);
@@ -53,9 +55,11 @@ public class Register {
         int inserted = preparedStatement.executeUpdate();
         if(inserted == 1){
             System.out.println("Inserted");
+            return  true;
         }
         else{
             System.out.println("an error occurred");
+            return false;
         }
     }
     /**

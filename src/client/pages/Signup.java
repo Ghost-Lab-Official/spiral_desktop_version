@@ -3,9 +3,15 @@ package client.pages;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.Connection;
 
-public class Signup {
+import server.Server.DbController.CloudStorageConnectionHandler;
+import server.Server.Controllers.UserModuleControllers.Register;
+
+public class Signup{
     private JFrame window;
     private JLabel welcome;
     private JLabel title;
@@ -28,14 +34,16 @@ public class Signup {
     private JPanel titlePanel;
     private JPanel formPanel;
     private JButton btn;
+    private Connection conn;
 
 
-    public Signup()throws IOException{
+    public Signup() throws Exception {
+        conn= new CloudStorageConnectionHandler().getConnection();
         formInitiator();
     }
     public void formInitiator()throws IOException {
         window = new JFrame("Signup Form");
-        window.setSize(1370,730);
+        window.setSize(1000,730);
         window.setLayout(null);
         window.setBackground(Color.WHITE);
 
@@ -104,6 +112,8 @@ public class Signup {
         btn.setBackground(Color.decode("#3674D0"));
         btn.setForeground(Color.WHITE);
         btn.setFont(new Font("verdana", Font.PLAIN, 15));
+        btn.setActionCommand("SIGNUP");
+        btn.addActionListener(new ActListener());
         already = new JLabel("Already have an account?");
         already.setForeground(Color.decode("#515151"));
         already.setBounds(510,650,150,40);
@@ -139,4 +149,40 @@ public class Signup {
         new Signup();
     }
 
+    public class ActListener extends  Register implements java.awt.event.ActionListener{
+
+        public ActListener(){}
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if("SIGNUP".equals(e.getActionCommand())){
+                try {
+                    if(first.getText().equals("") || last.getText().equals("") || name.getText().equals("") || address.getText().equals("") || pass.getPassword().toString().equals("") || place.getText().equals("")) {
+                        JOptionPane.showMessageDialog(window, "All Fields Are Required.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }else{
+                        boolean registered = this.registerUser(
+                                conn,
+                                first.getText(),
+                                last.getText(),
+                                name.getText(),
+                                address.getText(),
+                                "Male",
+                                "2021/06/06",
+                                pass.getPassword().toString(),
+                                place.getText()
+                        );
+                        if(registered==true){
+                            JOptionPane.showMessageDialog(window,"User Registered", "SUCCESSFUL.", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            JOptionPane.showMessageDialog(window,"Registration Failed", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(window,ex.getMessage(), "SOMETHING WENT WRONG", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
 }
