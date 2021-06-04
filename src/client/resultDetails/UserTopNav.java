@@ -1,17 +1,17 @@
 package client.resultDetails;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
-public class userTopNav extends JFrame {
+public class UserTopNav extends JFrame {
+ public UserTopNav(){
 
-    userTopNav() throws IOException {
-        topnavInit();
-    }
+ }
 
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
         int w = image.getWidth();
@@ -32,7 +32,7 @@ public class userTopNav extends JFrame {
         return output;
     }
 
-    public void topnavInit() throws IOException {
+    public JPanel topnavInit() throws IOException {
         JFrame window = new JFrame();
         JPanel navigationPanel = new JPanel();
         navigationPanel.setLayout(new BorderLayout());
@@ -43,7 +43,7 @@ public class userTopNav extends JFrame {
         JPanel logoPanel = new JPanel();
         logoPanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,5));
         logoPanel.setBackground(Color.decode("#FFFFFF"));
-        ImageIcon logoImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\spirallogo.png");
+        ImageIcon logoImage = new ImageIcon("src/client/images/spirallogo.png");
         JLabel logoImg = new JLabel(logoImage);
         logoPanel.add(logoImg);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
@@ -61,28 +61,37 @@ public class userTopNav extends JFrame {
 
         JPanel profilePanel = new JPanel();
         profilePanel.setBackground(Color.decode("#FFFFFF"));
-        profilePanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,35));
-        ImageIcon profileImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\logo.jpg");
-        JButton profileImg = new JButton(profileImage);
-        profileImg.setPreferredSize(new Dimension(120,40));
-        profileImg.setBorder(BorderFactory.createEmptyBorder(1,3,5,10));
-        profileImg.setBorder(new LineBorder(Color.gray,1,true));
-        profileImg.setBorder(new RoundedBoarder(50));
+        profilePanel.setSize(100,40);
+        profilePanel.setBorder(BorderFactory.createEmptyBorder(10,2,0,45));
 
+//        JLabel demoLabel = new JLabel();
+        BufferedImage img = null;
+
+        img = ImageIO.read(new File("src/client/images/profile.png"));
+        Image dimg = img.getScaledInstance(80,80,
+                Image.SCALE_DEFAULT);
+
+
+        ImageIcon profileImage = new ImageIcon(dimg);
+        JLabel profileImg = new JLabel(profileImage);
+
+        JLabel username = new JLabel("Nyirakamana");
+        profilePanel.add(username);
         profilePanel.add(profileImg);
         navigationPanel.add(profilePanel, BorderLayout.EAST);
 
         navigationPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 
-        window.add(navigationPanel, BorderLayout.PAGE_START);
-
-        window.setSize(1800,700);
-        window.setVisible(true);
+        return navigationPanel;
+//        window.add(navigationPanel, BorderLayout.PAGE_START);
+//
+//        window.setSize(1800,700);
+//        window.setVisible(true);
 
     }
-
-    public static void main(String[] args) throws IOException {
-        userTopNav userTopNav = new userTopNav();
-    }
+//
+//    public static void main(String[] args) throws IOException {
+//        userTopNav userTopNav = new userTopNav();
+//    }
 
 }

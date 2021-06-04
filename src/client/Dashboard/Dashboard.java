@@ -1,5 +1,6 @@
 package client.Dashboard;
 
+import client.resultDetails.UserTopNav;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class Dashboard {
     JFrame dashBoard;
-    JPanel sideBar,users,locations,spots,billing,mostViewedSpots,bestRatedSpot,topPopularLocation,recentRegisteredSpots,billing2;
+    JPanel sideBar,users,locations,spots,billing,mostViewedSpots,bestRatedSpot,recentRegisteredSpots,billing2,topNav;
     ChartPanel BarChart;
     JLabel DashboardLabel,UserLabel,BillingsLabel,LocationsLabel,SpotsLLabel,SettingsLabel,LogoutLabel,Users2Label,Locations2Label,spots2Label,billing2Label,RecentRegisterdSpotsLabel,recentRegisterdSpotsLabel,recentTimeLabel,bestRatedSpotLabel,bestRated2SpotLabel,bestRated3SpotLabel, bestRated4SpotLabel,bestRated5SpotLabel,bestRated6SpotLabel,bestRated7SpotLabel,bestRated8SpotLabel,mostViewedSpotsLabel,mostViewedSpotsLabel2;
     JLabel dashboardIconLabel,usersIconLabel,billingsIconLabel,locationsIconLabel,spotsIconLabel,settingsIconLabel,logoutIconLabel,users2IconLabel,locations2IconLabel,spots2IconLabel,billing2IconLabel,RecentRegisterdIconLabel,bestRatedIconSpotLabel,bestRated2IconSpotLabel,progressBar;
@@ -30,6 +31,10 @@ public class Dashboard {
     JFreeChart chart;
     public Dashboard() throws IOException {
     dashBoard = new JFrame("Dashboard");
+    topNav= new JPanel();
+    topNav = new UserTopNav().topnavInit();
+    topNav.setLayout(null);
+    topNav.setBounds(0,2,2000,80);
     sideBar = new JPanel();
     sideBar.setLayout(null);
     DashboardLabel = new JLabel("Dashboard");
@@ -345,6 +350,7 @@ public class Dashboard {
        BarChart = new ChartPanel(chart);
        BarChart.setBounds(200,260,540,400);
         container = new Container();
+        container.add(topNav);
         container.add(sideBar);
         container.add(users);
         container.add(locations);
@@ -357,8 +363,8 @@ public class Dashboard {
         container.setLayout(null);
         scrollBar = new JScrollBar();
         scrollBar.setBounds(100,100, 50,100);
+        dashBoard.add(topNav);
         dashBoard.add(container);
-
         dashBoard.setSize(1400,1700);
         dashBoard.setVisible(true);
  }
