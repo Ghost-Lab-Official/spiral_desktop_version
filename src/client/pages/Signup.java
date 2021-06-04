@@ -5,6 +5,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -129,6 +131,13 @@ public class Signup{
         login.setForeground(Color.decode("#3674D0"));
         login.setBounds(660,650,50,40);
         login.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        login.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                window.dispose();
+                new Login();
+            }
+        });
         window.add(spiral);
         window.add(welcome);
         window.add(title);
@@ -189,6 +198,8 @@ public class Signup{
                            address.setText("");
                            pass.setText("");
                            place.setText("");
+                           window.dispose();
+                           new Login();
                         }else{
                             JOptionPane.showMessageDialog(window,"Registration Failed", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
