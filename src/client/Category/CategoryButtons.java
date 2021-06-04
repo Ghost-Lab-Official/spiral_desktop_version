@@ -1,6 +1,10 @@
     package client.Category;
 
+    import client.ClientMain.ClientServerConnector;
     import client.resultDetails.CommentPanel;
+    import server.Server.Model.RequestBody;
+    import server.Server.Model.ResponseBody;
+    import server.Server.Model.SpotCategory;
 
     import javax.swing.*;
     import javax.swing.border.LineBorder;
@@ -20,7 +24,7 @@
 
         private JTable categoriesTable;
 
-        public CategoryButtons() {
+        public CategoryButtons() throws Exception {
             CategoriesInit();
         }
         public ImageIcon createImageIconResizeable(String path,
@@ -54,26 +58,33 @@
             }
         }
 
-        public void loadCategoryTable(){
-//            ImageIcon delete = createImageIcon("/images/si-delete.png","delete");
-//            JLabel deleteIcon = new JLabel(delete);
-//            deleteIcon.setBounds(140,10,40,25);
-//            JButton deleteButton = new JButton((Action) deleteIcon);
-            String[][] locationsData = {
-                    {"1", "1000", "rwanda coding academy","rwanda coding academy is a school i...","Active"},
-                    {"2", "1001", "Nyirangarama products","Nyirangarama products","Active"},
-                    {"3", "1002", "gender balance","gender is the concept that is still not un...","Active"},
-                    {"4", "1003", "balanced diet ","balanced diet is on a good level in rwanda c..","Active"},
-                    {"5", "1004", "balanced diet ","balanced diet is on a good level in rwanda c..","Active"},
-                    {"6", "1005", "Books ","Books that talk abount different subjects","Active"},
-                    {"7", "1006", "huye waterfall","huye waterfall provides water for huye people","Active"}
-            };
+        public void loadCategoryTable() throws Exception{
+            /* Get all registered categories */
+            RequestBody requestBody = new RequestBody();
+            requestBody.setUrl("/sportCategory");
+            requestBody.setAction("getAll");
+            requestBody.setObject(null);
+
+            ClientServerConnector clientServerConnector = new ClientServerConnector();
+            ResponseBody responseBody=  clientServerConnector.ConnectToServer(requestBody);
+
+            String[][] locationsData = {};
+
+            Integer index=0;
+            for (Object response: responseBody.getResponse()){
+                SpotCategory spotCategory = (SpotCategory) response;
+                locationsData[index][0] = String.valueOf(spotCategory.getCategoryId());
+                locationsData[index][1] = String.valueOf(spotCategory.getUserId());
+                locationsData[index][2] = String.valueOf(spotCategory.getCategoryName());
+                locationsData[index][3] = String.valueOf(spotCategory.getDescription());
+            }
 
             panel2 = new JPanel();
             panel2.setBounds(50, 110, 1175, 400);
 
             categoriesTable = new JTable();
-            String[] columns = {"Category id","User id","Category name", "Description","Action"};
+//            String[] columns = {"Category id","User id","Category name", "Description","Action"};
+            String[] columns = {"Category id","User id","Category name", "Description"};
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnIdentifiers(columns);
             categoriesTable.setModel(model);
@@ -105,7 +116,7 @@
             panel2.add(sp);
         };
 
-        public void CategoriesInit() {
+        public void CategoriesInit() throws Exception {
             window = new JFrame("Categories buttons");
             window.setSize(1375, 735);
             window.setLayout(null);
@@ -138,7 +149,7 @@
 
 
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws Exception {
 
             new CategoryButtons();
         }

@@ -1,7 +1,7 @@
 package client.ClientMain;
 
-import com.spiralSpotManagement.Server.Model.RequestBody;
-import com.spiralSpotManagement.Server.Model.ResponseBody;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

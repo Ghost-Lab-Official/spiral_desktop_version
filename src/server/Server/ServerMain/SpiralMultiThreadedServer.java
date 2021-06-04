@@ -46,9 +46,9 @@ SpiralMultiThreadedServer {
 //  }
 
     public void startServer()throws Exception{
-    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
-    String username = "2YQ7auowc7";
-    String password = "R2IMVJC67L";
+    String url = "jdbc:mysql://localhost:3306/2YQ7auowc7";
+    String username = "root";
+    String password = "welcome";
 
     PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
     propertyVariables.setPropertiesInFile();

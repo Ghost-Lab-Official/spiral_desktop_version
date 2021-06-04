@@ -43,7 +43,7 @@ public class userTopNav extends JFrame {
         JPanel logoPanel = new JPanel();
         logoPanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,5));
         logoPanel.setBackground(Color.decode("#FFFFFF"));
-        ImageIcon logoImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\spirallogo.png");
+        ImageIcon logoImage = new ImageIcon("src/client/images/spirallogo.png");
         JLabel logoImg = new JLabel(logoImage);
         logoPanel.add(logoImg);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
@@ -62,7 +62,7 @@ public class userTopNav extends JFrame {
         JPanel profilePanel = new JPanel();
         profilePanel.setBackground(Color.decode("#FFFFFF"));
         profilePanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,35));
-        ImageIcon profileImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\logo.jpg");
+        ImageIcon profileImage = new ImageIcon("src/client/images/profile.jpg");
         JButton profileImg = new JButton(profileImage);
         profileImg.setPreferredSize(new Dimension(120,40));
         profileImg.setBorder(BorderFactory.createEmptyBorder(1,3,5,10));
