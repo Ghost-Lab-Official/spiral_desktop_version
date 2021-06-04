@@ -11,6 +11,13 @@ import java.sql.Connection;
 import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Controllers.UserModuleControllers.Register;
 
+/**
+ * @Author: MANZI Mike
+ * @Author: MUKUNDWA Ange Nicole
+ * @Description: This is a class for user registration
+ *
+ *  */
+
 public class Signup{
     private JFrame window;
     private JLabel welcome;
