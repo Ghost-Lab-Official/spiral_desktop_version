@@ -23,7 +23,7 @@ import java.util.Properties;
 public class CloudStorageConnectionHandler {
     public  Connection getConnection()throws Exception{
         Connection connection = null;
-        FileReader reader = new FileReader("config.properties");
+        FileReader reader = new FileReader("src/server/config.properties");
         Properties propertiesStored = new Properties();
         propertiesStored.load(reader);
         try {

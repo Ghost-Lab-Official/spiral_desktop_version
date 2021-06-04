@@ -1,11 +1,24 @@
 package client.pages;
 
 
+import client.ClientMain.ClientServerConnector;
+import server.Server.Model.Billing;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.ResponseStatus;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 
 public class RegisterBill extends JFrame {
+    JTextField billingNameInput;
+    JTextField amountInput;
+    JTextField periodInput;
     private static final Color themeColor = Color.decode("#3674D0");
 
     RegisterBill(){
@@ -46,13 +59,13 @@ public class RegisterBill extends JFrame {
 
         //input fields
         JLabel billingName = new JLabel("Billing name");
-        JTextField billingNameInput = new JTextField();
+        billingNameInput = new JTextField();
         JLabel amount = new JLabel("Billing price");
-        JTextField amountInput = new JTextField();
+        amountInput = new JTextField();
 
         
-        JLabel period = new JLabel("Billing period");
-        JTextField periodInput = new JTextField();
+        JLabel period = new JLabel("Billing period (months)");
+        periodInput = new JTextField();
 
 
 //        styling the input labels
@@ -104,6 +117,9 @@ public class RegisterBill extends JFrame {
                 new EmptyBorder(new Insets(25, 20, 25, 25))
         ));
 
+        createBtn.setActionCommand("REGISTER");
+        createBtn.addActionListener(new ActionListen());
+
         CreateButtonPanel.setBackground(Color.WHITE);
         CreateButtonPanel.add(createBtn, BorderLayout.WEST);
 
@@ -115,7 +131,51 @@ public class RegisterBill extends JFrame {
 
     }
 
+
+    public void registerBill()throws Exception{
+        String billName = billingNameInput.getText();
+        Integer billPrice = Integer.parseInt(amountInput.getText());
+        Integer billPeriod = Integer.parseInt(periodInput.getText());
+
+        Billing billing = new Billing();
+        billing.setBilling_name(billName);
+        billing.setPrice(billPrice);
+        billing.setBilling_period(billPeriod);
+        System.out.println(billName+" "+billPrice+" "+billPeriod);
+
+//        send request to backend
+
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/billing");
+        requestBody.setAction("register");
+        requestBody.setObject(billing);
+
+
+
+
+
+        ClientServerConnector clientServerConnector = new ClientServerConnector();
+
+        ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+
+        showMessageDialog(null,"Bill is registered successfully");
+
+    }
+
+    public class ActionListen implements ActionListener{
+        @Override
+                public void actionPerformed(ActionEvent e){
+            try {
+                registerBill();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         new RegisterBill();
     }
 }
+     
