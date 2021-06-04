@@ -40,7 +40,7 @@ public class SingleResultDetails extends JFrame {
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-comment");
         requestBody.setAction("getComments");
-        requestBody.setObject((Object) id);
+        requestBody.setObject((Object) spotN);
         ClientServerConnector clientServerConnector = new ClientServerConnector();
         ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
         boolean found = false;
