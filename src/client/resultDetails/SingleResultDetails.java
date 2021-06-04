@@ -4,6 +4,7 @@ import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthFormattedTextFieldUI;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.util.ArrayList;
@@ -12,20 +13,34 @@ import java.util.Map;
 // class GridLayout extends JFrame
 public class SingleResultDetails extends JFrame {
     private int searchId;
+    private String spotN;
+    private String descSpot;
+
+    public SingleResultDetails(int id,String name,String desc) {
+        this.spotN=name;
+        this.descSpot=desc;
+        this.searchId=id;
+    }
+
+//    public SingleResultDetails(int id, String name, String desc) {
+//    }
+
     public int getSearchId() {
         return searchId;
     }
     public void setSearchId(int searchId) {
         this.searchId = searchId;
     }
-    public SingleResultDetails(int id ) throws Exception {
+    public SingleResultDetails ()throws Exception {
         // Creating Object P1 of JPanel class
-        setSearchId(id);
+
+        setSearchId(searchId);
         System.out.println("id got " + getSearchId());
+
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-comment");
         requestBody.setAction("getComments");
-        requestBody.setObject((Object) 3);
+        requestBody.setObject((Object) id);
         ClientServerConnector clientServerConnector = new ClientServerConnector();
         ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
         boolean found = false;
@@ -102,7 +117,7 @@ public class SingleResultDetails extends JFrame {
         p2.setBackground(Color.WHITE);
         // Initialization of object
         // "one" of JLabel class.
-        resultDetailsTitle = new JLabel("Amakosi-Ish Kevin");
+        resultDetailsTitle = new JLabel(spotN);
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
