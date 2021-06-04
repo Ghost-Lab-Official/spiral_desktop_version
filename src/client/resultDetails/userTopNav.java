@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,6 +51,7 @@ public class userTopNav extends JFrame {
         JLabel logoImg = new JLabel(logoImage);
         logoPanel.add(logoImg);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
+
 
         JPanel searchPanel = new JPanel();
         searchPanel.setSize(600,300);
