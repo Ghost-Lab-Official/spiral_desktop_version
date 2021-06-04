@@ -50,7 +50,7 @@ public class RegisterLocationLevel {
                 stmt.setString(3, description);
                 int inserted = stmt.executeUpdate();
                 if(inserted == 1){
-                    showMessageDialog(null, "Registeration is done successfully!!!");
+                    showMessageDialog(null, "Registration is done successfully!!!");
                 }
                 else{
                     showMessageDialog(null, "Something went wrong!!!");
