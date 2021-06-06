@@ -1,13 +1,8 @@
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-package resultDetails;
-
-=======
 package client.resultDetails;// Java program to illustrate the GridLayout
 import client.ClientMain.ClientServerConnector;
 import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
->>>>>>> 03d05775c3684bf99699098a0e1ab28122625c40:src/client/resultDetails/SingleResultDetails.java
 import javax.swing.*;
 import javax.swing.plaf.synth.SynthFormattedTextFieldUI;
 import java.awt.*;
@@ -106,25 +101,6 @@ public class SingleResultDetails extends JFrame {
         CommentField.setMargin(new Insets(15, 15, 10, 15));
         final Font f = CommentField.getFont();
         CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
-<<<<<<< HEAD:src/resultDetails/ResultDetails.java
-//        JOptionPane.showMessageDialog(null, CommentField);
-//        JTextArea CommentField=new JTextArea("Add Comment");
-//        CommentField.setBounds(0,50,300,55);
-//        CommentField.setBorder(BorderFactory.createCompoundBorder(
-//                CommentField.getBorder(),
-//                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-//        CommentField.setMargin(new Insets(20, 20, 10, 10));
-//        CommentField.setBounds(0,50,300,55);
-//        CommentField.setBorder(null);
-//        CommentField.setMargin(new Insets(20, 20, 10, 10));
-         JButton sendComment=new JButton("SEND");
-         sendComment.setBounds(300,50,100,55);
-         sendComment.setBackground(Color.decode("#C4C4C4"));
-         sendComment.setBorder(null);
-         sendComment.setFont(new Font("Verdana", Font.BOLD, 15));
-         lastPanel.add(CommentField);
-         lastPanel.add(sendComment);
-=======
         JButton sendComment=new JButton("SEND");
         sendComment.setBounds(300,50,100,55);
         sendComment.setBackground(Color.decode("#C4C4C4"));
@@ -132,7 +108,6 @@ public class SingleResultDetails extends JFrame {
         sendComment.setFont(new Font("Nunito", Font.BOLD, 15));
         lastPanel.add(CommentField);
         lastPanel.add(sendComment);
->>>>>>> 03d05775c3684bf99699098a0e1ab28122625c40:src/client/resultDetails/SingleResultDetails.java
         p1.add(lastPanel);
         JLabel resultDetailsTitle, likes, resultDetailsDescription;
         JPanel descriptionPanel = new JPanel(new GridLayout(4, 4));

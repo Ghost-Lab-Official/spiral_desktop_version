@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/resultDetails/PlaceholderTextField.java
-package resultDetails;
-=======
+
 package client.resultDetails;
->>>>>>> 03d05775c3684bf99699098a0e1ab28122625c40:src/client/resultDetails/PlaceholderTextField.java
 
 import java.awt.*;
 
