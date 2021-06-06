@@ -132,7 +132,7 @@ public class ResultDetails {
             String command = e.getActionCommand();
             if( command.equals( "details" ))  {
                 try {
-                    new SingleResultDetails(int id, String name, String dsc);
+                    new SingleResultDetails(id,name,desc);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -166,35 +166,36 @@ public class ResultDetails {
         window.setTitle("Result Details");
         int y1=40;int y2=60;
         for (Object response : responseBody.getResponse()) {
-        window.setBounds(300, 10, 800, 800);
-        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        window.setResizable(true);
-        container = window.getContentPane();
-        container.setBackground(Color.white);
-        container.setLayout(null);
+            window.setBounds(300, 10, 800, 800);
+            window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            window.setResizable(true);
+            container = window.getContentPane();
+            container.setBackground(Color.white);
+            container.setLayout(null);
 
             Spot spot = (Spot) response;
-        title = new JLabel(spot.getSpotName());
-        JButton det = new JButton("click");
-        det.setActionCommand("details");
-        det.addActionListener(new ButtonClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
-        title.setFont(new Font("Arial", Font.BOLD, 23));
-        title.setSize(500, 30);
-        title.setLocation(60, y1);
-        det.setSize(60, 30);
-        det.setLocation(200, 30);
-        title.setForeground(Color.decode("#0074DB"));
-        container.add(title);
-        container.add(det);
-        description = new JLabel();
-        description.setText(convertToMultiline(spot.getSpotDescription()));
-        description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description.setSize(700, 130);
-        description.setLocation(60, y2);
-        container.add(description);
-       y1=+150;
-       y2=+170;
-    }
+            System.out.println("my spot id "+spot.getSpotId());
+            title = new JLabel(spot.getSpotName());
+            JButton det = new JButton("click");
+            det.setActionCommand("details");
+            det.addActionListener(new ButtonClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+            title.setFont(new Font("Arial", Font.BOLD, 23));
+            title.setSize(500, 30);
+            title.setLocation(60, y1);
+            det.setSize(60, 30);
+            det.setLocation(200, 30);
+            title.setForeground(Color.decode("#0074DB"));
+            container.add(title);
+            container.add(det);
+            description = new JLabel();
+            description.setText(convertToMultiline(spot.getSpotDescription()));
+            description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+            description.setSize(700, 130);
+            description.setLocation(60, y2);
+            container.add(description);
+            y1=+150;
+            y2=+170;
+        }
         //Second Div
 //        title2= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
 //        title2.setFont(new Font("Arial", Font.BOLD, 23));
