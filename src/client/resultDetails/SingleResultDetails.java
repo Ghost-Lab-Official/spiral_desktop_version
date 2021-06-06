@@ -16,11 +16,11 @@ public class SingleResultDetails extends JFrame {
     private String spotN;
     private String descSpot;
 
-    public SingleResultDetails(int id,String name,String desc) {
-        this.spotN=name;
-        this.descSpot=desc;
-        this.searchId=id;
-    }
+//    public SingleResultDetails(int id,String name,String desc) {
+//        this.spotN=name;
+//        this.descSpot=desc;
+//        this.searchId=id;
+//    }
 
 //    public SingleResultDetails(int id, String name, String desc) {
 //    }
@@ -31,11 +31,12 @@ public class SingleResultDetails extends JFrame {
     public void setSearchId(int searchId) {
         this.searchId = searchId;
     }
-    public SingleResultDetails ()throws Exception {
+    public SingleResultDetails(int id,String name,String desc) throws Exception {
         // Creating Object P1 of JPanel class
-
+//        this.spotN=name;
+//        this.descSpot=desc;
+//        this.searchId=id;
         setSearchId(searchId);
-        System.out.println("id got " + getSearchId());
 
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-comment");

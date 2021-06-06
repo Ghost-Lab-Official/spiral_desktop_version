@@ -132,7 +132,7 @@ public class ResultDetails {
             String command = e.getActionCommand();
             if( command.equals( "details" ))  {
                 try {
-                    new SingleResultDetails(id,name,desc);
+                    new SingleResultDetails(int id, String name, String dsc);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -174,7 +174,6 @@ public class ResultDetails {
         container.setLayout(null);
 
             Spot spot = (Spot) response;
-            System.out.println("my spot id "+spot.getSpotId());
         title = new JLabel(spot.getSpotName());
         JButton det = new JButton("click");
         det.setActionCommand("details");
