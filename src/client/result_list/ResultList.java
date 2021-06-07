@@ -29,10 +29,6 @@ public class ResultList extends JFrame{
                 {"Title", "url", "description","Relation"},
                 {"Title", "url", "description","Relation"}
         };
-
-
-
-
         JLabel timeTaken = new JLabel("Time Taken:");
         JLabel timeInSeconds = new JLabel("14 secs");
         JLabel totalSearches = new JLabel("Total Searches:");

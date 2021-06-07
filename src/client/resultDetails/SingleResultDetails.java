@@ -1,13 +1,58 @@
 package client.resultDetails;// Java program to illustrate the GridLayout
+import client.ClientMain.ClientServerConnector;
+import server.Server.Model.Comment;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+
+
+
 // class GridLayout extends JFrame
-public class ResultDetails extends JFrame {
-    ResultDetails() {
+public class SingleResultDetails extends JFrame {
+
+    private int searchId;
+
+    public int getSearchId() {
+        return searchId;
+    }
+
+    public void setSearchId(int searchId) {
+        this.searchId = searchId;
+    }
+
+    public SingleResultDetails(int id ) throws Exception {
         // Creating Object P1 of JPanel class
+        setSearchId(id);
+       System.out.println("id getted " + getSearchId());
+
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/spot-comment");
+        requestBody.setAction("getComments");
+
+        requestBody.setObject(5);
+        ClientServerConnector clientServerConnector = new ClientServerConnector();
+        ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+        boolean found = false;
+        Integer index = 0;
+        List<Object> commentsList = new ArrayList<>();
+        for (Object response: responseBody.getResponse()){
+            index++;
+            found = true;
+            Comment comment = (Comment) response;
+            System.out.println(index + ". " + comment.getContent());
+            commentsList.add(comment);
+        }
+
+        if(!found){
+            System.out.println("No comments Found.");
+        }
         JPanel p1 = new JPanel();
         // set the layout
         p1.setLayout(new GridLayout(4, 2));
@@ -138,6 +183,6 @@ public class ResultDetails extends JFrame {
     public static void main(String[] args)
     {
         // calling the constructor
-        new ResultDetails();
+        //new SingleResultDetails();
     }
 }
