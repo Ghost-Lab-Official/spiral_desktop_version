@@ -1,11 +1,14 @@
 package client.resultDetails;// Java program to illustrate the GridLayout
 import client.ClientMain.ClientServerConnector;
-import server.Server.Model.Comment;
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseBody;
+import client.result_list.ResultDetails;
+import server.Server.Model.*;
+
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthFormattedTextFieldUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,36 +16,106 @@ import java.util.Map;
 // class GridLayout extends JFrame
 public class SingleResultDetails extends JFrame {
     private int searchId;
-    private String spotN;
+    private String spotName;
     private String descSpot;
 
-    public SingleResultDetails(int id,String name,String desc) {
-        this.spotN=name;
-        this.descSpot=desc;
-        this.searchId=id;
+    public SingleResultDetails() {
+
     }
 
-//    public SingleResultDetails(int id, String name, String desc) {
-//    }
+
 
     public int getSearchId() {
         return searchId;
     }
+
+    private class LabelClickListener extends MouseAdapter {
+        private int rates;
+
+
+
+LabelClickListener(int ratings){
+    this.rates=ratings;
+}
+
+
+        public void mouseClicked(MouseEvent e) {
+
+            try {
+                rateSpot(rates);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+        }
+    }
+    /// rate spot
+    public void  rateSpot(int rates) throws Exception {
+
+        SpotRatings spotRating = new SpotRatings();
+        spotRating.setSpot_id(this.searchId);
+        spotRating.setUser_id(25);
+        spotRating.setRating(rates);
+
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/spot-rating");
+        requestBody.setAction("register");
+        requestBody.setObject(spotRating);
+        ClientServerConnector clientServerConnector = new ClientServerConnector();
+        ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+        try {
+            responseBody = clientServerConnector.ConnectToServer(requestBody);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+//    new SingleResultDetails(searchId,spotName,descSpot);
+
+    }
     public void setSearchId(int searchId) {
         this.searchId = searchId;
     }
-    public SingleResultDetails ()throws Exception {
+    public int  getRates(Integer id) throws Exception {
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/spot-rating");
+        requestBody.setAction("getRatings");
+        requestBody.setObject((Object) 5);
+
+        ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+        boolean found = false;
+        Integer  rates = 0;
+
+        for (Object response: responseBody.getResponse()){
+            found = true;
+            SpotRatings spotRating = (SpotRatings) response;
+            rates=rates+spotRating.getRating();
+            System.out.println("rates spots :"+spotRating.getSpot_id());
+        }
+
+        if(!found){
+            return 0;
+        }
+        System.out.println("number of rates :"+rates);
+        return  rates;
+    }
+    public  SingleResultDetails (int id,String name,String desc)throws Exception {
         // Creating Object P1 of JPanel class
+        this.spotName=name;
+        this.descSpot=desc;
+        this.searchId=id;
 
         setSearchId(searchId);
-        System.out.println("id got " + getSearchId());
-
+        getRates(searchId);
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-comment");
         requestBody.setAction("getComments");
-        requestBody.setObject((Object) spotN);
+        requestBody.setObject((Object) this.searchId);
         ClientServerConnector clientServerConnector = new ClientServerConnector();
-        ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+        ResponseBody responseBody = null;
+        try {
+            responseBody = clientServerConnector.ConnectToServer(requestBody);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         boolean found = false;
         Integer index = 0;
         List<Object> commentsList = new ArrayList<>();
@@ -56,6 +129,10 @@ public class SingleResultDetails extends JFrame {
         if(!found){
             System.out.println("No comments Found.");
         }
+
+
+
+
         JPanel p1 = new JPanel();
         // set the layout
         p1.setLayout(new GridLayout(4, 2));
@@ -117,60 +194,66 @@ public class SingleResultDetails extends JFrame {
         p2.setBackground(Color.WHITE);
         // Initialization of object
         // "one" of JLabel class.
-        resultDetailsTitle = new JLabel(spotN);
+        resultDetailsTitle = new JLabel(spotName);
+        JLabel ratesn =new JLabel(String.valueOf(getRates(searchId)));
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
         resultDetailsTitle.setBounds(350,100,400,20);
+        ratesn.setBounds(500,100,40,20);
         likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
         int x=430;
-        for (int i = 0;i<4;i++) {
             CommentPanel ratingStars = new CommentPanel();
-            ImageIcon image = ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 15, 15);
-            JLabel rates = new JLabel(image);
-            rates.setBounds(x, 135, 80, 20);
-            p2.add(rates);
+            ImageIcon imageY =ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 20, 20);
+            ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
+            JLabel star1 = new JLabel((getRates(searchId)>=5)?imageY:imageB);
+            star1.setBounds(x, 135, 80, 20);
+            star1.addMouseListener(new LabelClickListener(5));
+            p2.add(star1);
             x+=20;
-        }
-        resultDetailsDescription = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula\n" +
-                "blandit metus eget eleifend. Suspendisse nisl ante, aliquam in nunc at, sagittis\n" +
-                "fringilla lorem. Duis pretium arcu et diam convallis, et lacinia lectus fermentum.\n" +
-                "Nunc ac mattis ante. Nullam et diam efficitur, pulvinar sem ac, congue ipsum.\n" +
-                "Proin lacinia nisi vitae tortor scelerisque fringilla. Fusce in gravida nulla. In quis\n" +
-                "orci ut ex condimentum faucibus nec sed odio. Nulla et turpis mollis, aliquet nib\n" +
-                "id, pharetra massa. Duis finibus ante quis scelerisque luctus.\n" +
-                "\n <br><br>" +
-                "Mauris vehicula ante vel erat accumsan, eu ultrices elit porttitor. Aliquam accum\n" +
-                "urna nec condimentum suscipit. Fusce eleifend massa cursus elementum pulvin \n" +
-                "Vivamus quis quam luctus, porta metus at, pharetra mi. Quisque diam sapien, p\n" +
-                "uere eu suscipit eu, convallis nec magna. \n <br><br>" +
-                "\n" +
-                "Cras luctus sagittis feugiat. Vestibului amet dapibus nulla. Integer faucibus id m\n" +
-                "id lectus suscipit suscipit in quis turpis. Sed auctor tempor dolor, vitae placerat\n" +
-                "rhoncus vel. Mauris tellus nisi, congue vitae fringilla id, condimentum vel tellus.\n" +
-                "lentesque ac dui vulputate, ultrices quam sit amet.</html>");
-        resultDetailsDescription.setBounds(230,150,450,400);
+            JLabel star2 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
+            star2.setBounds(x, 135, 80, 20);
+            p2.add(star2);
+            x+=20;
+            JLabel star3 = new JLabel((getRates(searchId)>=15)?imageY:imageB);
+            star3.setBounds(x, 135, 80, 20);
+            p2.add(star3);
+            x+=20;
+            JLabel star4 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
+            star4.setBounds(x, 135, 80, 20);
+            p2.add(star4);
+
+//        for (int i = 0;i<4;i++) {
+//            CommentPanel ratingStars = new CommentPanel();
+//            ImageIcon imageY =ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 20, 20);
+//            ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
+//            JLabel rates = new JLabel((getRates(searchId)>5)?imageY:imageB);
+//            rates.setBounds(x, 135, 80, 20);
+//            p2.add(rates);
+//            x+=20;
+//        }
+
+        resultDetailsDescription = new JLabel("<html>"+descSpot+"</html>");
+        resultDetailsDescription.setBounds(230,0,450,400);
         resultDetailsDescription.setFont(new Font("Nunito", Font.PLAIN,13));
         p2.setLayout(null);
         p2.add(resultDetailsDescription);
-        // Adding Jlabel "one" on JFrame.
+
         p2.add(resultDetailsTitle);
+        p2.add(ratesn);
         p2.add(likes);
         p1.setLayout (new GridLayout(6,1));
         add(p1, "West");
         add(p2, "East");
         // Function to set visible
         // status of JFrame.
+        this.setSize(1920, 670);
         setVisible(true);
+
         // this Keyword refers to current
         // object. Function to set size of JFrame.
-        this.setSize(1920, 670);
+
     }
-    // Main Method
-    public static void main(String[] args)
-    {
-        // calling the constructor
-        //new SingleResultDetails();
-    }
+
 }

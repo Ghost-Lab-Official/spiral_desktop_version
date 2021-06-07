@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -112,7 +114,11 @@ public class ResultDetails {
     public void setLsubTitle3(JLabel lsubTitle3) {
         this.lsubTitle3 = lsubTitle3;
     }
-    private class ButtonClickListener implements ActionListener {
+    private class LabelClickListener extends MouseAdapter {
+        private int rates;
+
+
+
         private int id;
         private String name;
         private String desc;
@@ -120,7 +126,7 @@ public class ResultDetails {
 
 
 
-        public ButtonClickListener(Integer spotId, String spotName, String spotDescription) {
+        public LabelClickListener(Integer spotId, String spotName, String spotDescription) {
             this.id=spotId;
             this.name=spotName;
             this.desc=spotDescription;
@@ -128,24 +134,26 @@ public class ResultDetails {
         }
 
 
-        public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-            if( command.equals( "details" ))  {
+        public void mouseClicked(MouseEvent e) {
+
                 try {
                     new SingleResultDetails(id,name,desc);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-            }
         }
     }
+
+
+
+
     public ResultDetails() throws Exception {
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/search");
         requestBody.setAction("getSpots");
 
         Spot spotToSend = new Spot();
-        String searchKey = "fish";
+        String searchKey = "computer";
         spotToSend.setSpotName(searchKey);
         requestBody.setObject(spotToSend);
 
@@ -176,25 +184,22 @@ public class ResultDetails {
             Spot spot = (Spot) response;
             System.out.println("my spot id "+spot.getSpotId());
         title = new JLabel(spot.getSpotName());
-        JButton det = new JButton("click");
-        det.setActionCommand("details");
-        det.addActionListener(new ButtonClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+       title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
         title.setFont(new Font("Arial", Font.BOLD, 23));
         title.setSize(500, 30);
         title.setLocation(60, y1);
-        det.setSize(60, 30);
-        det.setLocation(200, 30);
+
         title.setForeground(Color.decode("#0074DB"));
         container.add(title);
-        container.add(det);
+
         description = new JLabel();
         description.setText(convertToMultiline(spot.getSpotDescription()));
         description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
         description.setSize(700, 130);
         description.setLocation(60, y2);
         container.add(description);
-       y1=+150;
-       y2=+170;
+         y1=+150;
+         y2=+170;
     }
         //Second Div
 //        title2= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
