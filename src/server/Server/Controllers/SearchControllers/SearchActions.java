@@ -262,4 +262,88 @@ public class SearchActions {
         }
 
     }
+
+    public User getUserById(Integer id) throws Exception {
+        Connection connection = new CloudStorageConnectionHandler().getConnection();
+        User user = new User();
+        String sql = "SELECT * from users_table WHERE id="+id+"";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            user.setFirstName(rs.getString("first_name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setUserName(rs.getString("user_name"));
+            user.setEmail((rs.getString("email")));
+            user.setGender(rs.getString("gender"));
+            user.setLocation(rs.getString("location"));
+            user.setUserId(rs.getInt("user_id"));
+            user.setBirthDate(rs.getString("birth_date"));
+            user.setUserCategory(rs.getString("user_category"));
+        }
+        return user;
+    }
+
+    public Spot getSpotById(Integer id) throws Exception {
+        Connection connection = new CloudStorageConnectionHandler().getConnection();
+        Spot spot = new Spot();
+        String sql = "SELECT * from Spot_table WHERE id=" + id + " AND status = 1";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            spot.setSpotName(rs.getString("spot_name"));
+            spot.setSpotDescription(rs.getString("spot_description"));
+            spot.setSpotId(rs.getInt("spot_id"));
+            spot.setStatus((rs.getInt("status")));
+            spot.setRegistrationDate(rs.getString("registration_date"));
+//                spot1.setLocationId(rs.getInt("location_id"));
+            spot.setCategoryId(rs.getInt("category_id"));
+            spot.setUserId(rs.getInt("user_id"));
+        }
+        return spot;
+    }
+
+    public Comment getMessageById(Integer id) throws Exception {
+        Connection connection = new CloudStorageConnectionHandler().getConnection();
+        Comment comment = new Comment();
+        String sql = "SELECT * from comments WHERE id="+id+"";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                comment.setComment_id(rs.getString("comment_id"));
+                comment.setContent(rs.getString("content"));
+                comment.setCreated_at(rs.getDate("created_at"));
+                comment.setUpdatedAt(rs.getDate("updated_at"));
+                comment.setUserId(rs.getInt("user_id"));
+                comment.setSpotId(rs.getInt("spot_id"));
+                comment.setStatus(rs.getString("status"));
+            }
+            return comment;
+    }
+
+    public Object getSearchInfo(SearchRequest searchRequest) throws Exception {
+        Object result = new Object();
+        switch (searchRequest.getCategory()){
+            case "user":
+                if(searchRequest.getSearchId() != null){
+                    result = getUserById(searchRequest.getSearchId());
+                }
+                break;
+            case "spot":
+                if(searchRequest.getSearchId() != null){
+                    result = getSpotById(searchRequest.getSearchId());
+                }
+                break;
+            case "message":
+                if(searchRequest.getSearchId() != null){
+                    result = getMessageById(searchRequest.getSearchId());
+                }
+                break;
+            default:
+                System.out.println("Invalid type");
+        }
+        return result;
+    }
 }

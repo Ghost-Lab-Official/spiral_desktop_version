@@ -46,8 +46,8 @@ public class ClientServerConnector {
             out.writeObject(requestBody);
             out.flush();
 
-            // displaying server reply
-            List<Object> dataReturned = (List<Object>) in.readObject();
+                // displaying server reply
+                 List<Object> dataReturned = (List<Object>) in.readObject();
 
 
             ResponseBody responseBody = new ResponseBody(dataReturned);

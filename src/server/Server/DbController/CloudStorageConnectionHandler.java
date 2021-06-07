@@ -8,11 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-
-import com.mysql.jdbc.CommunicationsException;
-
 import java.io.FileReader;
-import java.sql.*;
 import java.util.Properties;
 
 /**

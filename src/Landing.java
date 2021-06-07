@@ -1,6 +1,7 @@
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.text.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 
 public class Landing extends JFrame{
