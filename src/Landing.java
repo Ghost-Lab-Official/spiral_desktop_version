@@ -122,15 +122,10 @@ public class Landing extends JFrame{
                 if(e.getKeyCode()==KeyEvent.VK_ENTER){
                     String searchStr = searchField.getText();
                     try {
-//                        searchSpot(searchStr);
                         new ResultList(searchStr);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-//                    String sql = "SELECT * from Spot_table WHERE spot_name LIKE '%" + searchStr + "%' OR spot_description LIKE '%" + searchStr + "%' AND status = 1 ORDER BY viewers DESC LIMIT 10";
-//                    System.out.   println(searchStr);
-//                    ResultList resultList = new ResultList();
-//                    resultList.initUI();
                 }
             }
 
