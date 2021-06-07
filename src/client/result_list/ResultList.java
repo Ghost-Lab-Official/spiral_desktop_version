@@ -6,17 +6,17 @@ import javax.swing.*;
 
 public class ResultList extends JFrame{
 
-    public ResultList(){
+    public ResultList(String searchKey) throws Exception {
         setTitle("Search Results");
         setSize(1200, 700);
         setMinimumSize(new Dimension(1000, 500));
-        initUI();
+        initUI(searchKey);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
-    public void initUI(){
+    public void initUI(String searchKey) throws Exception {
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
@@ -86,7 +86,7 @@ public class ResultList extends JFrame{
         mainPanel.add(leftPanel, BorderLayout.CENTER);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.setBackground(Color.WHITE);
-        leftPanel.add(new ResultDetails().getContainer());
+        leftPanel.add(new ResultDetails(searchKey).getContainer());
 
 
         add(mainPanel);
@@ -96,7 +96,7 @@ public class ResultList extends JFrame{
         return "<html>" + text.replaceAll("\n", "<br>");
     }
 
-    public static void main(String[] args){
-        new ResultList();
-    }
+//    public static void main(String[] args) throws Exception {
+//        new ResultList("fish");
+//    }
 }

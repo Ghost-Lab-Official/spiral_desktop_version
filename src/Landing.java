@@ -1,5 +1,6 @@
 import client.ClientMain.ClientServerConnector;
 import client.pages.RegisterLocation;
+import client.result_list.ResultDetails;
 import client.result_list.ResultList;
 import server.Server.Middleware.UserAuthMiddleware;
 import server.Server.Model.RequestBody;
@@ -121,7 +122,8 @@ public class Landing extends JFrame{
                 if(e.getKeyCode()==KeyEvent.VK_ENTER){
                     String searchStr = searchField.getText();
                     try {
-                        searchSpot(searchStr);
+//                        searchSpot(searchStr);
+                        new ResultList(searchStr);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }

@@ -5,10 +5,10 @@ package server.Server.Controllers.UserModuleControllers;
  * @description: This is user category actions controller
  */
 
-import server.Server.DbController.CloudStorageConnectionHandler;
+
+
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseStatus;
-import server.Server.Model.SpotCategory;
 import server.Server.Model.UserCategory;
 
 import java.util.ArrayList;
