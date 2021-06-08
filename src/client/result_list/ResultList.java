@@ -86,9 +86,13 @@ public class ResultList extends JFrame{
         mainPanel.add(leftPanel, BorderLayout.CENTER);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.setBackground(Color.WHITE);
-        leftPanel.add(new ResultDetails(searchKey).getContainer());
 
-
+        try {
+            leftPanel.add(new ResultDetails(searchKey).getContainer());
+        }
+        catch (Exception e) {
+            leftPanel.add(new ResultDetails("").getContainer());
+        }
         add(mainPanel);
     }
 
