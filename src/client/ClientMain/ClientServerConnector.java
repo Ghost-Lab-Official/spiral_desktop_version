@@ -1,6 +1,5 @@
 package client.ClientMain;
 
-
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
 

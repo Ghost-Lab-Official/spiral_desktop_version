@@ -52,7 +52,6 @@ public class userTopNav extends JFrame {
         logoPanel.add(logoImg);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
 
-
         JPanel searchPanel = new JPanel();
         searchPanel.setSize(600,300);
         JTextField searchInput=new JTextField("Search",30);
