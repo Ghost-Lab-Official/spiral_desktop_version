@@ -31,6 +31,20 @@ class Tabless extends JFrame {
         String empty = "";
         String[] columnNames = {"Billing id","Billing name", "Billing Price","Billing Period","Status","Action"};
         Object[][] data = {
+                {1002,"Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
+                {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
                 {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
                 {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
                 {"Billing id","Billing name", "Billing Price","Billing Period","Status", empty},
@@ -69,7 +83,11 @@ class Tabless extends JFrame {
         navPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, navPanel.getMinimumSize().height));
     }
     public void FooterUI(){
-      footerPanel = new JPanel();
+        footerPanel = new JPanel();
+        otherText = new JLabel("Footer Buttons and text goes here.");
+        footerPanel.add(otherText);
+        footerPanel.setBackground(Color.blue);
+        tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, tablePanel.getMinimumSize().height));
     }
     public void ButtonUI(){
         buttonPanel = new JPanel();
@@ -101,7 +119,7 @@ class Tabless extends JFrame {
         window = new JFrame();
         window.setLayout(null);
         window.setContentPane(verticalBox);
-        window.setSize(900,500);
+        window.setSize(1000,500);
         window.setVisible(true);
     }
 
