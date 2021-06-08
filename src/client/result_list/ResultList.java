@@ -1,12 +1,16 @@
 package client.result_list;
 
 
+import client.resultDetails.SingleResultDetails;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class ResultList extends JFrame{
 
-    public ResultList(){
+    public ResultList() throws Exception {
         setTitle("Search Results");
         setSize(1200, 700);
         setMinimumSize(new Dimension(1000, 500));
@@ -16,7 +20,7 @@ public class ResultList extends JFrame{
         setVisible(true);
     }
 
-    public void initUI(){
+    public void initUI() throws Exception {
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
@@ -92,7 +96,7 @@ public class ResultList extends JFrame{
         return "<html>" + text.replaceAll("\n", "<br>");
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
         new ResultList();
     }
 }

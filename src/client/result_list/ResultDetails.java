@@ -4,6 +4,7 @@ import client.resultDetails.SingleResultDetails;
 import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
+import server.Server.Model.Spot;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class ResultDetails {
     private JFrame window;
@@ -112,103 +112,132 @@ public class ResultDetails {
     public void setLsubTitle3(JLabel lsubTitle3) {
         this.lsubTitle3 = lsubTitle3;
     }
-
-
     private class ButtonClickListener implements ActionListener {
+        private int id;
+        private String name;
+        private String desc;
+
+
+
+
+        public ButtonClickListener(Integer spotId, String spotName, String spotDescription) {
+            this.id=spotId;
+            this.name=spotName;
+            this.desc=spotDescription;
+
+        }
+
+
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if( command.equals( "details" ))  {
-
                 try {
-                    new SingleResultDetails(5);
-
+                    new SingleResultDetails(id,name,desc);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-                System.out.println("I'm a swing developer");
             }
         }
     }
-    public ResultDetails() {
-        window= new JFrame();
+    public ResultDetails() throws Exception {
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/search");
+        requestBody.setAction("getSpots");
+
+        Spot spotToSend = new Spot();
+        String searchKey = "fish";
+        spotToSend.setSpotName(searchKey);
+        requestBody.setObject(spotToSend);
+
+        ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+        boolean found = false;
+        Integer index = 0;
+        List<Object> spotsList = new ArrayList<>();
+        for (Object response : responseBody.getResponse()) {
+            index++;
+            found = true;
+            Spot spot = (Spot) response;
+            String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0, 20) + "..." : spot.getSpotDescription();
+            System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" + showDesc);
+            spotsList.add(spot);
+        }
+
+        window = new JFrame();
         window.setTitle("Result Details");
-        window.setBounds(300, 10, 800, 800);
-        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        window.setResizable(true);
-        container = window.getContentPane();
-        container.setBackground(Color.white);
-        container.setLayout(null);
-        title= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
-        JButton det=new JButton("click");
-        det.setActionCommand("details");
-        det.addActionListener(new ButtonClickListener());
-        title.setFont(new Font("Arial", Font.BOLD, 23));
-        title.setSize(500, 30);
-        title.setLocation(60, 40);
-        det.setSize(60,30);
-        det.setLocation(200,30);
-        title.setForeground(Color.decode("#0074DB"));
-        container.add(title);
-        container.add(det);
-        subTitle= new JLabel("http://www.ecosia.org >");
-        subTitle.setFont(new Font("Arial", Font.ITALIC, 14));
-        subTitle.setSize(500, 30);
-        subTitle.setLocation(60, 68);
-        subTitle.setForeground(Color.lightGray);
-        container.add(subTitle);
-        description= new JLabel();
-        description.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
-        description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description.setSize(700, 130);
-        description.setLocation(60, 100);
-        container.add(description);
-        lsubTitle= new JLabel("<html><font color=blue><U>Related</U>: </font> <font color=gray>Lorem Ipsum... Mto mto-Ish Kevin</font></html>");
-        lsubTitle.setFont(new Font("Arial", Font.ITALIC, 14));
-        lsubTitle.setSize(500, 30);
-        lsubTitle.setLocation(60, 220);
-        container.add(lsubTitle);
+        int y1=40;int y2=60;
+        for (Object response : responseBody.getResponse()) {
+            window.setBounds(300, 10, 800, 800);
+            window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            window.setResizable(true);
+            container = window.getContentPane();
+            container.setBackground(Color.white);
+            container.setLayout(null);
+
+            Spot spot = (Spot) response;
+            System.out.println("my spot id "+spot.getSpotId());
+            title = new JLabel(spot.getSpotName());
+            JButton det = new JButton("click");
+            det.setActionCommand("details");
+            det.addActionListener(new ButtonClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+            title.setFont(new Font("Arial", Font.BOLD, 23));
+            title.setSize(500, 30);
+            title.setLocation(60, y1);
+            det.setSize(60, 30);
+            det.setLocation(200, 30);
+            title.setForeground(Color.decode("#0074DB"));
+            container.add(title);
+            container.add(det);
+            description = new JLabel();
+            description.setText(convertToMultiline(spot.getSpotDescription()));
+            description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+            description.setSize(700, 130);
+            description.setLocation(60, y2);
+            container.add(description);
+            y1=+150;
+            y2=+170;
+        }
         //Second Div
-        title2= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
-        title2.setFont(new Font("Arial", Font.BOLD, 23));
-        title2.setSize(500, 30);
-        title2.setLocation(60, 280);
-        title2.setForeground(Color.decode("#0074DB"));
-        container.add(title2);
-        subTitle2= new JLabel("http://www.ecosia.org >");
-        subTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
-        subTitle2.setSize(500, 30);
-        subTitle2.setLocation(60, 308);
-        subTitle2.setForeground(Color.lightGray);
-        container.add(subTitle2);
-        description2= new JLabel();
-        description2.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
-        description2.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description2.setSize(700, 130);
-        description2.setLocation(60, 340);
-        container.add(description2);
-        lsubTitle2= new JLabel("<html><font color=blue><U>Related</U>: </font> <font color=gray>Lorem Ipsum... Mto mto-Ish Kevin</font></html>");
-        lsubTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
-        lsubTitle2.setSize(500, 30);
-        lsubTitle2.setLocation(60, 460);
-        container.add(lsubTitle2);
-        title3= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
-        title3.setFont(new Font("Arial", Font.BOLD, 23));
-        title3.setSize(500, 30);
-        title3.setLocation(60, 520);
-        title3.setForeground(Color.decode("#0074DB"));
-        container.add(title3);
-        subTitle3= new JLabel("http://www.ecosia.org >");
-        subTitle3.setFont(new Font("Arial", Font.ITALIC, 14));
-        subTitle3.setSize(500, 30);
-        subTitle3.setLocation(60, 548);
-        subTitle3.setForeground(Color.lightGray);
-        container.add(subTitle3);
-        description3= new JLabel();
-        description3.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
-        description3.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description3.setSize(700, 130);
-        description3.setLocation(60, 580);
-        container.add(description3);
+//        title2= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
+//        title2.setFont(new Font("Arial", Font.BOLD, 23));
+//        title2.setSize(500, 30);
+//        title2.setLocation(60, 280);
+//        title2.setForeground(Color.decode("#0074DB"));
+//        container.add(title2);
+//        subTitle2= new JLabel("http://www.ecosia.org >");
+//        subTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
+//        subTitle2.setSize(500, 30);
+//        subTitle2.setLocation(60, 308);
+//        subTitle2.setForeground(Color.lightGray);
+//        container.add(subTitle2);
+//        description2= new JLabel();
+//        description2.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
+//        description2.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+//        description2.setSize(700, 130);
+//        description2.setLocation(60, 340);
+//        container.add(description2);
+//        lsubTitle2= new JLabel("<html><font color=blue><U>Related</U>: </font> <font color=gray>Lorem Ipsum... Mto mto-Ish Kevin</font></html>");
+//        lsubTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
+//        lsubTitle2.setSize(500, 30);
+//        lsubTitle2.setLocation(60, 460);
+//        container.add(lsubTitle2);
+//        title3= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
+//        title3.setFont(new Font("Arial", Font.BOLD, 23));
+//        title3.setSize(500, 30);
+//        title3.setLocation(60, 520);
+//        title3.setForeground(Color.decode("#0074DB"));
+//        container.add(title3);
+//        subTitle3= new JLabel("http://www.ecosia.org >");
+//        subTitle3.setFont(new Font("Arial", Font.ITALIC, 14));
+//        subTitle3.setSize(500, 30);
+//        subTitle3.setLocation(60, 548);
+//        subTitle3.setForeground(Color.lightGray);
+//        container.add(subTitle3);
+//        description3= new JLabel();
+//        description3.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
+//        description3.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+//        description3.setSize(700, 130);
+//        description3.setLocation(60, 580);
+//        container.add(description3);
         window.setVisible(false);
     }
     public static String convertToMultiline(String orig)

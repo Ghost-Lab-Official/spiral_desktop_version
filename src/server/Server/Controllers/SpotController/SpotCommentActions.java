@@ -35,7 +35,6 @@ public class SpotCommentActions {
    * @throws Exception
    */
   public List<Comment> GetComments(Integer spotId) throws Exception {
-    System.out.println(spotId);
     List<Comment> commentsList = new ArrayList<>();
     Connection connection = new CloudStorageConnectionHandler().getConnection();
     try {

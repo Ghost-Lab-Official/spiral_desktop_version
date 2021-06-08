@@ -55,10 +55,10 @@ public class Dashboard {
     billingsIconLabel.setBounds(20,200,20,20);
     billingsIconLabel.setIcon(icon3);
     BillingsLabel.setBounds(50,200,250,25);
-    LocationsLabel = new JLabel("Locations");
+    LocationsLabel = new JLabel("client/Locations");
     LocationsLabel.setFont(new Font("Roboto",Font.BOLD,20));
     LocationsLabel.setForeground(Color.white);
-    img4 = ImageIO.read(new File("src\\client\\images\\Locations.png"));
+    img4 = ImageIO.read(new File("src\\client\\images\\client.Locations.png"));
     icon4 = new ImageIcon(img4.getScaledInstance(25,30,BufferedImage.SCALE_DEFAULT));
     locationsIconLabel = new JLabel();
     locationsIconLabel.setBounds(20,260,280,40);
@@ -138,7 +138,7 @@ public class Dashboard {
     locations2IconLabel = new JLabel();
     locations2IconLabel.setBounds(80,15,400,40);
     locations2IconLabel.setIcon(icon9);
-    Locations2Label = new JLabel("Locations");
+    Locations2Label = new JLabel("client/Locations");
     Locations2Label.setFont(new Font("Roboto",Font.BOLD,20));
     Locations2Label.setForeground(Color.white);
     Locations2Label.setBounds(80,20,100,100);
