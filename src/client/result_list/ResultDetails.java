@@ -114,11 +114,10 @@ public class ResultDetails {
     public void setLsubTitle3(JLabel lsubTitle3) {
         this.lsubTitle3 = lsubTitle3;
     }
+
+
     private class LabelClickListener extends MouseAdapter {
         private int rates;
-
-
-
         private int id;
         private String name;
         private String desc;
