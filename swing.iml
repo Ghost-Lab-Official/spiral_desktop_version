@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="activation-1.1" level="project" />
+    <orderEntry type="library" name="jfreechart-1.0.7" level="project" />
+    <orderEntry type="library" name="jcommon-1.0.8" level="project" />
   </component>
 </module>
