@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-public class ResultDetails {
+public class ResultDetails{
     private JFrame window;
     private Container container;
     private JLabel title;
@@ -30,6 +30,8 @@ public class ResultDetails {
     private JLabel subTitle3;
     private JLabel description3;
     private JLabel lsubTitle3;
+
+
     public JFrame getWindow() {
         return window;
     }
@@ -142,30 +144,28 @@ public class ResultDetails {
                 }
         }
     }
-
-
-
-
-    public ResultDetails() throws Exception {
+    public ResultDetails(String searchKeyParam) throws Exception {
+        if(searchKeyParam.equals("")){
+            System.out.println("sinzi nez");
+            new Spot().setSpotName("Oops! No results found at the moment");
+        }
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/search");
         requestBody.setAction("getSpots");
 
         Spot spotToSend = new Spot();
-        String searchKey = "computer";
-        spotToSend.setSpotName(searchKey);
+        spotToSend.setSpotName(searchKeyParam);
         requestBody.setObject(spotToSend);
 
         ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
-        boolean found = false;
         Integer index = 0;
         List<Object> spotsList = new ArrayList<>();
+
         for (Object response : responseBody.getResponse()) {
             index++;
-            found = true;
             Spot spot = (Spot) response;
-            String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0, 20) + "..." : spot.getSpotDescription();
-            System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" + showDesc);
+//            System.out.println("The response: "+ ((Spot) response).getSpotDescription());
+//            System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" + spot.getSpotDescription());
             spotsList.add(spot);
         }
 
@@ -173,12 +173,12 @@ public class ResultDetails {
         window.setTitle("Result Details");
         int y1=40;int y2=60;
         for (Object response : responseBody.getResponse()) {
-        window.setBounds(300, 10, 800, 800);
-        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        window.setResizable(true);
-        container = window.getContentPane();
-        container.setBackground(Color.white);
-        container.setLayout(null);
+            window.setBounds(300, 10, 800, 800);
+            window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            window.setResizable(true);
+            container = window.getContentPane();
+            container.setBackground(Color.white);
+            container.setLayout(null);
 
             Spot spot = (Spot) response;
             System.out.println("my spot id "+spot.getSpotId());
@@ -200,48 +200,7 @@ public class ResultDetails {
          y1=+150;
          y2=+170;
     }
-        //Second Div
-//        title2= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
-//        title2.setFont(new Font("Arial", Font.BOLD, 23));
-//        title2.setSize(500, 30);
-//        title2.setLocation(60, 280);
-//        title2.setForeground(Color.decode("#0074DB"));
-//        container.add(title2);
-//        subTitle2= new JLabel("http://www.ecosia.org >");
-//        subTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
-//        subTitle2.setSize(500, 30);
-//        subTitle2.setLocation(60, 308);
-//        subTitle2.setForeground(Color.lightGray);
-//        container.add(subTitle2);
-//        description2= new JLabel();
-//        description2.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
-//        description2.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-//        description2.setSize(700, 130);
-//        description2.setLocation(60, 340);
-//        container.add(description2);
-//        lsubTitle2= new JLabel("<html><font color=blue><U>Related</U>: </font> <font color=gray>Lorem Ipsum... Mto mto-Ish Kevin</font></html>");
-//        lsubTitle2.setFont(new Font("Arial", Font.ITALIC, 14));
-//        lsubTitle2.setSize(500, 30);
-//        lsubTitle2.setLocation(60, 460);
-//        container.add(lsubTitle2);
-//        title3= new JLabel("Amakosi-Ish Kevin (Lyrics) ");
-//        title3.setFont(new Font("Arial", Font.BOLD, 23));
-//        title3.setSize(500, 30);
-//        title3.setLocation(60, 520);
-//        title3.setForeground(Color.decode("#0074DB"));
-//        container.add(title3);
-//        subTitle3= new JLabel("http://www.ecosia.org >");
-//        subTitle3.setFont(new Font("Arial", Font.ITALIC, 14));
-//        subTitle3.setSize(500, 30);
-//        subTitle3.setLocation(60, 548);
-//        subTitle3.setForeground(Color.lightGray);
-//        container.add(subTitle3);
-//        description3= new JLabel();
-//        description3.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
-//        description3.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-//        description3.setSize(700, 130);
-//        description3.setLocation(60, 580);
-//        container.add(description3);
+      
         window.setVisible(false);
     }
     public static String convertToMultiline(String orig)

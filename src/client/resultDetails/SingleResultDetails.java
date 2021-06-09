@@ -78,7 +78,7 @@ LabelClickListener(int ratings){
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-rating");
         requestBody.setAction("getRatings");
-        requestBody.setObject((Object) 5);
+        requestBody.setObject((Object) searchId);
 
         ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
         boolean found = false;
@@ -195,12 +195,12 @@ LabelClickListener(int ratings){
         // Initialization of object
         // "one" of JLabel class.
         resultDetailsTitle = new JLabel(spotName);
-        JLabel ratesn =new JLabel(String.valueOf(getRates(searchId)));
+       
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
-        resultDetailsTitle.setBounds(350,100,400,20);
-        ratesn.setBounds(500,100,40,20);
+        resultDetailsTitle.setBounds(350,100,400,30);
+      
         likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
         int x=430;
@@ -241,7 +241,6 @@ LabelClickListener(int ratings){
         p2.add(resultDetailsDescription);
 
         p2.add(resultDetailsTitle);
-        p2.add(ratesn);
         p2.add(likes);
         p1.setLayout (new GridLayout(6,1));
         add(p1, "West");
@@ -253,7 +252,6 @@ LabelClickListener(int ratings){
 
         // this Keyword refers to current
         // object. Function to set size of JFrame.
-
     }
 
 }

@@ -26,18 +26,28 @@ public class SearchActions {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Spot spot1 = new Spot();
-                spot1.setSpotName(rs.getString("spot_name"));
-                spot1.setSpotDescription(rs.getString("spot_description"));
-                spot1.setSpotId(rs.getInt("spot_id"));
-                spot1.setStatus((rs.getInt("status")));
-                spot1.setRegistrationDate(rs.getString("registration_date"));
+            System.out.println("we got this: " + rs);
+            if(rs.next()) {
+                while (rs.next()) {
+                    Spot spot1 = new Spot();
+                    spot1.setSpotName(rs.getString("spot_name"));
+                    spot1.setSpotDescription(rs.getString("spot_description"));
+                    spot1.setSpotId(rs.getInt("spot_id"));
+                    spot1.setStatus((rs.getInt("status")));
+                    spot1.setRegistrationDate(rs.getString("registration_date"));
 //                spot1.setLocationId(rs.getInt("location_id"));
-                spot1.setCategoryId(rs.getInt("category_id"));
-                spot1.setUserId(rs.getInt("user_id"));
+                    spot1.setCategoryId(rs.getInt("category_id"));
+                    spot1.setUserId(rs.getInt("user_id"));
+                    spotsList.add(spot1);
+                }
+            }
+
+            else{
+                Spot spot1 = new Spot();
+                spot1.setSpotDescription("No results found");
                 spotsList.add(spot1);
             }
+
 
             Integer userId = new UserAuthMiddleware().checkForUserExistence();
             if(userId > 0) {

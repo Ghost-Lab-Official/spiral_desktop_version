@@ -7,7 +7,7 @@ import java.awt.*;
 public class RegisterLocation extends JFrame {
     private static final Color themeColor = Color.decode("#3674D0");
 
-    RegisterLocation(){
+    public RegisterLocation(){
         super("Create New Location");
         setSize(1000,650);
         initUI();
@@ -15,7 +15,7 @@ public class RegisterLocation extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-    void initUI(){
+    public void initUI(){
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
