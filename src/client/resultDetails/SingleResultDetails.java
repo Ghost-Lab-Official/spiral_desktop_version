@@ -34,7 +34,7 @@ public class SingleResultDetails extends JFrame {
 
 
 
-LabelClickListener(int ratings){
+        LabelClickListener(int ratings){
     this.rates=ratings;
 }
 
@@ -62,12 +62,13 @@ LabelClickListener(int ratings){
         requestBody.setAction("register");
         requestBody.setObject(spotRating);
         ClientServerConnector clientServerConnector = new ClientServerConnector();
-        ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+
         try {
-            responseBody = clientServerConnector.ConnectToServer(requestBody);
+            ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+        System.out.println("spot rated with"+rates);
 //    new SingleResultDetails(searchId,spotName,descSpot);
 
     }
@@ -207,20 +208,24 @@ LabelClickListener(int ratings){
             CommentPanel ratingStars = new CommentPanel();
             ImageIcon imageY =ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 20, 20);
             ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
-            JLabel star1 = new JLabel((getRates(searchId)>=5)?imageY:imageB);
+            JLabel star1 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
             star1.setBounds(x, 135, 80, 20);
             star1.addMouseListener(new LabelClickListener(5));
+
             p2.add(star1);
             x+=20;
-            JLabel star2 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
+            JLabel star2 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
             star2.setBounds(x, 135, 80, 20);
+            star2.addMouseListener(new LabelClickListener(10));
             p2.add(star2);
             x+=20;
-            JLabel star3 = new JLabel((getRates(searchId)>=15)?imageY:imageB);
+            JLabel star3 = new JLabel((getRates(searchId)>=30)?imageY:imageB);
+           star3.addMouseListener(new LabelClickListener(15));
             star3.setBounds(x, 135, 80, 20);
             p2.add(star3);
             x+=20;
-            JLabel star4 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
+            JLabel star4 = new JLabel((getRates(searchId)>=40)?imageY:imageB);
+            star4.addMouseListener(new LabelClickListener(20));
             star4.setBounds(x, 135, 80, 20);
             p2.add(star4);
 
