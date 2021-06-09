@@ -1,20 +1,20 @@
 package server.Server.ServerMain;
 
-import server.Server.Controllers.BillingControllers.BillingController;
-import server.Server.Controllers.LocationControllers.LocationController;
-import server.Server.Controllers.LocationLevelControllers.LocationLevelController;
+import server.Server.Controllers.BillingControllers.*;
+import server.Server.Controllers.LocationControllers.*;
+import server.Server.Controllers.LocationLevelControllers.*;
 import server.Server.Controllers.ReportController.ReportController;
-import server.Server.Controllers.SearchControllers.SearchController;
-import server.Server.Controllers.SpotCategoryControllers.SpotCategoryController;
-import server.Server.Controllers.SpotController.SpotCommentController;
-import server.Server.Controllers.SpotController.SpotCommentReactionController;
-import server.Server.Controllers.SpotController.SpotController;
-import server.Server.Controllers.SpotController.SpotRatingController;
-import server.Server.Controllers.UserBilling.UserBillingController;
-import server.Server.Controllers.UserModuleControllers.UserCategoryController;
-import server.Server.Controllers.UserModuleControllers.UserController;
-import server.Server.DbController.PropertyVariables;
-import server.Server.Model.RequestBody;
+import server.Server.Controllers.SearchControllers.*;
+import server.Server.Controllers.SpotCategoryControllers.*;
+import server.Server.Controllers.SpotController.*;
+import server.Server.Controllers.SpotController.*;
+import server.Server.Controllers.SpotController.*;
+import server.Server.Controllers.SpotController.*;
+import server.Server.Controllers.UserBilling.*;
+import server.Server.Controllers.UserModuleControllers.*;
+import server.Server.Controllers.UserModuleControllers.*;
+import server.Server.DbController.*;
+import server.Server.Model.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,20 +1,20 @@
 package server.Server.Controllers.ReportController;
 
 
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseStatus;
-import server.Server.Model.UserLog;
+import server.Server.Model.*;
+//import server.Server.Model.ResponseStatus;
+//import server.Server.Model.UserLog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportController {
-     /**
- * ReportController: This class is to controll every action that is done on our module. in this controller class is where cases or actions are switched to return the response 
- * regarding that kind of action. 
- * @author Best Verie Iradukunda
- *  @author Erneste Ntezirizaza
- */
+    /**
+     * ReportController: This class is to controll every action that is done on our module. in this controller class is where cases or actions are switched to return the response
+     * regarding that kind of action.
+     * @author Best Verie Iradukunda
+     *  @author Erneste Ntezirizaza
+     */
 
     public List<Object> mainMethod(RequestBody request)throws Exception{
         String action = request.getAction();
@@ -51,7 +51,7 @@ public class ReportController {
                 return new LocationsReportsActions().viewAllLocations();
 
 
-                //Spot Cases
+            //Spot Cases
 
 
             case "getTotalNumberOfRegisteredSpots":
@@ -104,6 +104,12 @@ public class ReportController {
 
             case "viewReportForAnotherDay":
                 return new SpotReportsActions().getReportForAnotherDay((String) request.getObject());
+
+            case "viewHighlyRatedSpots":
+                return new SpotReportsActions().viewHighlyRatedSpots();
+
+            case "viewRecentRegisteredSpots":
+                return new SpotReportsActions().viewRecentlyAddedSpots();
             //                OTHER ACTIONS SHOULD GO HERE
 //            --------------------------------------
         }
