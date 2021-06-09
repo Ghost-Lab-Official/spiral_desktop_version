@@ -603,6 +603,41 @@ public class SpotReportsActions {
         }catch (Exception e){
             e.printStackTrace();
         }
+        public static List<List> printDataOnLineChart(){
+            List<List> data = new ArrayList<List>();
+            try{
+                CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+                Connection connection = cloudStorageConnection.getConnection();
+                Statement statement = connection.createStatement();
+                String castedYear;
+                Set<Integer> years = new HashSet<Integer>();
+                List<Integer> yearsList = new ArrayList<Integer>();
+                List<Integer> spots = new ArrayList<>();
+                Set<String> castedYears = new HashSet<String>();
+                String number_of_years = "SELECT EXTRACT(YEAR FROM registration_date) FROM Spot_table";
+                ResultSet resultSet = statement.executeQuery(number_of_years);
+                while (resultSet.next()){
+                years.add(Integer.parseInt(resultSet.getString(1)));
+                }
+                yearsList.addAll(years);
+                for(Integer spotYear: yearsList) {
+                    castedYear= spotYear.toString();
+                    castedYears.add(castedYear);
+                    String spotsNumber = "SELECT COUNT(spot_id) FROM Spot_table WHERE (SELECT EXTRACT(YEAR FROM registration_date)='"+castedYear+"')";
+                    ResultSet resultSet2 = statement.executeQuery(spotsNumber);
+                   while (resultSet2.next()){
+                       spots.add(Integer.parseInt(resultSet2.getString(1)));
+                   }
+                }
+                data.add(spots);
+                data.add(yearsList);
+                System.out.println(data);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return data;
+        }
 
     }
 

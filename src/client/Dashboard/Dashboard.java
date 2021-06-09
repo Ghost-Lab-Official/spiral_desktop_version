@@ -1,14 +1,14 @@
 package client.Dashboard;
 
-import client.ClientMain.*;
+import client.ClientMain.ClientServerConnector;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import server.Server.Model.*;
-//import server.Server.Model.ResponseBody;
-//import server.Server.Model.SpotsReport;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.SpotsReport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

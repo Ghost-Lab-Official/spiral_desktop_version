@@ -260,7 +260,6 @@ public class SearchActions {
         } catch (Exception e) {
             return popularSearchesObject;
         }
-
     }
 
     public User getUserById(Integer id) throws Exception {

@@ -1,6 +1,5 @@
 package server.Server.Controllers.SearchControllers;
 
-import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Middleware.UserAuthMiddleware;
 import server.Server.Model.*;
 

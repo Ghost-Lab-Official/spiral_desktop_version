@@ -1,11 +1,11 @@
 package client.Home;
 
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
-import javax.swing.*;
-import javax.swing.plaf.LayerUI;
 
 public class Loader {
     static final WaitLayerUI layerUI = new WaitLayerUI();
