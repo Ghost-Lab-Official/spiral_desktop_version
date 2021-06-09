@@ -125,8 +125,6 @@ public class ResultDetails{
         private String desc;
 
 
-
-
         public LabelClickListener(Integer spotId, String spotName, String spotDescription) {
             this.id=spotId;
             this.name=spotName;
@@ -145,19 +143,22 @@ public class ResultDetails{
         }
     }
     public ResultDetails(String searchKeyParam) throws Exception {
+        Spot spotToSend = new Spot();
+
         if(searchKeyParam.equals("")){
-            System.out.println("sinzi nez");
-            new Spot().setSpotName("Oops! No results found at the moment");
+            spotToSend.setSpotName("Oops! No results found at the moment");
         }
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/search");
         requestBody.setAction("getSpots");
 
-        Spot spotToSend = new Spot();
         spotToSend.setSpotName(searchKeyParam);
         requestBody.setObject(spotToSend);
 
         ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+        if(responseBody == null){
+            spotToSend.setSpotName("Oops! No results found at the moment");
+        }
         Integer index = 0;
         List<Object> spotsList = new ArrayList<>();
 
@@ -180,8 +181,7 @@ public class ResultDetails{
             container.setBackground(Color.white);
             container.setLayout(null);
 
-            Spot spot = (Spot) response;
-            System.out.println("my spot id "+spot.getSpotId());
+        Spot spot = (Spot) response;
         title = new JLabel(spot.getSpotName());
        title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
         title.setFont(new Font("Arial", Font.BOLD, 23));

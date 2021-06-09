@@ -13,7 +13,6 @@ import server.Server.Controllers.SpotController.SpotRatingController;
 import server.Server.Controllers.UserBilling.UserBillingController;
 import server.Server.Controllers.UserModuleControllers.UserCategoryController;
 import server.Server.Controllers.UserModuleControllers.UserController;
-import server.Server.DbController.PropertyVariables;
 import server.Server.Model.RequestBody;
 
 import java.io.IOException;
