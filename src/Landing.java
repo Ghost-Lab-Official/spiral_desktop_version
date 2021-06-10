@@ -6,6 +6,7 @@ import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Landing extends JFrame{
     private JButton loginButton;
     private JTextField searchInput;
     IconTextField searchField = new IconTextField();
+
 
     public class ActionLstner implements ActionListener {
 
@@ -46,6 +48,7 @@ public class Landing extends JFrame{
     }
 
 
+
     public Landing(){
         setTitle("client/Home");
         setSize(1000,600);
@@ -61,11 +64,13 @@ public class Landing extends JFrame{
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
         registerButton = new JButton("Register");
+
         registerButton.setActionCommand("SIGNUP");
         registerButton.addActionListener(new ActionLstner());
         loginButton = new JButton("Login");
         loginButton.setActionCommand("LOGIN");
         loginButton.addActionListener(new ActionLstner());
+        loginButton = new JButton("Login");
         searchInput = new JTextField("Search whatever you want");
 
         JLabel appBrand = new JLabel("Spiral");
