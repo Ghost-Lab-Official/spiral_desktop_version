@@ -1,8 +1,15 @@
+import client.pages.Login;
+import client.pages.Signup;
+
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
@@ -11,6 +18,36 @@ public class Landing extends JFrame{
     private JButton loginButton;
     private JTextField searchInput;
     IconTextField searchField = new IconTextField();
+
+
+    public class ActionLstner implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            switch (e.getActionCommand()) {
+                case "LOGIN":
+                    Login login = new Login();
+                    login.initUI();
+                    break;
+                case "SIGNUP":
+                    Signup signup = null;
+                    try {
+                        signup = new Signup();
+                        signup.formInitiator();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
+                default:
+                    System.out.println("Invalid action");
+                    break;
+            }
+        }
+
+    }
+
+
 
     public Landing(){
         setTitle("client/Home");
@@ -27,6 +64,12 @@ public class Landing extends JFrame{
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
         registerButton = new JButton("Register");
+
+        registerButton.setActionCommand("SIGNUP");
+        registerButton.addActionListener(new ActionLstner());
+        loginButton = new JButton("Login");
+        loginButton.setActionCommand("LOGIN");
+        loginButton.addActionListener(new ActionLstner());
         loginButton = new JButton("Login");
         searchInput = new JTextField("Search whatever you want");
 

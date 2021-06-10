@@ -1,8 +1,17 @@
 package client.userupdateprofile;
 
+import client.pages.UpdatePassword;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -65,6 +74,15 @@ public class UserUpdateProfile {
 
         changePasswordLabel = new JLabel("change Password");
         changePasswordLabel.setFont(new Font("Roboto",Font.BOLD,20));
+
+        changePasswordLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                UpdatePassword passwordUpdate = new UpdatePassword();
+                passwordUpdate.initUI();
+            }
+        });
+
         changePasswordLabel.setForeground(Color.black);
         img3 = ImageIO.read(new File("src/client/images/password.png"));
         icon3 = new ImageIcon(img3.getScaledInstance(15,15,BufferedImage.SCALE_DEFAULT));

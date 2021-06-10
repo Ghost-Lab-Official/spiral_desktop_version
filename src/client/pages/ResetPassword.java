@@ -74,13 +74,20 @@ public class ResetPassword extends JFrame {
         setVisible(true);
     }
 
+    public ResetPassword() {
+
+    }
+
+
     private String hashPassword(String password) {
         System.out.println(BCrypt.gensalt(12));
         return BCrypt.hashpw(password, BCrypt.gensalt(12));
 
     }
 
+
     private void initUI() {
+
         JPanel allContentPanel = new JPanel(new GridBagLayout());
         allContentPanel.setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 60));
         allContentPanel.setBackground(Color.WHITE);
