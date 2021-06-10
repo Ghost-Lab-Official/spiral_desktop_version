@@ -13,12 +13,16 @@ import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-
 
 public class Login extends JFrame {
     private static final long serialVersionUID = 4924551093376342051L;
@@ -46,9 +50,32 @@ public class Login extends JFrame {
         JTextField passwordInput = new JTextField();
         JButton loginButton = new JButton("Log in");
         JLabel signUpLabel = new JLabel("<html>Don't have account? <font color='blue'>Sign Up.</font></html>");
+        signUpLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Signup signupL = new Signup();
+                    signupL.formInitiator();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+            }
+        });
         JLabel forgotPasswordLabel = new JLabel("Forgot your Password?");
         loginButton.setPreferredSize(new Dimension(150,50));
+        forgotPasswordLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    ResetPassword reset = new ResetPassword();
+                    reset.initUI();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
+            }
+        });
         spLabel.setFont(new Font("nunito", Font.BOLD, 40));
         spLabel.setForeground(Color.WHITE);
         leftPanel.setBackground(themeColor);

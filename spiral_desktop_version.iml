@@ -7,5 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< Updated upstream
+=======
+    <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" name="jcommon-1.0.8" level="project" />
+    <orderEntry type="library" name="jfreechart-1.0.7" level="project" />
+>>>>>>> Stashed changes
   </component>
 </module>
