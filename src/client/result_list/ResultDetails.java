@@ -183,7 +183,6 @@ public class ResultDetails {
       {
 //        System.exit(0);
         new client.resultDetails.ResultDetails();
-
       }
     });
 
