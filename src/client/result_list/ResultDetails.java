@@ -181,8 +181,9 @@ public class ResultDetails {
     {
       public void mouseClicked(MouseEvent e)
       {
+//        System.exit(0);
         new client.resultDetails.ResultDetails();
-//        mainPanel.setVisible(true);
+
       }
     });
 
