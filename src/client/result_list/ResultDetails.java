@@ -2,6 +2,9 @@ package client.result_list;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class ResultDetails {
     private JFrame window;
@@ -174,7 +177,13 @@ public class ResultDetails {
         lsubTitle.setLocation(60, 220);
 
 //        Adding a mouse listener
-        
+        title.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                
+            }
+        });
 
 //        Adding content to container
         container.add(title);
