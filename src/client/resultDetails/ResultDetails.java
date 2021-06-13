@@ -6,7 +6,7 @@ import java.util.Map;
 
 // class GridLayout extends JFrame
 public class ResultDetails extends JFrame {
-    ResultDetails() {
+    public ResultDetails() {
         // Creating Object P1 of JPanel class
         JPanel p1 = new JPanel();
         // set the layout
@@ -58,13 +58,13 @@ public class ResultDetails extends JFrame {
         final Font f = CommentField.getFont();
         CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
 
-         JButton sendComment=new JButton("SEND");
-         sendComment.setBounds(300,50,100,55);
-         sendComment.setBackground(Color.decode("#C4C4C4"));
-         sendComment.setBorder(null);
-         sendComment.setFont(new Font("Nunito", Font.BOLD, 15));
-         lastPanel.add(CommentField);
-         lastPanel.add(sendComment);
+        JButton sendComment=new JButton("SEND");
+        sendComment.setBounds(300,50,100,55);
+        sendComment.setBackground(Color.decode("#C4C4C4"));
+        sendComment.setBorder(null);
+        sendComment.setFont(new Font("Nunito", Font.BOLD, 15));
+        lastPanel.add(CommentField);
+        lastPanel.add(sendComment);
 
         p1.add(lastPanel);
 

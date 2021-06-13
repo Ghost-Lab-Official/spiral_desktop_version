@@ -8,80 +8,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Pagination extends JPanel {
-    public Pagination(){dataTable(); paginationBtn();}
-    public void dataTable() {
-
-        String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
-
-        Object[][] data = {
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},{"Kathy", "Smith",
-                "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)}
-        };
-
-        final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(700, 150));
-        table.setFillsViewportHeight(false);
-
-        //Create the scroll pane and add the table to it.
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        //Add the scroll pane to this panel.
-        add(scrollPane);
-    }
+    public Pagination(){paginationBtn();}
 
     public class ButtonActionListener implements ActionListener {
         public void actionPerformed (ActionEvent e){
             String actionCommand = e.getActionCommand();
             System.out.println("Action Command: "+ actionCommand);
-            if(actionCommand.equals("Go to first page")){
-
-            }else if(actionCommand.equals("Go to previous page")){
-
-            }else if(actionCommand.equals("Go to page 1")){
+            if(actionCommand.equals("Go to page 1")){
 
             }else if(actionCommand.equals("Go to page 2")){
 
@@ -89,9 +22,7 @@ public class Pagination extends JPanel {
 
             }else if(actionCommand.equals("Go to page 4")){
 
-            }else if(actionCommand.equals("Go to next page")){
-
-            }else if(actionCommand.equals("Go to last page")){
+            }else if(actionCommand.equals("More pages")){
 
             }else{
 
@@ -102,56 +33,51 @@ public class Pagination extends JPanel {
     public void paginationBtn(){
 
         //Declaring buttons
-        JButton first = new JButton("First");
-        JButton previous = new JButton("Previous");
-        JButton page1 = new JButton("1");
-        JButton page2 = new JButton("2");
-        JButton page3 = new JButton("3");
-        JButton page4 = new JButton("4");
-        JButton next = new JButton("Next");
-        JButton last = new JButton("Last");
+        CircleButton page1 = new CircleButton("1");
+        CircleButton page2 = new CircleButton("2");
+        CircleButton page3 = new CircleButton("3");
+        CircleButton page4 = new CircleButton("4");
+        JButton etc = new JButton("...");
 
-        //Removing background from buttons
-        first.setContentAreaFilled(false);
-        previous.setContentAreaFilled(false);
+        //Removing background from buttons and other styles
         page1.setContentAreaFilled(false);
         page2.setContentAreaFilled(false);
         page3.setContentAreaFilled(false);
         page4.setContentAreaFilled(false);
-        next.setContentAreaFilled(false);
-        last.setContentAreaFilled(false);
+        etc.setContentAreaFilled(false);
+        etc.setBorderPainted(false);//Removing border
+        etc.setMargin(new Insets(0,0,15,0));//Set margin
+        etc.setFont(new Font("Arial", Font.PLAIN, 30));//Set font size
+        etc.setForeground(Color.blue);
+
+        //Removing focus painted
+        page1.setFocusPainted(false);
+        page2.setFocusPainted(false);
+        page3.setFocusPainted(false);
+        page4.setFocusPainted(false);
+        etc.setFocusPainted(false);
 
         //Attaching listener to buttons
         //Setting action commands
-        first.setActionCommand("Go to first page");
-        previous.setActionCommand("Go to previous page");
         page1.setActionCommand("Go to page 1");
         page2.setActionCommand("Go to page 2");
         page3.setActionCommand("Go to page 3");
         page4.setActionCommand("Go to page 4");
-        next.setActionCommand("Go to page next page");
-        last.setActionCommand("Go to last page");
+        etc.setActionCommand("More pages");
 
         //Adding action listener to buttons
-        first.addActionListener(new ButtonActionListener());
-        previous.addActionListener(new ButtonActionListener());
         page1.addActionListener(new ButtonActionListener());
         page2.addActionListener(new ButtonActionListener());
         page3.addActionListener(new ButtonActionListener());
         page4.addActionListener(new ButtonActionListener());
-        next.addActionListener(new ButtonActionListener());
-        last.addActionListener(new ButtonActionListener());
-
+        etc.addActionListener(new ButtonActionListener());
 
         //Add buttons to page
-        add(first);
-        add(previous);
         add(page1);
         add(page2);
         add(page3);
         add(page4);
-        add(next);
-        add(last);
+        add(etc);
     }
 
     private static void ShowGUI() {
@@ -174,7 +100,7 @@ public class Pagination extends JPanel {
 
         //Display the window.
         frame.pack();
-        frame.setSize(800,500);
+        frame.setSize(400,200);
         frame.setVisible(true);
     }
 
