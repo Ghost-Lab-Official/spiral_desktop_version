@@ -182,8 +182,7 @@ public class ResultDetails {
       public void mouseClicked(MouseEvent e)
       {
         new client.resultDetails.ResultDetails();
-        window.setVisible(false);
-        window.dispose();
+//        mainPanel.setVisible(true);
       }
     });
 
