@@ -153,26 +153,33 @@ public class ResultDetails {
           title.setSize(500, 30);
           title.setLocation(60, 40);
           title.setForeground(Color.decode("#0074DB"));
-          container.add(title);
+          JButton etc = new JButton("...");
+          etc.setActionCommand("peace dfsd");
 
         subTitle= new JLabel("http://www.ecosia.org >");
         subTitle.setFont(new Font("Arial", Font.ITALIC, 14));
         subTitle.setSize(500, 30);
         subTitle.setLocation(60, 68);
         subTitle.setForeground(Color.lightGray);
-        container.add(subTitle);
 
         description= new JLabel();
         description.setText(convertToMultiline("Lorem Ipsum is simply dummy text of the printing and typesetting\nindustry. Lorem Ipsum has been the industry's standard dummy \n text ever since the 1500s, when an unknown printer took a galley\nof type and scrambled it to make a type specimen book. It has\nsurvived not only five centuries, but also the leap into electronic\ntypesetting, remaining essentially unchanged."));
         description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
         description.setSize(700, 130);
         description.setLocation(60, 100);
-        container.add(description);
 
         lsubTitle= new JLabel("<html><font color=blue><U>Related</U>: </font> <font color=gray>Lorem Ipsum... Mto mto-Ish Kevin</font></html>");
         lsubTitle.setFont(new Font("Arial", Font.ITALIC, 14));
         lsubTitle.setSize(500, 30);
         lsubTitle.setLocation(60, 220);
+
+//        Adding a mouse listener
+        
+
+//        Adding content to container
+        container.add(title);
+        container.add(subTitle);
+        container.add(description);
         container.add(lsubTitle);
 
 
