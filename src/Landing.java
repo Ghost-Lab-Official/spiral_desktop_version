@@ -1,15 +1,24 @@
+import client.ClientMain.ClientServerConnector;
+import client.result_list.ResultList;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.Spot;
+
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.*;
 
+/**
+ * @author Mutoni Uwingeneye Denyse
+ */
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     private JButton registerButton;
     private JButton loginButton;
-    private JTextField searchInput;
     IconTextField searchField = new IconTextField();
 
     public Landing(){
@@ -28,7 +37,7 @@ public class Landing extends JFrame{
 
         registerButton = new JButton("Register");
         loginButton = new JButton("Login");
-        searchInput = new JTextField("Search whatever you want");
+//        searchInput.setActionCommand("SEARCH");
 
         JLabel appBrand = new JLabel("Spiral");
         JLabel welcomeText = new JLabel("Welcome to Spiral");
@@ -61,15 +70,6 @@ public class Landing extends JFrame{
         registerButton.setBorder(new RoundedBorder(40));
         registerButton.setFocusPainted(false);
         registerButton.setBorderPainted(false);
-//        registerButton.setContentAreaFilled(false);
-//        registerButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-//        registerButton.setBorder(BorderFactory.createCompoundBorder(
-//                new CustomBorder(),
-//                new EmptyBorder(new Insets(2, 1, 1, 2))
-//        ));
-
-//        registerButton.setBorder(new RoundedBorder(5));
-
         loginButton.setBackground(bgColor);
         loginButton.setFont(new Font("nunito",Font.PLAIN,17));
         loginButton.setForeground(textColor);
@@ -103,22 +103,108 @@ public class Landing extends JFrame{
 //        searchField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         searchField.setBorder(BorderFactory.createLineBorder(Color.GRAY,1,true));
         searchField.setForeground(Color.BLACK);
+
+        searchField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                    String searchStr = searchField.getText();
+                    try {
+                        new ResultList(searchStr);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         bodyContent.add(new JPanel(new GridBagLayout()).add(searchField));
         bodyContent.setLayout(boxLayout);
         bodyContent.setBackground(bgColor);
         bodyPanel.setBackground(bgColor);
         bodyPanel.add(bodyContent);
-
         headPanel.add(headLeftPanel, BorderLayout.WEST);
         headPanel.add(headRightPanel, BorderLayout.EAST);
         contentPanel.add(headPanel, BorderLayout.NORTH);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
+//        contentPanel.add(searchButton,BorderLayout.CENTER);
         add(contentPanel);
     }
 
     public static void main(String[] args) {
         new Landing();
     }
+    public static void searchSpot(String searchKey) throws Exception{
+        try {
+            RequestBody requestBody = new RequestBody();
+            requestBody.setUrl("/search");
+            requestBody.setAction("getSpots");
+
+            Spot spotToSend = new Spot();
+            System.out.print("Search a spot: ");
+
+            spotToSend.setSpotName(searchKey);
+            requestBody.setObject(spotToSend);
+
+            ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+            System.out.println(responseBody.getResponse());
+            boolean found = false;
+            Integer index = 0;
+            for (Object response : responseBody.getResponse()) {
+                index++;
+                found = true;
+                Spot spot = (Spot) response;
+                String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0,20) + "..." : spot.getSpotDescription();
+                System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" +  showDesc);
+            }
+
+            if (!found) {
+                System.out.println("No spots Found.");
+            } else {
+//                displaySpot(spotsList);
+            }
+        }catch (Exception e){
+            System.out.println("Error occured" + e.getMessage());
+        }
+    }
+
+//    public static void searchSpot(String searchKey) throws Exception{
+//        try {
+//            RequestBody requestBody = new RequestBody();
+//            requestBody.setUrl("/search");
+//            requestBody.setAction("getSpots");
+//
+//            Spot spotToSend = new Spot();
+//            System.out.print("Search a spot: ");
+//            //        create user log
+//
+//            spotToSend.setSpotName(searchKey);
+//            requestBody.setObject(spotToSend);
+//
+//            ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+//            System.out.println(responseBody);
+//            boolean found = false;
+//            Integer index = 0;
+//            for (Object response : responseBody.getResponse()) {
+//                index++;
+//                found = true;
+//                Spot spot = (Spot) response;
+//                String showDesc = spot.getSpotDescription().length() > 20 ? spot.getSpotDescription().substring(0,20) + "..." : spot.getSpotDescription();
+////                spotsList.add(spot);
+//            }
+//
+//            if (!found) {
+//                System.out.println("No spots Found.");
+//            } else {
+//            }
+//        }catch (Exception e){
+//            System.out.println("Error occured : " + e.getMessage());
+//        }
+//    }
 }
 class RoundedBorder implements Border {
     private int radius;
@@ -191,6 +277,7 @@ class IconTextComponentHelper {
     }
 }
 
+
 class IconTextField extends JTextField {
     private IconTextComponentHelper mHelper = new IconTextComponentHelper(this);
 
@@ -219,13 +306,10 @@ class IconTextField extends JTextField {
         getHelper().onSetIcon(icon);
     }
 
-//    public void setIconSpacing(int spacing) {
-//        getHelper().onSetIconSpacing(spacing);
-//    }
-
     @Override
     public void setBorder(Border border) {
         getHelper().onSetBorder(border);
         super.setBorder(getHelper().getBorder());
     }
+
 }

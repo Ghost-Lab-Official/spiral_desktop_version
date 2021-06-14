@@ -1,0 +1,155 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Loader",
+            "request": "launch",
+            "mainClass": "Home.Loader",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch Landing",
+            "request": "launch",
+            "mainClass": "Landing",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch LocationButtons",
+            "request": "launch",
+            "mainClass": "Locations.LocationButtons",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch LocationViews",
+            "request": "launch",
+            "mainClass": "Locations.LocationViews",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch CheckBoxMenuItemEx",
+            "request": "launch",
+            "mainClass": "menus.CheckBoxMenuItemEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch PopupMenuEx",
+            "request": "launch",
+            "mainClass": "menus.PopupMenuEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch RadioMenuItemEx",
+            "request": "launch",
+            "mainClass": "menus.RadioMenuItemEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch RightMenuEx",
+            "request": "launch",
+            "mainClass": "menus.RightMenuEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShortcutsEx",
+            "request": "launch",
+            "mainClass": "menus.ShortcutsEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleMenuEx",
+            "request": "launch",
+            "mainClass": "menus.SimpleMenuEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch SubmenuEx",
+            "request": "launch",
+            "mainClass": "menus.SubmenuEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolbarEx",
+            "request": "launch",
+            "mainClass": "menus.ToolbarEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolbarsEx",
+            "request": "launch",
+            "mainClass": "menus.ToolbarsEx",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch Login",
+            "request": "launch",
+            "mainClass": "pages.Login",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch RegisterLocation",
+            "request": "launch",
+            "mainClass": "pages.RegisterLocation",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch RegisterLocationLevel",
+            "request": "launch",
+            "mainClass": "pages.RegisterLocationLevel",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch Signup",
+            "request": "launch",
+            "mainClass": "pages.Signup",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch PlaceholderTextField",
+            "request": "launch",
+            "mainClass": "resultDetails.PlaceholderTextField",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch ResultDetails",
+            "request": "launch",
+            "mainClass": "resultDetails.ResultDetails",
+            "projectName": "spiral_desktop_version_9eae8083"
+        },
+        {
+            "type": "java",
+            "name": "Launch ResultList",
+            "request": "launch",
+            "mainClass": "result_list.ResultList",
+            "projectName": "spiral_desktop_version_9eae8083"
+        }
+    ]
+}
