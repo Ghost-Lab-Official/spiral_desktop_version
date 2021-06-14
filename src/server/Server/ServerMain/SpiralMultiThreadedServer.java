@@ -13,10 +13,6 @@ import server.Server.Controllers.SpotController.SpotRatingController;
 import server.Server.Controllers.UserBilling.UserBillingController;
 import server.Server.Controllers.UserModuleControllers.UserCategoryController;
 import server.Server.Controllers.UserModuleControllers.UserController;
-<<<<<<< HEAD
-import server.Server.DbController.PropertyVariables;
-=======
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 import server.Server.Model.RequestBody;
 
 import java.io.IOException;
@@ -30,187 +26,158 @@ import java.util.List;
  *  @author : Ntwari Egide - Scrum Master
  *  @author : Ishimwe Gervais
  */
-public class
-SpiralMultiThreadedServer {
+public class SpiralMultiThreadedServer {
 
+  /*
+   * This method is called once to set the db configurations
+   */
+  //
+  //    public void startServer()throws Exception{
+  //    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
+  //    String username = "2YQ7auowc7";
+  //    String password = "R2IMVJC67L";
+  //
+  //    PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
+  //    propertyVariables.setPropertiesInFile();
+  //  }
 
+  public static void main(String[] args) {
+    ServerSocket server = null;
 
-/*
-* This method is called once to set the db configurations
-*/
-//
-//    public void startServer()throws Exception{
-//    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
-//    String username = "2YQ7auowc7";
-//    String password = "R2IMVJC67L";
-//
-//    PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
-//    propertyVariables.setPropertiesInFile();
-//  }
+    try {
+      // server is listening on port 1234
+      server = new ServerSocket(1294);
+      server.setReuseAddress(true);
 
-<<<<<<< HEAD
-    public void startServer()throws Exception{
-    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
-    String username = "root";
-    String password = "welcome";
+      // running infinite loop for getting
+      // client request
+      while (true) {
+        // socket object to receive incoming client
+        // requests
+        Socket client = server.accept();
 
-    PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
-    propertyVariables.setPropertiesInFile();
-  }
-=======
+        // Displaying that new client is connected
+        // to server
+        System.out.println(
+          "New client connected" + client.getInetAddress().getHostAddress()
+        );
 
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
+        // create a new thread object
+        ClientHandler clientSock = new ClientHandler(client);
 
-
-    public static void main(String[] args)
-    {
-        ServerSocket server = null;
-
+        // This thread will handle the client
+        // separately
+        new Thread(clientSock).start();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (server != null) {
         try {
-
-            // server is listening on port 1234
-            server = new ServerSocket(1294);
-            server.setReuseAddress(true);
-
-            // running infinite loop for getting
-            // client request
-            while (true) {
-                // socket object to receive incoming client
-                // requests
-                Socket client = server.accept();
-
-                // Displaying that new client is connected
-                // to server
-                System.out.println("New client connected"
-                        + client.getInetAddress()
-                        .getHostAddress());
-
-                // create a new thread object
-                ClientHandler clientSock
-                        = new ClientHandler(client);
-
-                // This thread will handle the client
-                // separately
-                new Thread(clientSock).start();
-            }
+          server.close();
+        } catch (IOException e) {
+          e.printStackTrace();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (server != null) {
-                try {
-                    server.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+      }
+    }
+  }
+
+  // ClientHandler class
+  private static class ClientHandler implements Runnable {
+
+    private final Socket clientSocket;
+
+    // Constructor
+    public ClientHandler(Socket socket) {
+      this.clientSocket = socket;
     }
 
-    // ClientHandler class
-    private static class ClientHandler implements Runnable {
-        private final Socket clientSocket;
+    public void run() {
+      ObjectOutputStream out = null;
+      ObjectInputStream in = null;
+      try {
+        // get the outputstream of client
+        out = new ObjectOutputStream(clientSocket.getOutputStream());
 
-        // Constructor
-        public ClientHandler(Socket socket)
-        {
-            this.clientSocket = socket;
+        // get the inputstream of client
+        in = new ObjectInputStream(clientSocket.getInputStream());
+
+        RequestBody requestBody;
+
+        while ((requestBody = (RequestBody) in.readObject()) != null) {
+          //Reading the url
+          String url = requestBody.getUrl();
+
+          List<Object> responseObject = null;
+          switch (url) {
+            case "/users":
+              responseObject = new UserController().mainMethod(requestBody);
+              break;
+            case "/user-category":
+              responseObject =
+                new UserCategoryController().mainMethod(requestBody);
+              break;
+            case "/spot":
+              responseObject =
+                new SpotController().mainSpotController(requestBody);
+
+              break;
+            case "/sportCategory":
+              responseObject =
+                new SpotCategoryController().mainMethod(requestBody);
+              break;
+            case "/spot-comment":
+              responseObject =
+                new SpotCommentController().mainMethod(requestBody);
+              break;
+            case "/spot-reaction":
+              responseObject =
+                new SpotCommentReactionController().mainMethod(requestBody);
+              break;
+            case "/spot-rating":
+              responseObject =
+                new SpotRatingController().mainSpotController(requestBody);
+              break;
+            case "/search":
+              responseObject = new SearchController().mainMethod(requestBody);
+              break;
+            case "/report":
+              responseObject = new ReportController().mainMethod(requestBody);
+              break;
+            case "/location":
+              responseObject = new LocationController().mainMethod(requestBody);
+              break;
+            case "/location-levels":
+              responseObject =
+                new LocationLevelController().mainMethod(requestBody);
+              break;
+            case "/billing":
+              responseObject = new BillingController().mainMethod(requestBody);
+              break;
+            case "/users-billing":
+              responseObject =
+                new UserBillingController().mainMethod(requestBody);
+              break;
+            default:
+          }
+
+          out.writeObject(responseObject);
         }
-
-        public void run()
-        {
-            ObjectOutputStream out = null;
-            ObjectInputStream in = null;
-            try {
-                // get the outputstream of client
-                out = new ObjectOutputStream(
-                        clientSocket.getOutputStream());
-
-                // get the inputstream of client
-                in = new ObjectInputStream(clientSocket.getInputStream());
-
-                RequestBody requestBody;
-                
-                while ((requestBody = (RequestBody) in.readObject()) != null) {
-                    //Reading the url
-                    String url = requestBody.getUrl();
-
-                    List<Object> responseObject = null;
-                    switch (url){
-                        case "/users":
-
-                            responseObject =  new UserController().mainMethod(requestBody);
-                            break;
-                        case"/user-category":
-                            responseObject = new UserCategoryController().mainMethod(requestBody);
-                            break;
-                        case "/spot":
-                            responseObject = new SpotController().mainSpotController(requestBody);
-
-                            break;
-
-                        case "/sportCategory":
-                            responseObject = new SpotCategoryController().mainMethod(requestBody);
-                            break;
-                        case "/spot-comment":
-                            responseObject = new SpotCommentController().mainMethod(requestBody);
-                            break;
-                        case "/spot-reaction":
-                            responseObject = new SpotCommentReactionController().mainMethod(requestBody);
-                            break;
-                        case "/spot-rating":
-                            responseObject = new SpotRatingController().mainSpotController(requestBody);
-                            break;
-
-                        case "/search":
-                            responseObject = new SearchController().mainMethod(requestBody);
-                            break;
-
-                        case "/report":
-                            responseObject = new ReportController().mainMethod(requestBody);
-                            break;
-
-                        case "/location":
-                            responseObject = new LocationController().mainMethod(requestBody);
-                            break;
-                        case "/location-levels":
-                            responseObject = new LocationLevelController().mainMethod(requestBody);
-                            break;
-
-                        case "/billing":
-                            responseObject = new BillingController().mainMethod(requestBody);
-                            break;
-
-                        case "/users-billing":
-                            responseObject = new UserBillingController().mainMethod(requestBody);
-                            break;
-                        default:
-
-                    }
-
-
-                    out.writeObject(responseObject);
-                }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                    }
-                    if (in != null) {
-                        in.close();
-                        clientSocket.close();
-                    }
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        try {
+          if (out != null) {
+            out.close();
+          }
+          if (in != null) {
+            in.close();
+            clientSocket.close();
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
         }
+      }
     }
+  }
 }

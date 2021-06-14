@@ -1,20 +1,8 @@
 package client.result_list;
 
-<<<<<<< HEAD
+
 import javax.swing.*;
 import java.awt.*;
-
-public class ResultList extends JFrame{
-
-    public ResultList(){
-        setTitle("Search Results");
-        setSize(1200, 700);
-        setMinimumSize(new Dimension(1000, 500));
-        initUI();
-=======
-
-import java.awt.*;
-import javax.swing.*;
 
 public class ResultList extends JFrame{
 
@@ -23,17 +11,12 @@ public class ResultList extends JFrame{
         setSize(1200, 700);
         setMinimumSize(new Dimension(1000, 500));
         initUI(searchKey);
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
-<<<<<<< HEAD
-    public void initUI(){
-=======
     public void initUI(String searchKey) throws Exception {
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
@@ -103,11 +86,6 @@ public class ResultList extends JFrame{
         mainPanel.add(leftPanel, BorderLayout.CENTER);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.setBackground(Color.WHITE);
-<<<<<<< HEAD
-        leftPanel.add(new ResultDetails().getContainer());
-
-
-=======
 
         try {
             leftPanel.add(new ResultDetails(searchKey).getContainer());
@@ -115,7 +93,6 @@ public class ResultList extends JFrame{
         catch (Exception e) {
             leftPanel.add(new ResultDetails("").getContainer());
         }
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         add(mainPanel);
     }
 
@@ -123,13 +100,7 @@ public class ResultList extends JFrame{
         return "<html>" + text.replaceAll("\n", "<br>");
     }
 
-<<<<<<< HEAD
-    public static void main(String[] args){
-        new ResultList();
-    }
-=======
 //    public static void main(String[] args) throws Exception {
 //        new ResultList();
 //    }
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 }

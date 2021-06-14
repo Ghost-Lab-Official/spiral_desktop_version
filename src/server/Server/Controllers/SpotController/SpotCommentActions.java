@@ -1,9 +1,5 @@
 package server.Server.Controllers.SpotController;
 
-
-import server.Server.DbController.CloudStorageConnectionHandler;
-import server.Server.Model.Comment;
-import server.Server.Model.ResponseStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import server.Server.DbController.CloudStorageConnectionHandler;
+import server.Server.Model.Comment;
+import server.Server.Model.ResponseStatus;
 
 public class SpotCommentActions {
 
@@ -35,10 +34,6 @@ public class SpotCommentActions {
    * @throws Exception
    */
   public List<Comment> GetComments(Integer spotId) throws Exception {
-<<<<<<< HEAD
-    System.out.println(spotId);
-=======
->>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
     List<Comment> commentsList = new ArrayList<>();
     Connection connection = new CloudStorageConnectionHandler().getConnection();
     try {
@@ -79,7 +74,7 @@ public class SpotCommentActions {
     Connection connection = new CloudStorageConnectionHandler().getConnection();
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(
-              GetCommentReplyQuery
+        GetCommentReplyQuery
       );
       preparedStatement.setString(1, CommentId);
       ResultSet result = preparedStatement.executeQuery();
