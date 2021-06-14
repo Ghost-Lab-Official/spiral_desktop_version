@@ -1,6 +1,7 @@
 package client.pages;
 
 import client.ClientMain.ClientServerConnector;
+import client.ClientMain.ClientServerConnector.*;
 import client.Dashboard.Dashboard;
 import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Model.RequestBody;
@@ -88,7 +89,6 @@ public class Login extends JFrame {
                 ResponseStatus responseStatus = (ResponseStatus) response;
                 if(responseStatus.getStatus()==200){
                     Dashboard dashboard = new Dashboard();
-                    dashboard.setProgressBarValue();
                 }
             }
         }
