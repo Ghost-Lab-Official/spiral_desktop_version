@@ -1,4 +1,4 @@
-package server.Server.DbController;
+package client.DbController;
 
 
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public class CloudStorageConnectionHandler {
             String username = propertiesStored.getProperty("dbUsername");
             String password = propertiesStored.getProperty("dbPassword");
 
-             Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
             // System.out.println("database connection is done ... ");
             return connection;
