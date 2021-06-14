@@ -3,9 +3,12 @@ package client.Home;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
+import client.Landing;
+
 
 public class Loader {
     static final WaitLayerUI layerUI = new WaitLayerUI();
@@ -13,10 +16,14 @@ public class Loader {
     JFrame frame = new JFrame("Loading spiral content ....");
 
     public Loader() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+
         JPanel panel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(400, 400);
+                return new Dimension(width,700);
             }
         };
         panel.setLayout(new BorderLayout());
@@ -43,15 +50,25 @@ public class Loader {
         ActionListener managePlay=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+//                clossing the current class
                 layerUI.stop();
                 panel.remove(waitLable);
+                Window win = SwingUtilities.getWindowAncestor(panel);
+                win.dispose();
+
+                // then call the second class
+                Landing landing   =new Landing();
+                landing.initUI();
             }
         };
 
+
         Timer timer = new Timer(6000,managePlay);
-        timer.setInitialDelay(10000);
+        timer.setInitialDelay(3000);
         timer.setRepeats(false);
         timer.start();
+
+//        layerUI.stop();
 
 
     }
@@ -69,6 +86,7 @@ public class Loader {
             @Override
             public void run() {
                 Loader loading_Test = new Loader();
+
             }
         });
 

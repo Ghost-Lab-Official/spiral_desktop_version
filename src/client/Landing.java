@@ -1,9 +1,12 @@
+package client;
+
+import client.Home.Loader;
+
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import client.Home.Loader;
 
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
@@ -118,13 +121,13 @@ public class Landing extends JFrame{
     }
 
     public static void main(String[] args) {
-
         new Loader();
 //
 
 
     }
 }
+
 class RoundedBorder implements Border {
     private int radius;
     RoundedBorder(int radius) {
@@ -140,6 +143,7 @@ class RoundedBorder implements Border {
         g.drawRoundRect(x, y, width-1, height-1, radius, radius);
     }
 }
+
 class CustomBorder extends AbstractBorder {
     public void paintBorder(Component c, Graphics g, int x, int y,
                             int width, int height) {
