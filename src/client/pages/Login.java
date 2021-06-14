@@ -1,6 +1,12 @@
 package client.pages;
 
+import client.ClientMain.ClientServerConnector;
+import client.Dashboard.Dashboard;
 import server.Server.DbController.CloudStorageConnectionHandler;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.ResponseStatus;
+import server.Server.Model.User;
 
 import javax.swing.*;
 import java.awt.BasicStroke;
@@ -23,7 +29,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 
+import java.io.IOException;
 import java.sql.*;
+
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
 
 
 public class Login extends JFrame {
@@ -33,6 +43,7 @@ public class Login extends JFrame {
 	JTextField emailInput;
 	JTextField passwordInput;
 	JLabel loginFailed;
+    ClientServerConnector clientServerConnector = new ClientServerConnector();
     
     public class ActionLstn implements ActionListener {
 
@@ -41,8 +52,12 @@ public class Login extends JFrame {
 			
 			switch (e.getActionCommand()) {
 			case "LOGIN":
-				userLogin();
-				break;
+                try {
+                    userLogin();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                break;
 
 			default:
 				System.out.println("Invalid action");
@@ -52,37 +67,31 @@ public class Login extends JFrame {
     	
     }
     
-    public void userLogin() {
+    public void userLogin() throws Exception {
     	String email = emailInput.getText();
     	String password = passwordInput.getText();
-    	if(email.equals("") || password.equals("")) {
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/users");
+        requestBody.setAction("login");
+        requestBody.setObject(user);
+        if(email.equals("") || password.equals("")) {
     		System.out.println("Enter email and Password");
             loginFailed.setText("Please enter your email and password");
             loginFailed.setBorder(BorderFactory.createLineBorder(Color.RED));
     	}else {
-    		try {
-				PreparedStatement stmt = con.prepareStatement("SELECT * FROM users_table WHERE email=?");
-				stmt.setString(1, email);
-				ResultSet result = stmt.executeQuery();
-				String storedPassord = null;
-				while(result.next()) {
-					storedPassord = result.getString("password");
-				}
-				if(password.equals(storedPassord)) {
-					System.out.println("Login Successful");
-					loginFailed.setText("");
-					loginFailed.setForeground(Color.white);
-                    loginFailed.setBorder(BorderFactory.createLineBorder(Color.white));
-				}else {
-					System.out.println("Invalid Email Or Password");
-                    loginFailed.setText("Invalid email or password");
-                    loginFailed.setForeground(Color.decode("#e63c4d"));
-                    loginFailed.setBorder(BorderFactory.createLineBorder(Color.RED));
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-    	}
+            ClientServerConnector clientServerConnector = new ClientServerConnector();
+            ResponseBody responseBody=  clientServerConnector.ConnectToServer(requestBody);
+            for (Object response: responseBody.getResponse()) {
+                ResponseStatus responseStatus = (ResponseStatus) response;
+                if(responseStatus.getStatus()==200){
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.setProgressBarValue();
+                }
+            }
+        }
     }
 
     public Login() throws Exception {
