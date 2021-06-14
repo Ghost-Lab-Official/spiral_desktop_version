@@ -1,10 +1,14 @@
 package client.resultDetails;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class userTopNav extends JFrame {
@@ -61,14 +65,22 @@ public class userTopNav extends JFrame {
 
         JPanel profilePanel = new JPanel();
         profilePanel.setBackground(Color.decode("#FFFFFF"));
-        profilePanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,35));
-        ImageIcon profileImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\logo.jpg");
-        JButton profileImg = new JButton(profileImage);
-        profileImg.setPreferredSize(new Dimension(120,40));
-        profileImg.setBorder(BorderFactory.createEmptyBorder(1,3,5,10));
-        profileImg.setBorder(new LineBorder(Color.gray,1,true));
-        profileImg.setBorder(new RoundedBoarder(50));
+        profilePanel.setSize(100,40);
+        profilePanel.setBorder(BorderFactory.createEmptyBorder(10,2,0,45));
 
+//        JLabel demoLabel = new JLabel();
+        BufferedImage img = null;
+
+        img = ImageIO.read(new File("src/client/images/profile.png"));
+        Image dimg = img.getScaledInstance(80,80,
+                Image.SCALE_DEFAULT);
+
+
+        ImageIcon profileImage = new ImageIcon(dimg);
+        JLabel profileImg = new JLabel(profileImage);
+
+        JLabel username = new JLabel("Nyirakamana");
+        profilePanel.add(username);
         profilePanel.add(profileImg);
         navigationPanel.add(profilePanel, BorderLayout.EAST);
 
