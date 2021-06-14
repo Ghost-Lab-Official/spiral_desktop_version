@@ -13,7 +13,10 @@ import server.Server.Controllers.SpotController.SpotRatingController;
 import server.Server.Controllers.UserBilling.UserBillingController;
 import server.Server.Controllers.UserModuleControllers.UserCategoryController;
 import server.Server.Controllers.UserModuleControllers.UserController;
+<<<<<<< HEAD
 import server.Server.DbController.PropertyVariables;
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 import server.Server.Model.RequestBody;
 
 import java.io.IOException;
@@ -45,6 +48,7 @@ SpiralMultiThreadedServer {
 //    propertyVariables.setPropertiesInFile();
 //  }
 
+<<<<<<< HEAD
     public void startServer()throws Exception{
     String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
     String username = "root";
@@ -53,6 +57,9 @@ SpiralMultiThreadedServer {
     PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
     propertyVariables.setPropertiesInFile();
   }
+=======
+
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
 
     public static void main(String[] args)

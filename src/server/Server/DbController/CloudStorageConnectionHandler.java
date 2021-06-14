@@ -8,7 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+<<<<<<< HEAD
 import java.io.FileReader;
+=======
+
+import com.mysql.jdbc.CommunicationsException;
+
+import java.io.FileReader;
+import java.sql.*;
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 import java.util.Properties;
 
 /**
@@ -19,7 +27,11 @@ import java.util.Properties;
 public class CloudStorageConnectionHandler {
     public  Connection getConnection()throws Exception{
         Connection connection = null;
+<<<<<<< HEAD
         FileReader reader = new FileReader("config.properties");
+=======
+        FileReader reader = new FileReader("src/server/config.properties");
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         Properties propertiesStored = new Properties();
         propertiesStored.load(reader);
         try {

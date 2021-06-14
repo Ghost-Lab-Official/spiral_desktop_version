@@ -3,12 +3,18 @@ package client.Home;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
 import client.Landing;
 
+=======
+import java.beans.PropertyChangeEvent;
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
 public class Loader {
     static final WaitLayerUI layerUI = new WaitLayerUI();
@@ -16,6 +22,7 @@ public class Loader {
     JFrame frame = new JFrame("Loading spiral content ....");
 
     public Loader() {
+<<<<<<< HEAD
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
@@ -24,6 +31,12 @@ public class Loader {
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(width,700);
+=======
+        JPanel panel = new JPanel() {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(400, 400);
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
             }
         };
         panel.setLayout(new BorderLayout());
@@ -50,6 +63,7 @@ public class Loader {
         ActionListener managePlay=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 //                clossing the current class
                 layerUI.stop();
                 panel.remove(waitLable);
@@ -70,6 +84,18 @@ public class Loader {
 
 //        layerUI.stop();
 
+=======
+                layerUI.stop();
+                panel.remove(waitLable);
+            }
+        };
+
+        Timer timer = new Timer(6000,managePlay);
+        timer.setInitialDelay(10000);
+        timer.setRepeats(false);
+        timer.start();
+
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
     }
 
@@ -86,7 +112,10 @@ public class Loader {
             @Override
             public void run() {
                 Loader loading_Test = new Loader();
+<<<<<<< HEAD
 
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
             }
         });
 

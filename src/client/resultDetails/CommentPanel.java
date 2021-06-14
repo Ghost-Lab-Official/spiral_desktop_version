@@ -1,5 +1,12 @@
+<<<<<<< HEAD:src/client/resultDetails/CommentPanel.java
 package client.resultDetails;
 
+=======
+
+package client.resultDetails;
+
+
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24:src/CommentPanel.java
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,7 +36,7 @@ public class CommentPanel extends JPanel {
         if (imgURL != null) {
             ImageIcon imageIcon = new ImageIcon(imgURL, description);
             Image image=imageIcon.getImage();
-            Image newimg = image.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
+            Image newimg = image.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
             imageIcon=new ImageIcon(newimg);
             return imageIcon;
         } else {

@@ -25,10 +25,13 @@ public class SearchController {
                 }
                 return results;
 
+<<<<<<< HEAD
             case "getSearchInfo":
                 results.add(new SearchActions().getSearchInfo((SearchRequest) requestBody.getObject()));
                 return results;
 
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
             case "getPeople":
                 List<User> peopleList = new SearchActions().getPeople((User) requestBody.getObject());
                 for (User user: peopleList){

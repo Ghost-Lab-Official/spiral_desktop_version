@@ -1,9 +1,14 @@
 package client.Locations;
+<<<<<<< HEAD
 import client.resultDetails.CommentPanel;
 import client.pages.RegisterLocation;
 import client.pages.RegisterLocationLevel;
 
 import java.io.IOException;
+=======
+
+
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -24,9 +29,15 @@ public class LocationViews {
     private JTable locationsTable;
 
 
+<<<<<<< HEAD
     String url = "jdbc:mysql://localhost:3306/2YQ7auowc7";
     String userName = "root";
     String password = "";
+=======
+    String url = "jdbc:mysql://localhost:3306/spiral_db";
+    String userName = "root";
+    String password = "pauline";
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
     public LocationViews() {
         LocationsInit();
@@ -119,7 +130,11 @@ public class LocationViews {
                     JOptionPane.ERROR_MESSAGE);
         }
 
+<<<<<<< HEAD
         sp.setPreferredSize(new Dimension(1175,500));
+=======
+        sp.setPreferredSize(new Dimension(1175,400));
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
         panel2.setBackground(Color.WHITE);
         panel2.add(sp);
@@ -156,6 +171,7 @@ public class LocationViews {
                 new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+<<<<<<< HEAD
         levelButton.addActionListener(e -> {
             window.setVisible(false);
             try {
@@ -164,6 +180,8 @@ public class LocationViews {
                 ioException.printStackTrace();
             }
         });
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
 
 
@@ -178,10 +196,13 @@ public class LocationViews {
                 new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
+<<<<<<< HEAD
         locationButton.addActionListener(e -> {
             window.setVisible(false);
             new RegisterLocation();
         });
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
 
 

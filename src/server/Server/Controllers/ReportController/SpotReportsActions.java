@@ -211,6 +211,7 @@ public class SpotReportsActions {
 
             return AllSpots;
         }
+<<<<<<< HEAD
 
 
 
@@ -246,6 +247,8 @@ public class SpotReportsActions {
 
          return AllSpots;
      }
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         public List<Object> ViewHighlyVisitedSpots() throws Exception{
             CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
             Connection connection = cloudStorageConnection.getConnection();
@@ -256,7 +259,11 @@ public class SpotReportsActions {
                     "left join users_table on Spot_table.user_id=users_table.user_id" +
                     " left join locations on Spot_table.location_id = locations.location_id" +
                     " left join spot_category on Spot_table.category_id = spot_category.category_id " +
+<<<<<<< HEAD
                     "WHERE Spot_table.status ='active' AND Spot_table.views > 10 LIMIT 5";
+=======
+                    "WHERE Spot_table.status ='active' AND Spot_table.views > 10";
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
             ResultSet resultset = stment.executeQuery(querry);
 
             List <Object> AllSpots = new ArrayList<>();

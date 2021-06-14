@@ -1,5 +1,6 @@
 package client.resultDetails;
 
+<<<<<<< HEAD
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,6 +10,13 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+=======
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 import java.io.IOException;
 
 public class userTopNav extends JFrame {
@@ -65,6 +73,7 @@ public class userTopNav extends JFrame {
 
         JPanel profilePanel = new JPanel();
         profilePanel.setBackground(Color.decode("#FFFFFF"));
+<<<<<<< HEAD
         profilePanel.setSize(100,40);
         profilePanel.setBorder(BorderFactory.createEmptyBorder(10,2,0,45));
 
@@ -81,6 +90,16 @@ public class userTopNav extends JFrame {
 
         JLabel username = new JLabel("Nyirakamana");
         profilePanel.add(username);
+=======
+        profilePanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,35));
+        ImageIcon profileImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\logo.jpg");
+        JButton profileImg = new JButton(profileImage);
+        profileImg.setPreferredSize(new Dimension(120,40));
+        profileImg.setBorder(BorderFactory.createEmptyBorder(1,3,5,10));
+        profileImg.setBorder(new LineBorder(Color.gray,1,true));
+        profileImg.setBorder(new RoundedBoarder(50));
+
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         profilePanel.add(profileImg);
         navigationPanel.add(profilePanel, BorderLayout.EAST);
 

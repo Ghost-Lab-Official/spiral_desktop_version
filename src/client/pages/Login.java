@@ -1,6 +1,7 @@
 package client.pages;
 
 import javax.swing.*;
+<<<<<<< HEAD
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -8,6 +9,24 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+=======
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
 
 
 public class Login extends JFrame {
@@ -39,6 +58,7 @@ public class Login extends JFrame {
         JLabel forgotPasswordLabel = new JLabel("Forgot your Password?");
         loginButton.setPreferredSize(new Dimension(150,50));
 
+<<<<<<< HEAD
         signUpLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -72,6 +92,8 @@ public class Login extends JFrame {
 
             }
         });
+=======
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         spLabel.setFont(new Font("nunito", Font.BOLD, 40));
         spLabel.setForeground(Color.WHITE);
         leftPanel.setBackground(themeColor);

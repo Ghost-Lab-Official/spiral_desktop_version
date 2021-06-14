@@ -15,7 +15,11 @@ public class RegisterLocation extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
+<<<<<<< HEAD
     void initUI(){
+=======
+    public void initUI(){
+>>>>>>> d3cbee5dde6691de8ab652e5c49bd56983c38f24
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
