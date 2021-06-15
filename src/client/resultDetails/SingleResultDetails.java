@@ -19,6 +19,8 @@ public class SingleResultDetails extends JFrame {
     private int searchId;
     private String spotName;
     private String descSpot;
+    final PlaceholderTextField CommentField = new PlaceholderTextField();
+    private String content;
 
     public SingleResultDetails() {
 
@@ -34,19 +36,45 @@ public class SingleResultDetails extends JFrame {
 
     private class ButtonClickListener implements ActionListener {
 
+        private Integer spotId;
         private String commentContent;
 
-        public ButtonClickListener(String commentText) {
+        public ButtonClickListener(Integer id,String commentText) {
+            this.spotId = id;
             this.commentContent = commentText;
         }
-
 
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if( command.equals( "sendComment" ))  {
                 try {
-//                    new SingleResultDetails(id,name,desc);
-                    System.out.println("Here we are guys: " + this.commentContent);
+                    System.out.println(this.commentContent);
+                    Comment comment = new Comment();
+
+                    comment.setSpotId(this.spotId);
+                    // TODO Use logged in user
+                    comment.setUserId(3);
+                    comment.setComment_id(UUID.randomUUID().toString());
+                    comment.setContent(this.commentContent);
+                    comment.setStatus("active");
+                    comment.setCreated_at(new Date());
+                    comment.setUpdatedAt(new Date());
+
+                    RequestBody requestBody = new RequestBody();
+                    requestBody.setUrl("/spot-comment");
+                    requestBody.setAction("register");
+                    requestBody.setObject(comment);
+
+                    ClientServerConnector clientServerConnector = new ClientServerConnector();
+                    ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
+
+                    for (Object response: responseBody.getResponse()){
+                        ResponseStatus responseStatus = (ResponseStatus) response;
+                        System.out.println("\t\t -------------------------------------- STATUS: "+responseStatus.getStatus()+" ---------------------------");
+                        System.out.println("\t\t --------------         Meaning: "+responseStatus.getMessage());
+                        System.out.println("\t\t --------------         Action: "+responseStatus.getActionToDo());
+                        System.out.println("\t\t ------------------------------------------------------------------------------");
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -103,7 +131,7 @@ public class SingleResultDetails extends JFrame {
         int n = 0;
 
         for (Object response : responseBody.getResponse()) {
-
+            System.out.println(n);
             if (n < 4) {
                 Comment comment = (Comment) response;
                 CommentPanel commentP = new CommentPanel(String.valueOf(comment.getUserId()), comment.getContent(), 12);
@@ -134,8 +162,7 @@ public class SingleResultDetails extends JFrame {
         lastPanel.add(more);
 
 //        ResponseBody response;
-//        Comment comment = (Comment) response;
-        final PlaceholderTextField CommentField = new PlaceholderTextField("");
+//        Comment comment = (Comment) response
         CommentField.setColumns(20);
         CommentField.setPlaceholder("Add a comment!");
         CommentField.setBounds(0, 50, 300, 55);
@@ -151,7 +178,7 @@ public class SingleResultDetails extends JFrame {
 
         sendComment.setActionCommand("sendComment");
 //        sendComment.addActionListener(new ResultDetails.ButtonClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
-        sendComment.addActionListener(new ButtonClickListener(CommentField.getText()));
+        sendComment.addActionListener(new ButtonClickListener(searchId, CommentField.getText()));
 
         //sendComment.addActionListener(new ButtonClickListener(comm., spot.getSpotName(), spot.getSpotDescription()));
         sendComment.setBounds(300, 50, 100, 55);
