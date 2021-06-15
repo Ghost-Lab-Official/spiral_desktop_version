@@ -63,8 +63,6 @@ public class UserTopNav extends JFrame {
         profilePanel.setBackground(Color.decode("#FFFFFF"));
         profilePanel.setSize(100,40);
         profilePanel.setBorder(BorderFactory.createEmptyBorder(10,2,0,45));
-
-//        JLabel demoLabel = new JLabel();
         BufferedImage img = null;
 
         img = ImageIO.read(new File("src/client/images/profile.png"));
@@ -83,15 +81,6 @@ public class UserTopNav extends JFrame {
         navigationPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 
         return navigationPanel;
-//        window.add(navigationPanel, BorderLayout.PAGE_START);
-//
-//        window.setSize(1800,700);
-//        window.setVisible(true);
 
     }
-//
-//    public static void main(String[] args) throws IOException {
-//        userTopNav userTopNav = new userTopNav();
-//    }
-
 }
