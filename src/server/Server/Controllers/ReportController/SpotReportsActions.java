@@ -557,27 +557,27 @@ public class SpotReportsActions {
     }
 
 
-    public static void getReportForAnotherMonth(int month, int year)throws Exception{
-        try{
-            CloudStorageConnectionHandler cloudStorageConnection=new CloudStorageConnectionHandler();
-            Connection connection=cloudStorageConnection.getConnection();
+    public static void getReportForAnotherMonth(int month, int year)throws Exception {
+        try {
+            CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+            Connection connection = cloudStorageConnection.getConnection();
 
-            Statement statement=connection.createStatement();
-            String query="SELECT Spot_table.spot_id , Spot_table.spot_name , Spot_table.spot_description ," +
+            Statement statement = connection.createStatement();
+            String query = "SELECT Spot_table.spot_id , Spot_table.spot_name , Spot_table.spot_description ," +
                     " Spot_table.status , Spot_table.views  , Spot_table.registration_date ," +
                     " users_table.user_name , locations.location_name , spot_category.category_name from Spot_table " +
                     "left join users_table on Spot_table.user_id=users_table.user_id" +
                     " left join locations on Spot_table.location_id = locations.locationId" +
                     " left join spot_category on Spot_table.category_id = spot_category.category_id " +
-                    "where MONTH(Spot_table.registration_date)= " + month + " and YEAR(Spot_table.registration_date) =" +year;
+                    "where MONTH(Spot_table.registration_date)= " + month + " and YEAR(Spot_table.registration_date) =" + year;
 //            System.out.println(query);
 
 
-            ResultSet resultSet=statement.executeQuery(query);
-            ArrayList<SpotsReport> reportForAnotherDay=new ArrayList<SpotsReport>();
+            ResultSet resultSet = statement.executeQuery(query);
+            ArrayList<SpotsReport> reportForAnotherDay = new ArrayList<SpotsReport>();
 
-            while (resultSet.next()){
-                SpotsReport spots= new SpotsReport(
+            while (resultSet.next()) {
+                SpotsReport spots = new SpotsReport(
                         resultSet.getString("spot_id"),
                         resultSet.getString("user_name"),
                         resultSet.getString("category_name"),
@@ -592,17 +592,18 @@ public class SpotReportsActions {
                 reportForAnotherDay.add(spots);
             }
             Iterator iterator = reportForAnotherDay.iterator();
-            System.out.println("\t\t\t #Id" + "\t\t\t createdBy" +  "\t\t\t  Entitled " +  "\t\t\t\t\t\t location" +  "\t\t\t\t\t category " +  "\t\t\t\t\t\t status " +  "\t\t\t\t\t views"+  "\t\t\t\t\t  registrationDate ");
+            System.out.println("\t\t\t #Id" + "\t\t\t createdBy" + "\t\t\t  Entitled " + "\t\t\t\t\t\t location" + "\t\t\t\t\t category " + "\t\t\t\t\t\t status " + "\t\t\t\t\t views" + "\t\t\t\t\t  registrationDate ");
             System.out.println("\t\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            while(iterator.hasNext()){
-                SpotsReport spot = (SpotsReport)iterator.next();
-                System.out.println("\t\t\t " +spot.getSpot_id() + "\t\t\t\t " +spot.getUser_name() +  "\t\t\t\t " +spot.getSpot_description() +  "\t\t\t\t\t " +spot.getLocation_name() +  "\t\t\t\t\t " +spot.getCategory_name() +  "\t\t\t\t\t\t\t\t " +spot.getStatus() +  "\t\t\t\t\t\t\t " +spot.getViews() +  "\t\t\t\t\t\t " + spot.getRegistration_date());
+            while (iterator.hasNext()) {
+                SpotsReport spot = (SpotsReport) iterator.next();
+                System.out.println("\t\t\t " + spot.getSpot_id() + "\t\t\t\t " + spot.getUser_name() + "\t\t\t\t " + spot.getSpot_description() + "\t\t\t\t\t " + spot.getLocation_name() + "\t\t\t\t\t " + spot.getCategory_name() + "\t\t\t\t\t\t\t\t " + spot.getStatus() + "\t\t\t\t\t\t\t " + spot.getViews() + "\t\t\t\t\t\t " + spot.getRegistration_date());
             }
             connection.close();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
         public static List<List> printDataOnLineChart(){
             List<List> data = new ArrayList<List>();
             try{
@@ -641,5 +642,4 @@ public class SpotReportsActions {
 
     }
 
-}
 

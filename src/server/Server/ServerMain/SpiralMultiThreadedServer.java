@@ -1,21 +1,20 @@
 package server.Server.ServerMain;
 
-import server.Server.Controllers.BillingControllers.*;
-import server.Server.Controllers.LocationControllers.*;
-import server.Server.Controllers.LocationLevelControllers.*;
+import server.Server.Controllers.BillingControllers.BillingController;
+import server.Server.Controllers.LocationControllers.LocationController;
+import server.Server.Controllers.LocationLevelControllers.LocationLevelController;
 import server.Server.Controllers.ReportController.ReportController;
-import server.Server.Controllers.SearchControllers.*;
-import server.Server.Controllers.SpotCategoryControllers.*;
-import server.Server.Controllers.SpotController.*;
-import server.Server.Controllers.SpotController.*;
-import server.Server.Controllers.SpotController.*;
-import server.Server.Controllers.SpotController.*;
-import server.Server.Controllers.UserBilling.*;
-import server.Server.Controllers.UserModuleControllers.*;
-import server.Server.Controllers.UserModuleControllers.*;
-import server.Server.DbController.*;
-import server.Server.Model.*;
-
+import server.Server.Controllers.SearchControllers.SearchController;
+import server.Server.Controllers.SpotCategoryControllers.SpotCategoryController;
+import server.Server.Controllers.SpotController.SpotCommentController;
+import server.Server.Controllers.SpotController.SpotCommentReactionController;
+import server.Server.Controllers.SpotController.SpotController;
+import server.Server.Controllers.SpotController.SpotRatingController;
+import server.Server.Controllers.UserBilling.UserBillingController;
+import server.Server.Controllers.UserModuleControllers.UserCategoryController;
+import server.Server.Controllers.UserModuleControllers.UserController;
+import server.Server.DbController.PropertyVariables;
+import server.Server.Model.RequestBody;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -32,9 +31,9 @@ SpiralMultiThreadedServer {
 
 
 
-/*
-* This method is called once to set the db configurations
-*/
+    /*
+     * This method is called once to set the db configurations
+     */
 //
 //    public void startServer()throws Exception{
 //    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
@@ -46,13 +45,12 @@ SpiralMultiThreadedServer {
 //  }
 
     public void startServer()throws Exception{
-    String url = "jdbc:mysql://remotemysql.com:3306/2YQ7auowc7?" + "autoReconnect=true&useSSL=false";
-    String username = "2YQ7auowc7";
-    String password = "R2IMVJC67L";
-
-    PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
-    propertyVariables.setPropertiesInFile();
-  }
+        String url = "jdbc:mysql://localhost:3306/2yq7auowc7?" + "autoReconnect=true&useSSL=false";
+        String username = "root";
+        String password = "verie";
+        PropertyVariables propertyVariables = new PropertyVariables(url,username,password,3306l,1000l);
+        propertyVariables.setPropertiesInFile();
+    }
 
 
     public static void main(String[] args)
@@ -125,7 +123,7 @@ SpiralMultiThreadedServer {
                 in = new ObjectInputStream(clientSocket.getInputStream());
 
                 RequestBody requestBody;
-                
+
                 while ((requestBody = (RequestBody) in.readObject()) != null) {
                     //Reading the url
                     String url = requestBody.getUrl();

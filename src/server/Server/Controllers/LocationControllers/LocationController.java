@@ -1,7 +1,7 @@
 package server.Server.Controllers.LocationControllers;
 
 
-import server.Server.Model.Location;
+import server.Server.Model.*;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseStatus;
 

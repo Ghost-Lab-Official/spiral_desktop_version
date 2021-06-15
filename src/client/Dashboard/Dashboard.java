@@ -8,7 +8,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
-import server.Server.Model.SpotsReport;
+import server.Server.Model.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Dashboard {
-
     JFrame dashBoard;
     JPanel topnav,
             sideBar,
@@ -29,7 +28,6 @@ public class Dashboard {
             billing,
             mostViewedSpots,
             bestRatedSpot,
-            topPopularLocation,
             recentRegisteredSpots,
             billing2;
     ChartPanel lineChart;
@@ -79,8 +77,9 @@ public class Dashboard {
             img8,
             img9,
             img10,
-            img11;
-    JProgressBar mostViewedSpotPb;
+            img11,
+            img12;
+
     JScrollBar scrollBar;
     Container container;
     JFreeChart chart;
@@ -159,8 +158,6 @@ public class Dashboard {
             icon7=new ImageIcon(img7.getScaledInstance(20, 20, BufferedImage.SCALE_DEFAULT));
             logoutIconLabel=new JLabel();
             logoutIconLabel.setBounds(20, 520, 250, 25);
-            logoutIconLabel.setIcon(icon7);
-            sideBar.add(dashboardIconLabel);
             sideBar.add(DashboardLabel);
             sideBar.add(usersIconLabel);
             sideBar.add(UserLabel);
@@ -337,11 +334,19 @@ public class Dashboard {
         return dataset;
     }
 
-    public void displayRatesCardData(String Label) {
+    public void displayRatesCardData(String Label) throws IOException {
 
         JPanel ratesCardData = new JPanel();
         ratesCardData.setBackground(new Color(0,0,0,0));
         ratesCardData.setBorder(new EmptyBorder(5,0,0,0));
+        img12=ImageIO.read(new File("src/client/images/Billing.png"));
+        icon1=new ImageIcon(img1.getScaledInstance(20, 20, BufferedImage.SCALE_DEFAULT));
+
+        JLabel ratesList=new JLabel();
+        ratesList.setBounds(20, 70, 20, 20);
+        ratesList.setIcon(icon1);
+
+        ratesCardData.add(ratesList);
         bestRatedSpotLabel=new JLabel(Label);
         bestRatedSpotLabel.setFont(new Font("Roboto", Font.BOLD, 15));
         bestRatedSpotLabel.setForeground(Color.black);
