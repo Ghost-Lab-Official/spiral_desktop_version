@@ -104,6 +104,11 @@ public class ReportController {
 
             case "viewReportForAnotherDay":
                 return new SpotReportsActions().getReportForAnotherDay((String) request.getObject());
+
+            case "viewHighlyRatedSpots":
+                return new SpotReportsActions().viewHighlyRatedSpots();
+            case "viewRecentRegisteredSpots":
+                return new SpotReportsActions().viewRecentlyAddedSpots();
             //                OTHER ACTIONS SHOULD GO HERE
 //            --------------------------------------
         }

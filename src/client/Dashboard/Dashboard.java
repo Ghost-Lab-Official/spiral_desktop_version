@@ -1,5 +1,6 @@
 package client.Dashboard;
 
+import client.ClientMain.ClientServerConnector;
 import client.resultDetails.UserTopNav;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -7,9 +8,13 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import server.Server.Controllers.ReportController.SpotReportsActions;
+import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseBody;
+import server.Server.Model.SpotsReport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dashboard {
+     JLabel TopRatedLabelTitle;
     JFrame dashBoard;
     JPanel sideBar,users,locations,spots,billing,mostViewedSpots,bestRatedSpot,recentRegisteredSpots,billing2,topNav;
     ChartPanel BarChart;
@@ -29,7 +35,7 @@ public class Dashboard {
     JScrollBar scrollBar;
     Container container;
     JFreeChart chart;
-    public Dashboard() throws IOException {
+    public Dashboard() throws Exception {
     dashBoard = new JFrame("Dashboard");
     topNav= new JPanel();
     topNav = new UserTopNav().topnavInit();
@@ -121,7 +127,11 @@ public class Dashboard {
     billing = new JPanel();
     mostViewedSpots = new JPanel();
     bestRatedSpot = new JPanel();
+    bestRatedSpot.setLayout(new BoxLayout(bestRatedSpot, BoxLayout.Y_AXIS));
+    bestRatedSpot.setBorder(new EmptyBorder(20, 5, 0, 0));
     recentRegisteredSpots = new JPanel();
+    recentRegisteredSpots.setLayout(new BoxLayout(recentRegisteredSpots,BoxLayout.Y_AXIS));
+    recentRegisteredSpots.setBorder(new EmptyBorder(30,5,0,0));
     billing2 = new JPanel();
     sideBar.setBounds(0,80,200,700);
     sideBar.setBackground(Color.decode("#3674d0"));
@@ -181,167 +191,43 @@ public class Dashboard {
     billing2Label.setBounds(80,20,100,100);
     billing.add(billing2IconLabel);
     billing.add(billing2Label);
-    bestRatedSpot.setBackground(Color.white);
-    bestRatedSpot.setBounds(750,285,180,150);
-    bestRatedSpot.setLayout(null);
-    bestRatedSpotLabel = new JLabel("Best rated spot");
-    bestRatedSpotLabel.setFont(new Font("Roboto",Font.BOLD,15));
-    bestRatedSpotLabel.setForeground(Color.gray);
-    bestRatedSpotLabel.setBounds(20,-70,200,200);
-    bestRatedIconSpotLabel = new JLabel("RCA:");
-    bestRatedIconSpotLabel.setFont(new Font("Roboto",Font.BOLD,12));
-    bestRatedIconSpotLabel.setForeground(Color.black);
-    bestRatedIconSpotLabel.setBounds(20,-40,200,200);
-    img13 = ImageIO.read(new File("src\\client\\images\\star.png"));
-    icon13 = new ImageIcon(img13.getScaledInstance(20,20,BufferedImage.SCALE_DEFAULT));
-    bestRated2SpotLabel = new JLabel();
-    bestRated2SpotLabel.setBounds(48,-40,200,200);
-    bestRated2SpotLabel.setIcon(icon13);
-    bestRated3SpotLabel = new JLabel();
-    bestRated3SpotLabel.setBounds(70,-40,200,200);
-    bestRated3SpotLabel.setIcon(icon13);
-    bestRated4SpotLabel = new JLabel();
-    bestRated4SpotLabel.setBounds(90,-40,200,200);
-    bestRated4SpotLabel.setIcon(icon13);
-    bestRated5SpotLabel = new JLabel();
-    bestRated5SpotLabel.setBounds(110,-40,200,200);
-    bestRated5SpotLabel.setIcon(icon13);
-    bestRated2IconSpotLabel = new JLabel("Nyamagabe:");
-    bestRated2IconSpotLabel.setFont(new Font("Roboto",Font.BOLD,12));
-    bestRated2IconSpotLabel.setForeground(Color.black);
-    bestRated2IconSpotLabel.setBounds(20,-10,200,200);
-    bestRated6SpotLabel = new JLabel();
-    bestRated6SpotLabel.setBounds(90,-10,200,200);
-    bestRated6SpotLabel.setIcon(icon13);
-    bestRated7SpotLabel = new JLabel();
-    bestRated7SpotLabel.setBounds(110,-10,200,200);
-    bestRated7SpotLabel.setIcon(icon13);
-    bestRated8SpotLabel = new JLabel();
-    bestRated8SpotLabel.setBounds(130,-10,200,200);
-    bestRated8SpotLabel.setIcon(icon13);
-    bestRatedSpot.add(bestRatedSpotLabel);
-    bestRatedSpot.add(bestRated2SpotLabel);
-    bestRatedSpot.add(bestRated3SpotLabel);
-    bestRatedSpot.add(bestRated4SpotLabel);
-    bestRatedSpot.add(bestRated5SpotLabel);
-    bestRatedSpot.add(bestRatedIconSpotLabel);
-    bestRatedSpot.add(bestRated2IconSpotLabel);
-    bestRatedSpot.add(bestRated6SpotLabel);
-    bestRatedSpot.add(bestRated7SpotLabel);
-    bestRatedSpot.add(bestRated8SpotLabel);
-    recentRegisteredSpots.setBackground(Color.white);
-    recentRegisteredSpots.setBounds(950,285,300,380);
-    recentRegisteredSpots.setLayout(null);
-    recentRegisterdSpotsLabel = new JLabel("Recent registered spots");
-    recentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-    recentRegisterdSpotsLabel.setForeground(Color.gray);
-    recentRegisterdSpotsLabel.setBounds(30,-80,400,200);
-    img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
-    icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-    RecentRegisterdIconLabel = new JLabel();
-    RecentRegisterdIconLabel.setBounds(20,50,400,40);
-    RecentRegisterdIconLabel.setIcon(icon12);
-    RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-    RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-    RecentRegisterdSpotsLabel.setBounds(80,-45,200,200);
-    recentTimeLabel = new JLabel("2 minutes ago");
-    recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-    recentTimeLabel.setForeground(Color.gray);
-    recentTimeLabel.setBounds(80,-30,200,200);
-    recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-    recentRegisteredSpots.add(RecentRegisterdIconLabel);
-    recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-    recentRegisteredSpots.add(recentTimeLabel);
 
+        bestRatedSpot.setBackground(Color.white);
+        bestRatedSpot.setBounds(750, 285, 180, 150);
+        TopRatedLabelTitle=new JLabel("Best Rated Spots");
+        bestRatedSpot.add(TopRatedLabelTitle);
 
-        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
-        icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-        RecentRegisterdIconLabel = new JLabel();
-        RecentRegisterdIconLabel.setBounds(20,100,400,40);
-        RecentRegisterdIconLabel.setIcon(icon12);
-        RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-        RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-        RecentRegisterdSpotsLabel.setBounds(80,5,200,200);
-        recentTimeLabel = new JLabel("2 minutes ago");
-        recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-        recentTimeLabel.setForeground(Color.gray);
-        recentTimeLabel.setBounds(80,25,200,200);
-        recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(RecentRegisterdIconLabel);
-        recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(recentTimeLabel);
+        RequestBody request=new RequestBody();
+        request.setUrl("/report");
+        request.setAction("viewHighlyRatedSpots");
+        request.setObject(null);
 
+        ResponseBody responseBody=new ClientServerConnector().ConnectToServer(request);
 
-        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
-        icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-        RecentRegisterdIconLabel = new JLabel();
-        RecentRegisterdIconLabel.setBounds(20,150,400,40);
-        RecentRegisterdIconLabel.setIcon(icon12);
-        RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-        RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-        RecentRegisterdSpotsLabel.setBounds(80,60,200,200);
-        recentTimeLabel = new JLabel("2 minutes ago");
-        recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-        recentTimeLabel.setForeground(Color.gray);
-        recentTimeLabel.setBounds(80,80,200,200);
-        recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(RecentRegisterdIconLabel);
-        recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(recentTimeLabel);
+        for(Object Response: responseBody.getResponse()) {
+            SpotsReport SpotsReport=(server.Server.Model.SpotsReport) Response;
+            displayRatesCardData(SpotsReport.getSpot_name());
+        }
 
+        JLabel recentRegisterdSpotsLabelTitle=new JLabel("Recent registered spots");
+        recentRegisteredSpots.add(recentRegisterdSpotsLabelTitle);
+        recentRegisteredSpots.setBackground(Color.white);
+        recentRegisteredSpots.setBounds(950, 285, 300, 380);
 
-        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
-        icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-        RecentRegisterdIconLabel = new JLabel();
-        RecentRegisterdIconLabel.setBounds(20,200,400,40);
-        RecentRegisterdIconLabel.setIcon(icon12);
-        RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-        RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-        RecentRegisterdSpotsLabel.setBounds(80,110,200,200);
-        recentTimeLabel = new JLabel("2 minutes ago");
-        recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-        recentTimeLabel.setForeground(Color.gray);
-        recentTimeLabel.setBounds(80,130,200,200);
-        recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(RecentRegisterdIconLabel);
-        recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(recentTimeLabel);
+        RequestBody recentRequest=new RequestBody();
+        recentRequest.setUrl("/report");
+        recentRequest.setAction("viewRecentRegisteredSpots");
+        recentRequest.setObject(null);
 
-        img12 = ImageIO.read(new File("src\\client\\images\\recentSpots1.png"));
-        icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-        RecentRegisterdIconLabel = new JLabel();
-        RecentRegisterdIconLabel.setBounds(20,250,400,40);
-        RecentRegisterdIconLabel.setIcon(icon12);
-        RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-        RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-        RecentRegisterdSpotsLabel.setBounds(80,160,200,200);
-        recentTimeLabel = new JLabel("2 minutes ago");
-        recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-        recentTimeLabel.setForeground(Color.gray);
-        recentTimeLabel.setBounds(80,180,200,200);
-        recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(RecentRegisterdIconLabel);
-        recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(recentTimeLabel);
+        ResponseBody recentResponseBody=new ClientServerConnector().ConnectToServer(recentRequest);
 
+        for(Object recentResponse: recentResponseBody.getResponse()) {
+            SpotsReport SpotsReport=(server.Server.Model.SpotsReport) recentResponse;
+            displayRecentsCardData(SpotsReport.getSpot_name());
+//                System.out.println(SpotsReport.getSpot_name());
 
-        icon12 = new ImageIcon(img12.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
-        RecentRegisterdIconLabel = new JLabel();
-        RecentRegisterdIconLabel.setBounds(20,300,400,40);
-        RecentRegisterdIconLabel.setIcon(icon12);
-        RecentRegisterdSpotsLabel = new JLabel("Mukamira District");
-        RecentRegisterdSpotsLabel.setFont(new Font("Roboto",Font.BOLD,15));
-        RecentRegisterdSpotsLabel.setBounds(80,210,200,200);
-        recentTimeLabel = new JLabel("2 minutes ago");
-        recentTimeLabel.setFont(new Font("Roboto",Font.BOLD,10));
-        recentTimeLabel.setForeground(Color.gray);
-        recentTimeLabel.setBounds(80,230,200,200);
-        recentRegisteredSpots.add(recentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(RecentRegisterdIconLabel);
-        recentRegisteredSpots.add(RecentRegisterdSpotsLabel);
-        recentRegisteredSpots.add(recentTimeLabel);
-
-       billing2.setBackground(Color.white);
+        }
+        billing2.setBackground(Color.white);
        billing2.setBounds(1000,800,300,380);
        billing2.setLayout(null);
 
@@ -386,7 +272,48 @@ public class Dashboard {
       return dataset;
   }
 
- public static void main(String args[]) throws IOException{
+    public void displayRatesCardData(String Label) throws IOException {
+
+        JPanel ratesCardData = new JPanel();
+        ratesCardData.setBackground(new Color(0,0,0,0));
+        ratesCardData.setBorder(new EmptyBorder(5,0,0,0));
+        img12=ImageIO.read(new File("src/client/images/Billing.png"));
+        icon1=new ImageIcon(img1.getScaledInstance(20, 20, BufferedImage.SCALE_DEFAULT));
+
+        JLabel ratesList=new JLabel();
+        ratesList.setBounds(20, 70, 20, 20);
+        ratesList.setIcon(icon1);
+
+        ratesCardData.add(ratesList);
+        bestRatedSpotLabel=new JLabel(Label);
+        bestRatedSpotLabel.setFont(new Font("Roboto", Font.BOLD, 15));
+        bestRatedSpotLabel.setForeground(Color.black);
+        bestRatedSpotLabel.setLocation(100, 100);
+
+        bestRatedSpotLabel.setBounds(100, 100, 200, 200);
+        ratesCardData.add(bestRatedSpotLabel);
+
+        bestRatedSpot.add(ratesCardData);
+    }
+
+    public void displayRecentsCardData(String Label) {
+
+        JPanel recentsCardData = new JPanel();
+        recentsCardData.setBorder(new EmptyBorder(5,0,0,0));
+        recentsCardData.setBackground(Color.white);
+        recentRegisterdSpotsLabel=new JLabel(Label);
+        recentRegisterdSpotsLabel.setFont(new Font("Roboto", Font.BOLD, 15));
+        recentRegisterdSpotsLabel.setForeground(Color.black);
+        recentRegisterdSpotsLabel.setLocation(100,100);
+        recentRegisterdSpotsLabel.setBounds(30, -80, 400, 200);
+        recentsCardData.add(recentRegisterdSpotsLabel);
+
+        recentRegisteredSpots.add(recentsCardData);
+
+
+    }
+
+ public static void main(String args[]) throws Exception {
        Dashboard dashboard = new Dashboard();
  }
 }
