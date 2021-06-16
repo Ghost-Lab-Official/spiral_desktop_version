@@ -1,54 +1,62 @@
 package client.pages;
 
 import org.mindrot.jbcrypt.BCrypt;
-import server.Server.DbController.CloudStorageConnectionHandler;
-import server.Server.Model.User;
 
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class UpdatePasswordInfo extends JFrame {
+    Border borderLabel = BorderFactory.createEmptyBorder(0, 0, 5, 50);
+    Border passwordLabel = BorderFactory.createEmptyBorder(5, -50, 0, 0);
+    Border borderInput = BorderFactory.createEmptyBorder(0, 0, 20, 0);
+    JPanel alignInput = new JPanel(new BorderLayout());
+    JPanel alignInput2 = new JPanel(new BorderLayout());
     private JLabel newPasswordLabel, confirmNewPasswordLabel, titleLabel;
     private JPasswordField newPasswordInput;
     private JPasswordField confirmNewPasswordInput;
     private JButton updateButton;
-    Border borderLabel = BorderFactory.createEmptyBorder(0,0,5,50);
-    Border passwordLabel = BorderFactory.createEmptyBorder(5,-50,0,0);
-    Border borderInput = BorderFactory.createEmptyBorder(0, 0, 20, 0);
-    JPanel alignInput = new JPanel(new BorderLayout());
-    JPanel alignInput2 = new JPanel(new BorderLayout());
-    public UpdatePasswordInfo(User user) throws Exception {
+
+    public UpdatePasswordInfo() throws Exception {
+
         setTitle("/user/UpdatePassword");
         setSize(1000, 700);
         setMinimumSize(new Dimension(700, 400));
         initUI();
         updateButton.addActionListener(e -> {
+            String databaseURL = "jdbc:mysql://localhost:3306/2yq7auowc7";
+            String user = "root";
+            String password = "123";
+            Connection connection = null;
+
             String passText = newPasswordInput.getText();
             String comfText = confirmNewPasswordInput.getText();
-
-            String email = "test@gmail.com";
             if (passText.equals("") || comfText.equals("") && passText != comfText) {
                 System.out.println("Enter valid Password and it's confirmation");
             } else {
                 try {
-                    Connection conn = new CloudStorageConnectionHandler().getConnection();
-                    PreparedStatement updateSql=conn.prepareStatement("Update users_table SET password=? where email=?");
-                    updateSql.setString(1,hashPassword(passText));
-                    updateSql.setString(2,email);
-                    int PassUpdate=updateSql.executeUpdate();
-                    if (PassUpdate>0) {
-                        JOptionPane.showMessageDialog(updateButton, "Password has been successfully changed");
-                    } else {
-                        JOptionPane.showMessageDialog(updateButton, "Password not updated");
+                    Class.forName("com.mysql.jdbc.Driver");
+                    connection = DriverManager.getConnection(databaseURL, user, password);
+                    if (connection != null) {
+                        System.out.println("Connected to the database");
+                        String email = "test@gmail.com";
+                        String sql = "Update users_table SET password=? where email=?";
+                        PreparedStatement updateSql = connection.prepareStatement(sql);
+
+                        updateSql.setString(1, passText);//hashPassword
+                        updateSql.setString(2, email);
+                        int PassUpdate = updateSql.executeUpdate();
+                        if (PassUpdate == 1) {
+                            JOptionPane.showMessageDialog(updateButton, "Password has been successfully changed");
+                        }
                     }
                 } catch (Exception exception) {
+                    System.out.println("Could not find database driver class");
                     exception.printStackTrace();
                 }
             }
@@ -57,6 +65,18 @@ public class UpdatePasswordInfo extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            UpdatePasswordInfo ex = null;
+            try {
+                ex = new UpdatePasswordInfo();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ex.setVisible(true);
+        });
     }
 
     private String hashPassword(String password) {
@@ -85,7 +105,7 @@ public class UpdatePasswordInfo extends JFrame {
 
         newPasswordLabel = new JLabel("Password");
         alignInput.add(newPasswordLabel, BorderLayout.EAST);
-        alignInput.setBorder(BorderFactory.createEmptyBorder(0,0,5,250));
+        alignInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 250));
         newPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
         newPasswordLabel.setForeground(Color.decode("#202020"));
         newPasswordInput = new JPasswordField();
@@ -94,7 +114,7 @@ public class UpdatePasswordInfo extends JFrame {
 
         confirmNewPasswordLabel = new JLabel("Confirm Password");
         alignInput2.setBackground(null);
-        alignInput2.setBorder(BorderFactory.createEmptyBorder(0,0,5,210));
+        alignInput2.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 210));
         alignInput2.add(confirmNewPasswordLabel, BorderLayout.EAST);
         confirmNewPasswordLabel.setFont(new Font("Nunito", Font.PLAIN, 12));
         confirmNewPasswordLabel.setForeground(Color.decode("#202020"));
@@ -155,7 +175,6 @@ public class UpdatePasswordInfo extends JFrame {
         ));
         updateButton.setForeground(Color.decode("#FFFFFF"));
         updateButton.setBackground(Color.decode("#3674D0"));
-
         // Add labels and inputs' labels to passwordDataPanel
         passwordDataPanel.add(titleLabelPanel);
         passwordDataPanel.add(newPasswordPanel);
@@ -166,7 +185,7 @@ public class UpdatePasswordInfo extends JFrame {
         passwordDataPanel.add(updatePanel);
 
         // Add passwordDataPanel to allContentPanel
-        allContentPanel.setBorder(BorderFactory.createEmptyBorder(60,0,0,0));
+        allContentPanel.setBorder(BorderFactory.createEmptyBorder(60, 0, 0, 0));
         allContentPanel.add(passwordDataPanel);
 
 
@@ -178,43 +197,47 @@ public class UpdatePasswordInfo extends JFrame {
         topPanel.setBackground(Color.white);
         topPanel.setPreferredSize(new Dimension(100, 350));
         topPanel.add(allContentPanel);
-        topPanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        topPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         bottomPanel.add(topPanel, BorderLayout.CENTER);
         bottomPanel.setBackground(Color.decode("#3674D0"));
-        bottomPanel.setBorder(BorderFactory.createEmptyBorder(80,80,80,80));
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(80, 80, 80, 80));
         add(bottomPanel);
 
         pack();
     }
 
-    class RoundedBorder implements Border{
-        private int radius;
+    class RoundedBorder implements Border {
+        private final int radius;
+
         RoundedBorder(int radius) {
             this.radius = radius;
         }
+
         public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+            return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
         }
+
         public boolean isBorderOpaque() {
             return true;
         }
+
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
+
     class CustomBorder extends AbstractBorder {
         public void paintBorder(Component c, Graphics g, int x, int y,
                                 int width, int height) {
             super.paintBorder(c, g, x, y, width, height);
-            Graphics2D g2d = (Graphics2D)g;
+            Graphics2D g2d = (Graphics2D) g;
             g2d.setStroke(new BasicStroke(10));
             g2d.drawRoundRect(x, y, width - 1, height, 25, 20);
         }
     }
 
-    public class RoundedPanel extends JPanel
-    {
+    public class RoundedPanel extends JPanel {
         protected int _strokeSize = 0;
         protected Color _shadowColor = Color.WHITE;
         protected boolean _shadowed = true;
@@ -226,21 +249,18 @@ public class UpdatePasswordInfo extends JFrame {
 
         protected Color _backgroundColor = Color.WHITE;
 
-        public RoundedPanel(GridBagLayout borderLayout)
-        {
+        public RoundedPanel(GridBagLayout borderLayout) {
             super();
             setOpaque(false);
         }
 
         @Override
-        public void setBackground(Color c)
-        {
+        public void setBackground(Color c) {
             _backgroundColor = c;
         }
 
         @Override
-        protected void paintComponent(Graphics g)
-        {
+        protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
             int width = getWidth();
@@ -249,41 +269,24 @@ public class UpdatePasswordInfo extends JFrame {
             Color shadowColorA = new Color(_shadowColor.getRed(), _shadowColor.getGreen(), _shadowColor.getTransparency(), _shadowAlpha);
             Graphics2D graphics = (Graphics2D) g;
 
-            if(_highQuality)
-            {
+            if (_highQuality) {
                 graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             }
 
-            if(_shadowed)
-            {
+            if (_shadowed) {
                 graphics.setColor(shadowColorA);
                 graphics.fillRoundRect(_shadowOffset, _shadowOffset, width - _strokeSize - _shadowOffset,
                         height - _strokeSize - _shadowOffset, _arcs.width, _arcs.height);
-            }
-            else
-            {
+            } else {
                 _shadowGap = 1;
             }
 
             graphics.setColor(_backgroundColor);
-            graphics.fillRoundRect(0,  0, width - shadowGap, height - shadowGap, _arcs.width, _arcs.height);
+            graphics.fillRoundRect(0, 0, width - shadowGap, height - shadowGap, _arcs.width, _arcs.height);
             graphics.setStroke(new BasicStroke(_strokeSize));
             graphics.setColor(getForeground());
-            graphics.drawRoundRect(0,  0, width - shadowGap, height - shadowGap, _arcs.width, _arcs.height);
+            graphics.drawRoundRect(0, 0, width - shadowGap, height - shadowGap, _arcs.width, _arcs.height);
             graphics.setStroke(new BasicStroke());
         }
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            UpdatePasswordInfo ex = null;
-            User user = new User();
-            try {
-                ex = new UpdatePasswordInfo(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            ex.setVisible(true);
-        });
     }
 }
