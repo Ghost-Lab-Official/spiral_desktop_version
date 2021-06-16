@@ -157,6 +157,8 @@ public class LocationViews {
           new RegisterLocationLevel();
         } catch (IOException ioException) {
           ioException.printStackTrace();
+        } catch (Exception exception) {
+          exception.printStackTrace();
         }
       }
     );
