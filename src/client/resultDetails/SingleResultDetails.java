@@ -212,7 +212,7 @@ private String name;
         resultDetailsTitle = new JLabel(spotName);
        
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
-        likes = new JLabel("views: 38.8k");
+        likes = new JLabel("likes: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
         resultDetailsTitle.setBounds(350,100,400,30);
       
