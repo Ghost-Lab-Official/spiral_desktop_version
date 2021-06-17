@@ -118,6 +118,8 @@ public class ResultDetails{
         private int id;
         private String name;
         private String desc;
+
+
         public LabelClickListener(Integer spotId, String spotName, String spotDescription) {
             this.id=spotId;
             this.name=spotName;
@@ -164,23 +166,27 @@ public class ResultDetails{
             container = window.getContentPane();
             container.setBackground(Color.white);
             container.setLayout(null);
-            Spot spot = (Spot) response;
-            title = new JLabel(spot.getSpotName());
-            title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
-            title.setFont(new Font("Arial", Font.BOLD, 23));
-            title.setSize(500, 30);
-            title.setLocation(60, y1);
-            title.setForeground(Color.decode("#0074DB"));
-            container.add(title);
-            description = new JLabel();
-            description.setText(convertToMultiline(spot.getSpotDescription()));
-            description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-            description.setSize(700, 130);
-            description.setLocation(60, y2);
-            container.add(description);
-            y1=+150;
-            y2=+170;
-        }
+
+        Spot spot = (Spot) response;
+        title = new JLabel(spot.getSpotName());
+       title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+        title.setFont(new Font("Arial", Font.BOLD, 23));
+        title.setSize(500, 30);
+        title.setLocation(60, y1);
+
+        title.setForeground(Color.decode("#0074DB"));
+        container.add(title);
+
+        description = new JLabel();
+        description.setText(convertToMultiline(spot.getSpotDescription()));
+        description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+        description.setSize(700, 130);
+        description.setLocation(60, y2);
+        container.add(description);
+         y1=+150;
+         y2=+170;
+    }
+      
         window.setVisible(false);
     }
     public static String convertToMultiline(String orig)
