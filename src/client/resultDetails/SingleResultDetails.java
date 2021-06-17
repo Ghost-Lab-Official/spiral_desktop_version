@@ -31,18 +31,34 @@ public class SingleResultDetails extends JFrame {
 
     private class LabelClickListener extends MouseAdapter {
         private int rates;
+       private JFrame prev;
+private int id;
+private String name;
+        private String desc;
 
-
-
-        LabelClickListener(int ratings){
-    this.rates=ratings;
+        LabelClickListener(int ratings,JFrame prev,int id,String name,String desc){
+    this.rates=ratings;this.prev=prev;
+    this.id=id;this.name=name;this.desc=desc;
 }
 
-
         public void mouseClicked(MouseEvent e) {
-
+            System.out.println("id :"+id);
             try {
-                rateSpot(rates);
+
+                JFrame frame = new JFrame("rate checker");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(560, 200);
+
+
+                int result = JOptionPane.showConfirmDialog(frame,"Sure? to rate this spot?", "rate checker",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if(result == JOptionPane.YES_OPTION){
+                    rateSpot(rates);
+                  prev.dispose();
+                    new SingleResultDetails(id,name,desc);
+                }
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -198,11 +214,11 @@ public class SingleResultDetails extends JFrame {
         resultDetailsTitle = new JLabel(spotName);
        
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
-        likes = new JLabel("Likes: 38.8k");
+        likes = new JLabel("views: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
         resultDetailsTitle.setBounds(350,100,400,30);
       
-        likes.setBounds(380,135,80,20);
+        likes.setBounds(350,135,80,20);
         likes.setForeground(Color.decode("#878787"));
         int x=430;
             CommentPanel ratingStars = new CommentPanel();
@@ -210,22 +226,22 @@ public class SingleResultDetails extends JFrame {
             ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
             JLabel star1 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
             star1.setBounds(x, 135, 80, 20);
-            star1.addMouseListener(new LabelClickListener(5));
+            star1.addMouseListener(new LabelClickListener(5,this,this.searchId,this.spotName,this.descSpot));
 
             p2.add(star1);
             x+=20;
             JLabel star2 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
             star2.setBounds(x, 135, 80, 20);
-            star2.addMouseListener(new LabelClickListener(10));
+            star2.addMouseListener(new LabelClickListener(10,this,searchId,spotName,descSpot));
             p2.add(star2);
             x+=20;
             JLabel star3 = new JLabel((getRates(searchId)>=30)?imageY:imageB);
-           star3.addMouseListener(new LabelClickListener(15));
+           star3.addMouseListener(new LabelClickListener(15,this,searchId,spotName,descSpot));
             star3.setBounds(x, 135, 80, 20);
             p2.add(star3);
             x+=20;
             JLabel star4 = new JLabel((getRates(searchId)>=40)?imageY:imageB);
-            star4.addMouseListener(new LabelClickListener(20));
+            star4.addMouseListener(new LabelClickListener(20,this,searchId,spotName,descSpot));
             star4.setBounds(x, 135, 80, 20);
             p2.add(star4);
 
@@ -254,7 +270,6 @@ public class SingleResultDetails extends JFrame {
         // status of JFrame.
         this.setSize(1920, 670);
         setVisible(true);
-
         // this Keyword refers to current
         // object. Function to set size of JFrame.
     }

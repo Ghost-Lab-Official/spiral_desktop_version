@@ -5,7 +5,6 @@ import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
 import server.Server.Model.Spot;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,8 +29,6 @@ public class ResultDetails{
     private JLabel subTitle3;
     private JLabel description3;
     private JLabel lsubTitle3;
-
-
     public JFrame getWindow() {
         return window;
     }
@@ -116,51 +113,40 @@ public class ResultDetails{
     public void setLsubTitle3(JLabel lsubTitle3) {
         this.lsubTitle3 = lsubTitle3;
     }
-
-
     private class LabelClickListener extends MouseAdapter {
         private int rates;
         private int id;
         private String name;
         private String desc;
-
-
-
-
         public LabelClickListener(Integer spotId, String spotName, String spotDescription) {
             this.id=spotId;
             this.name=spotName;
             this.desc=spotDescription;
-
         }
-
-
         public void mouseClicked(MouseEvent e) {
-
-                try {
-                    new SingleResultDetails(id,name,desc);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
+            try {
+                new SingleResultDetails(id,name,desc);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         }
     }
     public ResultDetails(String searchKeyParam) throws Exception {
+        Spot spotToSend = new Spot();
         if(searchKeyParam.equals("")){
-            System.out.println("sinzi nez");
-            new Spot().setSpotName("Oops! No results found at the moment");
+            spotToSend.setSpotName("Oops! No results found at the moment");
         }
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/search");
         requestBody.setAction("getSpots");
-
-        Spot spotToSend = new Spot();
         spotToSend.setSpotName(searchKeyParam);
         requestBody.setObject(spotToSend);
-
         ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
+        if(responseBody == null){
+            spotToSend.setSpotName("Oops! No results found at the moment");
+        }
         Integer index = 0;
         List<Object> spotsList = new ArrayList<>();
-
         for (Object response : responseBody.getResponse()) {
             index++;
             Spot spot = (Spot) response;
@@ -168,7 +154,6 @@ public class ResultDetails{
 //            System.out.println(index + ". " + spot.getSpotName() + "\n\t\t" + spot.getSpotDescription());
             spotsList.add(spot);
         }
-
         window = new JFrame();
         window.setTitle("Result Details");
         int y1=40;int y2=60;
@@ -179,28 +164,23 @@ public class ResultDetails{
             container = window.getContentPane();
             container.setBackground(Color.white);
             container.setLayout(null);
-
             Spot spot = (Spot) response;
-            System.out.println("my spot id "+spot.getSpotId());
-        title = new JLabel(spot.getSpotName());
-       title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
-        title.setFont(new Font("Arial", Font.BOLD, 23));
-        title.setSize(500, 30);
-        title.setLocation(60, y1);
-
-        title.setForeground(Color.decode("#0074DB"));
-        container.add(title);
-
-        description = new JLabel();
-        description.setText(convertToMultiline(spot.getSpotDescription()));
-        description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description.setSize(700, 130);
-        description.setLocation(60, y2);
-        container.add(description);
-         y1=+150;
-         y2=+170;
-    }
-      
+            title = new JLabel(spot.getSpotName());
+            title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+            title.setFont(new Font("Arial", Font.BOLD, 23));
+            title.setSize(500, 30);
+            title.setLocation(60, y1);
+            title.setForeground(Color.decode("#0074DB"));
+            container.add(title);
+            description = new JLabel();
+            description.setText(convertToMultiline(spot.getSpotDescription()));
+            description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+            description.setSize(700, 130);
+            description.setLocation(60, y2);
+            container.add(description);
+            y1=+150;
+            y2=+170;
+        }
         window.setVisible(false);
     }
     public static String convertToMultiline(String orig)
