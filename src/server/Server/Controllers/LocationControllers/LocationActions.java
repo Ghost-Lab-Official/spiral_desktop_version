@@ -30,7 +30,6 @@ public class LocationActions {
             if(inserted_rec == 1){
                 return new ResponseStatus(200,"CREATED","Location registered");
             }
-
         }catch(Exception e){
             return new ResponseStatus(300,"EXCEPTIONAL ERROR",e.getMessage());
         }

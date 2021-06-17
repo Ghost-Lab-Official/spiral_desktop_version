@@ -313,4 +313,3 @@ class IconTextField extends JTextField {
     }
 
 }
-

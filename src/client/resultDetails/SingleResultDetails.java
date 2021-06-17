@@ -11,7 +11,6 @@ import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 public class SingleResultDetails extends JFrame {
     private int searchId;
     private String spotName;

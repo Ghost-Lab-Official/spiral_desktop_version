@@ -1,14 +1,12 @@
 package client.result_list;
 import client.ClientMain.ClientServerConnector;
 import client.resultDetails.SingleResultDetails;
-import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
 import server.Server.Model.Spot;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ public class ResultDetails{
     private JLabel subTitle3;
     private JLabel description3;
     private JLabel lsubTitle3;
+
+
     public JFrame getWindow() {
         return window;
     }
@@ -113,6 +113,8 @@ public class ResultDetails{
     public void setLsubTitle3(JLabel lsubTitle3) {
         this.lsubTitle3 = lsubTitle3;
     }
+
+
     private class LabelClickListener extends MouseAdapter {
         private int rates;
         private int id;
@@ -124,8 +126,12 @@ public class ResultDetails{
             this.id=spotId;
             this.name=spotName;
             this.desc=spotDescription;
+
         }
+
+
         public void mouseClicked(MouseEvent e) {
+
             try {
                 new SingleResultDetails(id,name,desc);
             } catch (Exception exception) {
@@ -141,8 +147,10 @@ public class ResultDetails{
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/search");
         requestBody.setAction("getSpots");
+
         spotToSend.setSpotName(searchKeyParam);
         requestBody.setObject(spotToSend);
+
         ResponseBody responseBody = new ClientServerConnector().ConnectToServer(requestBody);
         if(responseBody == null){
             spotToSend.setSpotName("Oops! No results found at the moment");
@@ -167,26 +175,26 @@ public class ResultDetails{
             container.setBackground(Color.white);
             container.setLayout(null);
 
-        Spot spot = (Spot) response;
-        title = new JLabel(spot.getSpotName());
-       title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
-        title.setFont(new Font("Arial", Font.BOLD, 23));
-        title.setSize(500, 30);
-        title.setLocation(60, y1);
+            Spot spot = (Spot) response;
+            title = new JLabel(spot.getSpotName());
+            title.addMouseListener(new LabelClickListener(spot.getSpotId(),spot.getSpotName(),spot.getSpotDescription()));
+            title.setFont(new Font("Arial", Font.BOLD, 23));
+            title.setSize(500, 30);
+            title.setLocation(60, y1);
 
-        title.setForeground(Color.decode("#0074DB"));
-        container.add(title);
+            title.setForeground(Color.decode("#0074DB"));
+            container.add(title);
 
-        description = new JLabel();
-        description.setText(convertToMultiline(spot.getSpotDescription()));
-        description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-        description.setSize(700, 130);
-        description.setLocation(60, y2);
-        container.add(description);
-         y1=+150;
-         y2=+170;
-    }
-      
+            description = new JLabel();
+            description.setText(convertToMultiline(spot.getSpotDescription()));
+            description.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
+            description.setSize(700, 130);
+            description.setLocation(60, y2);
+            container.add(description);
+            y1=+150;
+            y2=+170;
+        }
+
         window.setVisible(false);
     }
     public static String convertToMultiline(String orig)

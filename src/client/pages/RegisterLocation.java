@@ -1,115 +1,119 @@
 package client.pages;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 public class RegisterLocation extends JFrame {
-    private static final Color themeColor = Color.decode("#3674D0");
 
-    public RegisterLocation(){
-        super("Create New Location");
-        setSize(1000,650);
-        initUI();
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-    }
-    public void initUI(){
-        JPanel leftPanel = new JPanel();
-        JPanel rightPanel = new JPanel();
-        JLabel spiralLabel = new JLabel("Spiral");
-        JButton createBtn = new JButton("Register");
-        JLabel levelText = new JLabel("<html>This is where you could register your?<br/> <font color='#3674D0'>Location</font></html>");
-        JPanel CreateButtonPanel = new JPanel(new BorderLayout());
-        JPanel DescriptLabelPanel = new JPanel();
+  private static final Color themeColor = Color.decode("#3674D0");
 
-//        company name
-        spiralLabel.setFont(new Font("Nunito", Font.BOLD, 40));
-        spiralLabel.setForeground(Color.WHITE);
-        spiralLabel.setFont(new Font("Nunito", Font.BOLD,40));
-        spiralLabel.setForeground(Color.white);
+  public RegisterLocation() {
+    super("Create New Location");
+    setSize(1000, 650);
+    initUI();
+    setLocationRelativeTo(null);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setVisible(true);
+  }
 
-//        left panel
-        leftPanel.setBackground(themeColor);
-        leftPanel.add(spiralLabel);
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 120, 10, 120));
-        leftPanel.setLayout(new GridBagLayout());
+  void initUI() {
+    JPanel leftPanel = new JPanel();
+    JPanel rightPanel = new JPanel();
+    JLabel spiralLabel = new JLabel("Spiral");
+    JButton createBtn = new JButton("Register");
+    JLabel levelText = new JLabel(
+      "<html>This is where you could register your?<br/> <font color='#3674D0'>Location</font></html>"
+    );
+    JPanel CreateButtonPanel = new JPanel(new BorderLayout());
+    JPanel DescriptLabelPanel = new JPanel();
 
+    //        company name
+    spiralLabel.setFont(new Font("Nunito", Font.BOLD, 40));
+    spiralLabel.setForeground(Color.WHITE);
+    spiralLabel.setFont(new Font("Nunito", Font.BOLD, 40));
+    spiralLabel.setForeground(Color.white);
 
-        DescriptLabelPanel.setBackground(Color.WHITE);
-        DescriptLabelPanel.setLayout(new BorderLayout());
-        DescriptLabelPanel.add(levelText, BorderLayout.SOUTH);
+    //        left panel
+    leftPanel.setBackground(themeColor);
+    leftPanel.add(spiralLabel);
+    leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 120, 10, 120));
+    leftPanel.setLayout(new GridBagLayout());
 
-//      right panel
+    DescriptLabelPanel.setBackground(Color.WHITE);
+    DescriptLabelPanel.setLayout(new BorderLayout());
+    DescriptLabelPanel.add(levelText, BorderLayout.SOUTH);
 
-        //header
-        JLabel registerHeadingLabel = new JLabel("<html>Register Location</html>");
-        registerHeadingLabel.setForeground(themeColor);
-        registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
-        rightPanel.add(registerHeadingLabel);
+    //      right panel
 
-        //input fields
-        JLabel levelName = new JLabel("Location name");
-        JTextField levelNameInput = new JTextField();
-        JLabel levelDescription = new JLabel("Description");
-        JTextField levelDescrInput = new JTextField();
+    //header
+    JLabel registerHeadingLabel = new JLabel("<html>Register Location</html>");
+    registerHeadingLabel.setForeground(themeColor);
+    registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD, 25));
+    rightPanel.add(registerHeadingLabel);
 
-        JLabel gpsAddress = new JLabel("Location GPS");
-        JTextField gpsAddressInput = new JTextField();
+    //input fields
+    JLabel levelName = new JLabel("Location name");
+    JTextField levelNameInput = new JTextField();
+    JLabel levelDescription = new JLabel("Description");
+    JTextField levelDescrInput = new JTextField();
 
-//        styling the input labels
-        levelName.setFont(new Font("Verdana",Font.PLAIN,16));
-        levelDescription.setFont(new Font("Verdana",Font.PLAIN,16));
+    JLabel gpsAddress = new JLabel("Location GPS");
+    JTextField gpsAddressInput = new JTextField();
 
-//      styling the input fields
-        levelNameInput.setBorder(new RoundedBorder(15));
-        levelDescrInput.setBorder(new RoundedBorder(15));
+    //        styling the input labels
+    levelName.setFont(new Font("Verdana", Font.PLAIN, 16));
+    levelDescription.setFont(new Font("Verdana", Font.PLAIN, 16));
 
-        rightPanel.setLayout(new GridLayout(9,1, 0, 10));
-        rightPanel.setBackground(Color.WHITE);
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(30, 120, 30, 120));
+    //      styling the input fields
+    levelNameInput.setBorder(new RoundedBorder(15));
+    levelDescrInput.setBorder(new RoundedBorder(15));
 
-        JPanel levelNameLabelPanel = new JPanel();
-        levelNameLabelPanel.setBackground(Color.WHITE);
-        levelNameLabelPanel.setLayout(new BorderLayout());
-        levelNameLabelPanel.add(levelName,BorderLayout.SOUTH);
+    rightPanel.setLayout(new GridLayout(9, 1, 0, 10));
+    rightPanel.setBackground(Color.WHITE);
+    rightPanel.setBorder(BorderFactory.createEmptyBorder(30, 120, 30, 120));
 
-        JPanel levelDescrLabelPanel = new JPanel();
-        levelDescrLabelPanel.setBackground(Color.WHITE);
-        levelDescrLabelPanel.setLayout(new BorderLayout());
-        levelDescrLabelPanel.add(levelDescription,BorderLayout.SOUTH);
+    JPanel levelNameLabelPanel = new JPanel();
+    levelNameLabelPanel.setBackground(Color.WHITE);
+    levelNameLabelPanel.setLayout(new BorderLayout());
+    levelNameLabelPanel.add(levelName, BorderLayout.SOUTH);
 
-        rightPanel.add(levelNameLabelPanel);
-        rightPanel.add(levelNameInput);
-        rightPanel.add(levelDescrLabelPanel);
-        rightPanel.add(levelDescrInput);
-        rightPanel.add(gpsAddress);
-        rightPanel.add(gpsAddressInput);
+    JPanel levelDescrLabelPanel = new JPanel();
+    levelDescrLabelPanel.setBackground(Color.WHITE);
+    levelDescrLabelPanel.setLayout(new BorderLayout());
+    levelDescrLabelPanel.add(levelDescription, BorderLayout.SOUTH);
 
-        createBtn.setPreferredSize(new Dimension(150,50));
-        createBtn.setForeground(Color.WHITE);
-        createBtn.setBackground(themeColor);
-        createBtn.setFont(new Font("Nunito",Font.BOLD,16));
-        createBtn.setBounds(10, 10, 120, 50);
-        createBtn.setBorder(BorderFactory.createCompoundBorder(
-                new CustomBorder(),
-                new EmptyBorder(new Insets(25, 20, 25, 25))
-        ));
+    rightPanel.add(levelNameLabelPanel);
+    rightPanel.add(levelNameInput);
+    rightPanel.add(levelDescrLabelPanel);
+    rightPanel.add(levelDescrInput);
+    rightPanel.add(gpsAddress);
+    rightPanel.add(gpsAddressInput);
 
-        CreateButtonPanel.setBackground(Color.WHITE);
-        CreateButtonPanel.add(createBtn, BorderLayout.WEST);
+    createBtn.setPreferredSize(new Dimension(150, 50));
+    createBtn.setForeground(Color.WHITE);
+    createBtn.setBackground(themeColor);
+    createBtn.setFont(new Font("Nunito", Font.BOLD, 16));
+    createBtn.setBounds(10, 10, 120, 50);
+    createBtn.setBorder(
+      BorderFactory.createCompoundBorder(
+        new CustomBorder(),
+        new EmptyBorder(new Insets(25, 20, 25, 25))
+      )
+    );
 
-        rightPanel.add(CreateButtonPanel);
-        rightPanel.add(DescriptLabelPanel);
+    CreateButtonPanel.setBackground(Color.WHITE);
+    CreateButtonPanel.add(createBtn, BorderLayout.WEST);
 
-        // panel to window
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
+    rightPanel.add(CreateButtonPanel);
+    rightPanel.add(DescriptLabelPanel);
 
-    }
+    // panel to window
+    add(leftPanel, BorderLayout.WEST);
+    add(rightPanel, BorderLayout.CENTER);
+  }
 
-    public static void main(String[] args) {
-        new RegisterLocation();
-    }
+  public static void main(String[] args) {
+    new RegisterLocation();
+  }
 }
