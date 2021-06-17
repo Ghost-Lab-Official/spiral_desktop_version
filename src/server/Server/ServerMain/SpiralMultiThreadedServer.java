@@ -1,5 +1,4 @@
 package server.Server.ServerMain;
-
 import server.Server.Controllers.BillingControllers.BillingController;
 import server.Server.Controllers.LocationControllers.LocationController;
 import server.Server.Controllers.LocationLevelControllers.LocationLevelController;
@@ -14,14 +13,12 @@ import server.Server.Controllers.UserBilling.UserBillingController;
 import server.Server.Controllers.UserModuleControllers.UserCategoryController;
 import server.Server.Controllers.UserModuleControllers.UserController;
 import server.Server.Model.RequestBody;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
-
 /**
  *  @author : Ntwari Egide - Scrum Master
  *  @author : Ishimwe Gervais
