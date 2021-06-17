@@ -80,14 +80,8 @@ public class Login extends JFrame {
             System.out.println(checkIfPasswordsAreEqual(password,rs.getString("password")));
             if(checkIfPasswordsAreEqual(password,rs.getString("password"))){
                 checkUser = true;
-//                TreeMap<String,String> newPayload = new TreeMap<String,String>();
-//                newPayload.put("email",rs.getString("email"));
-//                newPayload.put("user_name",rs.getString("user_name"));
-//                newPayload.put("user_category",rs.getString("user_Category"));
-//                Token loginCredentials = new Token(rs.getString("email"),newPayload);
-//                String userToken = loginCredentials.generateJwtToken(1, ChronoUnit.DAYS);
-//                System.out.println(userToken);
                 Dashboard dashboard= new Dashboard();
+                setVisible(false);
             };
         }
         else{

@@ -59,7 +59,7 @@ public class Dashboard {
     LocationsLabel = new JLabel("client/Locations");
     LocationsLabel.setFont(new Font("Roboto",Font.BOLD,20));
     LocationsLabel.setForeground(Color.white);
-    img4 = ImageIO.read(new File("src\\client\\images\\client.Locations.png"));
+    img4 = ImageIO.read(new File("src\\client\\images\\Locations.png"));
     icon4 = new ImageIcon(img4.getScaledInstance(25,30,BufferedImage.SCALE_DEFAULT));
     locationsIconLabel = new JLabel();
     locationsIconLabel.setBounds(20,260,280,40);
