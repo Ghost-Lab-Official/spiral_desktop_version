@@ -18,17 +18,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-
-import java.io.IOException;
 import java.sql.*;
-import java.time.temporal.ChronoUnit;
-import java.util.TreeMap;
-
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseBody;
 
 
 public class Login extends JFrame {
@@ -87,32 +77,9 @@ public class Login extends JFrame {
         else{
             loginFailed.setText("invalid email or password");
             loginFailed.setBorder(BorderFactory.createLineBorder(Color.RED));
-            //throw new Exception("invalid credentials");
 
         }
         System.out.println(checkUser);
-//        User user = new User();
-//        user.setEmail(email);
-//        user.setPassword(password);
-//        RequestBody requestBody = new RequestBody();
-//        requestBody.setUrl("/users");
-//        requestBody.setAction("login");
-//        requestBody.setObject(user);
-//        if (email.equals("") || password.equals("")) {
-//            System.out.println("Enter email and Password");
-//            loginFailed.setText("Please enter your email and password");
-//            loginFailed.setBorder(BorderFactory.createLineBorder(Color.RED));
-//        } else {
-//            ClientServerConnector clientServerConnector = new ClientServerConnector();
-//            ResponseBody responseBody = clientServerConnector.ConnectToServer(requestBody);
-//            for (Object response : responseBody.getResponse()) {
-//                ResponseStatus responseStatus = (ResponseStatus) response;
-//                if (responseStatus.getStatus() == 200) {
-//                    Dashboard dashboard = new Dashboard();
-//                    setVisible(false);
-//                }
-//            }
-//        }
     }
     public boolean checkIfPasswordsAreEqual(String password, String hash){
         boolean rightPassword = false;
@@ -209,12 +176,6 @@ public class Login extends JFrame {
         loginButtonPanel.setBackground(Color.WHITE);
         loginButtonPanel.add(loginButton, BorderLayout.WEST);
 
-        ////////
-//        JPanel loginFailedPanel = new JPanel();
-//        loginFailedPanel.setBackground(Color.WHITE);
-//        loginFailedPanel.setLayout(new BorderLayout());
-//        loginFailedPanel.add(loginFailed, BorderLayout.SOUTH);
-        ////////
         rightPanel.add(welcomeLabel);
         rightPanel.add(loginHeadingLabel);
         rightPanel.add(loginFailed);
