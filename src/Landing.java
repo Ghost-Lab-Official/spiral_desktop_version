@@ -1,12 +1,8 @@
 import client.ClientMain.ClientServerConnector;
-import client.pages.RegisterLocation;
-import client.result_list.ResultDetails;
 import client.result_list.ResultList;
-import server.Server.Middleware.UserAuthMiddleware;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
 import server.Server.Model.Spot;
-import server.Server.Model.UserLog;
 
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
@@ -14,7 +10,6 @@ import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 /**
  * @author Mutoni Uwingeneye Denyse
