@@ -2,7 +2,6 @@ package client.resultDetails;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -10,12 +9,14 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 
-public class userTopNav extends JFrame {
+public class UserTopNav extends JFrame {
+ public UserTopNav(){
 
-    userTopNav() throws IOException {
-        topnavInit();
-    }
+ }
 
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
         int w = image.getWidth();
@@ -36,7 +37,7 @@ public class userTopNav extends JFrame {
         return output;
     }
 
-    public void topnavInit() throws IOException {
+    public JPanel topnavInit() throws IOException {
         JFrame window = new JFrame();
         JPanel navigationPanel = new JPanel();
         navigationPanel.setLayout(new BorderLayout());
@@ -47,7 +48,7 @@ public class userTopNav extends JFrame {
         JPanel logoPanel = new JPanel();
         logoPanel.setBorder(BorderFactory.createEmptyBorder(30,5,0,5));
         logoPanel.setBackground(Color.decode("#FFFFFF"));
-        ImageIcon logoImage = new ImageIcon("C:\\Users\\DELL\\OneDrive\\Desktop\\spirallogo.png");
+        ImageIcon logoImage = new ImageIcon("src/client/images/spirallogo.png");
         JLabel logoImg = new JLabel(logoImage);
         logoPanel.add(logoImg);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
@@ -67,8 +68,6 @@ public class userTopNav extends JFrame {
         profilePanel.setBackground(Color.decode("#FFFFFF"));
         profilePanel.setSize(100,40);
         profilePanel.setBorder(BorderFactory.createEmptyBorder(10,2,0,45));
-
-//        JLabel demoLabel = new JLabel();
         BufferedImage img = null;
 
         img = ImageIO.read(new File("src/client/images/profile.png"));
@@ -86,15 +85,7 @@ public class userTopNav extends JFrame {
 
         navigationPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 
-        window.add(navigationPanel, BorderLayout.PAGE_START);
-
-        window.setSize(1800,700);
-        window.setVisible(true);
+        return navigationPanel;
 
     }
-
-    public static void main(String[] args) throws IOException {
-        userTopNav userTopNav = new userTopNav();
-    }
-
 }
