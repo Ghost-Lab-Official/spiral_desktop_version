@@ -39,12 +39,22 @@ public class SpotCommentController {
                 return  usersObject;
             case "getComments":
                 List<Comment> spotCommentList = new SpotCommentActions().GetComments((Integer) requestBody.getObject());
-                System.out.println("here we are: " + spotCommentList);
+                //System.out.println("here we are: " + spotCommentList);
                 for (Comment spotComment:spotCommentList){
                     usersObject.add((Object) spotComment);
                 }
 
                 return  usersObject;
+
+            case "getCommentsOfUser":
+                List<Comment> list = new SpotCommentActions().GetCommentsOfUser((Integer) requestBody.getObject());
+                System.out.println(list);
+                for(Comment spotCommentOfUser:list){
+                    usersObject.add((Object) spotCommentOfUser );
+                }
+
+                return usersObject;
+
             case "getCommentReplies":
                 List<Comment> spotCommentRepliesList = new SpotCommentActions().GetCommentReplies((String) requestBody.getObject());
                 for (Comment spotCommentReply:spotCommentRepliesList){

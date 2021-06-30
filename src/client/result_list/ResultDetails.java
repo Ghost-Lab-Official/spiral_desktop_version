@@ -127,7 +127,6 @@ public class ResultDetails {
 
         }
 
-
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if( command.equals( "details" ))  {
@@ -174,7 +173,7 @@ public class ResultDetails {
             container.setLayout(null);
 
             Spot spot = (Spot) response;
-            System.out.println("my spot id "+spot.getSpotId());
+//            System.out.println("my spot id "+spot.getSpotId());
             title = new JLabel(spot.getSpotName());
             JButton det = new JButton("click");
             det.setActionCommand("details");

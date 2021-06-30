@@ -2,10 +2,7 @@ package client.resultDetails;// Java program to illustrate the GridLayout
 
 import client.ClientMain.ClientServerConnector;
 import client.result_list.ResultDetails;
-import server.Server.Model.Comment;
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseBody;
-import server.Server.Model.ResponseStatus;
+import server.Server.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.*;
+import java.util.List;
 
 // class GridLayout extends JFrame
 public class SingleResultDetails extends JFrame {
@@ -21,7 +19,7 @@ public class SingleResultDetails extends JFrame {
     private String descSpot;
     final PlaceholderTextField CommentField = new PlaceholderTextField();
     private String content;
-
+    private String username;
     public SingleResultDetails() {
 
     }
@@ -39,9 +37,10 @@ public class SingleResultDetails extends JFrame {
         private Integer spotId;
         private String commentContent;
 
-        public ButtonClickListener(Integer id,String commentText) {
+        public ButtonClickListener(Integer id,String commentText) throws Exception {
             this.spotId = id;
             this.commentContent = commentText;
+          // saveComment(String.valueOf(id),commentText);
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -53,7 +52,7 @@ public class SingleResultDetails extends JFrame {
 
                     comment.setSpotId(this.spotId);
                     // TODO Use logged in user
-                    comment.setUserId(3);
+                    comment.setUserId(4);
                     comment.setComment_id(UUID.randomUUID().toString());
                     comment.setContent(this.commentContent);
                     comment.setStatus("active");
@@ -70,6 +69,7 @@ public class SingleResultDetails extends JFrame {
 
                     for (Object response: responseBody.getResponse()){
                         ResponseStatus responseStatus = (ResponseStatus) response;
+                        System.out.println(responseStatus);
                         System.out.println("\t\t -------------------------------------- STATUS: "+responseStatus.getStatus()+" ---------------------------");
                         System.out.println("\t\t --------------         Meaning: "+responseStatus.getMessage());
                         System.out.println("\t\t --------------         Action: "+responseStatus.getActionToDo());
@@ -87,16 +87,18 @@ public class SingleResultDetails extends JFrame {
         this.spotName = name;
         this.descSpot = desc;
         this.searchId = id;
+        this.username = username;
 
         setSearchId(searchId);
         RequestBody requestBody = new RequestBody();
         requestBody.setUrl("/spot-comment");
-        requestBody.setAction("getComments");
-        requestBody.setObject((Object) this.searchId);
+        requestBody.setAction("getCommentsOfUser");
+        requestBody.setObject((Object) 1);
         ClientServerConnector clientServerConnector = new ClientServerConnector();
         ResponseBody responseBody = null;
         try {
             responseBody = clientServerConnector.ConnectToServer(requestBody);
+            System.out.println(responseBody.getResponse());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -131,10 +133,11 @@ public class SingleResultDetails extends JFrame {
         int n = 0;
 
         for (Object response : responseBody.getResponse()) {
-            System.out.println(n);
+            System.out.println(response);
+//            System.out.println(n);
             if (n < 4) {
                 Comment comment = (Comment) response;
-                CommentPanel commentP = new CommentPanel(String.valueOf(comment.getUserId()), comment.getContent(), 12);
+                CommentPanel commentP = new CommentPanel(comment.getUserName(), comment.getContent(), 12);
                 commentP.setFont(new Font("Nunito", Font.PLAIN, 13));
                 p1.add(commentP);
             } else {
@@ -152,14 +155,14 @@ public class SingleResultDetails extends JFrame {
 //        }
         JPanel lastPanel = new JPanel();
         lastPanel.setLayout(null);
-        JLabel more = new JLabel("Load more");
-        more.setBounds(150, 10, 100, 30);
-        more.setForeground(Color.decode("#3674D0"));
-        Font font = more.getFont();
-        Map attributes = font.getAttributes();
-        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        more.setFont(font.deriveFont(attributes));
-        lastPanel.add(more);
+//        JLabel more = new JLabel("Load more");
+//        more.setBounds(150, 10, 100, 30);
+//        more.setForeground(Color.decode("#3674D0"));
+//        Font font = more.getFont();
+//        Map attributes = font.getAttributes();
+//        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+//        more.setFont(font.deriveFont(attributes));
+//        lastPanel.add(more);
 
 //        ResponseBody response;
 //        Comment comment = (Comment) response
@@ -172,8 +175,9 @@ public class SingleResultDetails extends JFrame {
         final Font f = CommentField.getFont();
         CommentField.setFont(new Font(f.getName(), f.getStyle(), 12));
 
-        System.out.println("Here's our " + CommentField.getText());
+//        System.out.println("Here's our " + CommentField.getText());
         JButton sendComment = new JButton("SEND");
+
 //        sendComment.setActionCommand("sendComment");
 
         sendComment.setActionCommand("sendComment");
@@ -223,7 +227,10 @@ public class SingleResultDetails extends JFrame {
         p2.add(resultDetailsTitle);
         p2.add(likes);
         p1.setLayout(new GridLayout(6, 1));
-        add(p1, "West");
+        JScrollPane scrollPane = new JScrollPane(p1);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        add(scrollPane, "West");
         add(p2, "East");
         // Function to set visible
         // status of JFrame.
@@ -293,6 +300,7 @@ public class SingleResultDetails extends JFrame {
 
         for (Object response: responseBody.getResponse()){
             ResponseStatus responseStatus = (ResponseStatus) response;
+            System.out.println(responseStatus);
             System.out.println("\t\t -------------------------------------- STATUS: "+responseStatus.getStatus()+" ---------------------------");
             System.out.println("\t\t --------------         Meaning: "+responseStatus.getMessage());
             System.out.println("\t\t --------------         Action: "+responseStatus.getActionToDo());

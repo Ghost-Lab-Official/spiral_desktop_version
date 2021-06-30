@@ -14,7 +14,9 @@ import server.Server.Controllers.UserBilling.UserBillingController;
 import server.Server.Controllers.UserModuleControllers.UserCategoryController;
 import server.Server.Controllers.UserModuleControllers.UserController;
 import server.Server.DbController.PropertyVariables;
+import server.Server.Model.Comment;
 import server.Server.Model.RequestBody;
+import server.Server.Model.ResponseStatus;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -118,8 +120,7 @@ SpiralMultiThreadedServer {
             ObjectInputStream in = null;
             try {
                 // get the outputstream of client
-                out = new ObjectOutputStream(
-                        clientSocket.getOutputStream());
+                out = new ObjectOutputStream(clientSocket.getOutputStream());
 
                 // get the inputstream of client
                 in = new ObjectInputStream(clientSocket.getInputStream());
@@ -127,16 +128,17 @@ SpiralMultiThreadedServer {
                 RequestBody requestBody;
                 
                 while ((requestBody = (RequestBody) in.readObject()) != null) {
+                    System.out.println(requestBody.getUrl());
                     //Reading the url
                     String url = requestBody.getUrl();
 
                     List<Object> responseObject = null;
-                    switch (url){
+                    switch (url) {
                         case "/users":
 
-                            responseObject =  new UserController().mainMethod(requestBody);
+                            responseObject = new UserController().mainMethod(requestBody);
                             break;
-                        case"/user-category":
+                        case "/user-category":
                             responseObject = new UserCategoryController().mainMethod(requestBody);
                             break;
                         case "/spot":
@@ -182,8 +184,6 @@ SpiralMultiThreadedServer {
                         default:
 
                     }
-
-
                     out.writeObject(responseObject);
                 }
             }

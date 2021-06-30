@@ -23,9 +23,10 @@ public class CloudStorageConnectionHandler {
             String url = propertiesStored.getProperty("dbUrl");
             String username = propertiesStored.getProperty("dbUsername");
             String password = propertiesStored.getProperty("dbPassword");
+            System.out.println("password: "+password);
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
-            // System.out.println("database connection is done ... ");
+            System.out.println("database connection is done ... ");
             return connection;
         }
 //        catch (CommunicationsException e){

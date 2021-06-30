@@ -3,6 +3,7 @@ package server.Server.Controllers.SpotController;
 
 import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Model.Comment;
+import server.Server.Model.User;
 import server.Server.Model.ResponseStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,12 +12,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class SpotCommentActions {
 
   String GetCommentQuery = "Select * FROM comments WHERE spot_id=?";
 
   String GetCommentReplyQuery = "Select * FROM comments WHERE reply_id=?";
+
+  String GetCommentOfUserQuery = "SELECT c.updated_at,c.status,c.comment_id,u.user_name, c.user_id, c.spot_id, c.content, c.created_at\n" +
+          "FROM\n" +
+          "    comments c\n" +
+          "        INNER JOIN\n" +
+          "    users_table u ON c.user_id = u.user_id\n" +
+          "WHERE\n" +
+          "    c.spot_id =?\n" +
+          "ORDER BY c.created_at";
 
   String InsertCommentQuery =
     "INSERT INTO comments (comment_id, spot_id, user_id, content, created_at, updated_at) VALUES(?,?,?,?,?,?)";
@@ -59,6 +70,37 @@ public class SpotCommentActions {
       }
       return commentsList;
     } catch (Exception e) {
+      return commentsList;
+    }
+  }
+
+  public List<Comment> GetCommentsOfUser(Integer spotId) throws Exception {
+    System.out.println("id: "+spotId);
+    List<Comment> commentsList = new ArrayList<>();
+    Connection connection = new CloudStorageConnectionHandler().getConnection();
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(
+              GetCommentOfUserQuery
+      );
+      preparedStatement.setInt(1, spotId);
+      ResultSet result = preparedStatement.executeQuery();
+
+      while (result.next()) {
+        System.out.println(result.getString("user_name"));
+        Comment comment = new Comment();
+        comment.setUserName(result.getString("user_name"));
+        comment.setComment_id(result.getString("comment_id"));
+        comment.setSpotId(result.getInt("spot_id"));
+        comment.setUserId(result.getInt("user_id"));
+        comment.setStatus(result.getString("status"));
+        comment.setContent(result.getString("content"));
+        comment.setCreated_at(result.getDate("created_at"));
+        comment.setUpdatedAt(result.getDate("updated_at"));
+        commentsList.add(comment);
+      }
+      return commentsList;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
       return commentsList;
     }
   }
@@ -110,26 +152,24 @@ public class SpotCommentActions {
   public ResponseStatus insertComment(Comment comment) throws Exception {
     Connection connection = new CloudStorageConnectionHandler().getConnection();
     try {
-      PreparedStatement preparedStatement = connection.prepareStatement(
-        InsertCommentQuery
-      );
-      preparedStatement.setString(1, comment.getComment_id().toString());
+      PreparedStatement preparedStatement = connection.prepareStatement( InsertCommentQuery );
+      preparedStatement.setString(1, UUID.randomUUID().toString());
       preparedStatement.setString(2, comment.getSpotId().toString());
       preparedStatement.setString(3, comment.getUserId().toString());
       preparedStatement.setString(4, comment.getContent());
       preparedStatement.setString(5, toDateTime(comment.getCreated_at()));
       preparedStatement.setString(6, toDateTime(comment.getUpdatedAt()));
       int inserted = preparedStatement.executeUpdate();
-
       if (inserted == 1) {
         return new ResponseStatus(
           200,
           "COMMENT ADDED",
+          comment,
           "you have commented on the spot"
         );
       }
     } catch (Exception e) {
-      return new ResponseStatus(500, "EXCEPTION ERROR", e.getMessage());
+      return new ResponseStatus(500, "EXCEPTION ERROR",null, e.getMessage());
     }
 
     return null;

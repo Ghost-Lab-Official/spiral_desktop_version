@@ -18,6 +18,7 @@ public class Comment implements Serializable {
     private String status;
     private Date created_at;
     private Date updatedAt;
+    private String userName;
 
     public Comment() {
     }
@@ -101,5 +102,13 @@ public class Comment implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
