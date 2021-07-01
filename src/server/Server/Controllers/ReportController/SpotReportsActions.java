@@ -1,8 +1,8 @@
 package server.Server.Controllers.ReportController;
 
 
+import client.DbController.CloudStorageConnectionHandler;
 import server.Server.Controllers.UserModuleControllers.CounterResponse;
-import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Model.SpotsReport;
 
 import java.sql.Connection;
@@ -546,4 +546,3 @@ public class SpotReportsActions {
         }
 
 }
-

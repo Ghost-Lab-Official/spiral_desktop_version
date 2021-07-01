@@ -1,8 +1,8 @@
 package client.result_list;
 
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class ResultList extends JFrame{
 

@@ -277,6 +277,7 @@ class IconTextComponentHelper {
     }
 }
 
+
 class IconTextField extends JTextField {
     private IconTextComponentHelper mHelper = new IconTextComponentHelper(this);
 
@@ -310,6 +311,8 @@ class IconTextField extends JTextField {
         getHelper().onSetBorder(border);
         super.setBorder(getHelper().getBorder());
     }
+
+}
 
 }
 

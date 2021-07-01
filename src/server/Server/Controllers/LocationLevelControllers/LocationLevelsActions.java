@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 
 public class LocationLevelsActions {
-    String createLevelQuery = "INSERT INTO location_levels(level_id,level_name) VALUES(?,?)";
+    String createLevelQuery = "INSERT INTO location_levels(level_id,level_name,description) VALUES(?,?,?)";
 
     /**
      *  Register a new location level. It will take a level name and
@@ -33,6 +33,7 @@ public class LocationLevelsActions {
             PreparedStatement stmt = connection.prepareStatement(createLevelQuery);
             stmt.setString(1,level_id );
             stmt.setString(2, location.getLevel_name());
+            stmt.setString(3, location.getDescription());
             int inserted_rec = stmt.executeUpdate();
             if(inserted_rec == 1){
               return new ResponseStatus(200,"CREATED","Location level registered");
