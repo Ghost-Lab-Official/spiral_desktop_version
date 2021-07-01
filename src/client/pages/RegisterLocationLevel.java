@@ -14,6 +14,13 @@ import server.Server.Model.LocationLevels;
 import server.Server.Model.ResponseBody;
 import server.Server.Model.ResponseStatus;
 
+
+/**
+ *
+ * Author :pauline ishimwe
+ * this is location views it get all locations from location table and are displayed in a table
+ * it allows you navigation to register location page and  add level page
+ */
 public class RegisterLocationLevel {
     JTextArea levelText;
     JTextArea descriptionText;

@@ -2,7 +2,7 @@ package client.Locations;
 
 import client.pages.RegisterLocation;
 import client.pages.RegisterLocationLevel;
-import client.resultDetails.CommentPanel;
+import client.DbController.CloudStorageConnectionHandler;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
@@ -24,29 +24,13 @@ public class LocationViews {
 
   private JTable locationsTable;
 
-  String url = "jdbc:mysql://localhost:3306/2YQ7auowc7";
-  String userName = "root";
-  String password = "";
+
 
   public LocationViews() {
     LocationsInit();
   }
 
-  //    public ImageIcon createImageIconResizeable(String path,
-  //                                               String description, int w, int h) {
-  //        java.net.URL imgURL = CommentPanel.class.getResource(path);
-  //
-  //        if (imgURL != null) {
-  //            ImageIcon imageIcon = new ImageIcon(imgURL, description);
-  //            Image image=imageIcon.getImage();
-  //            Image newimg = image.getScaledInstance(w, h,  Image.SCALE_SMOOTH);
-  //            imageIcon=new ImageIcon(newimg);
-  //            return imageIcon;
-  //        } else {
-  //            System.err.println("Couldn't find file: " + path);
-  //            return null;
-  //        }
-  //    }
+
 
   public void loadLocationTable() {
     panel2 = new JPanel();
@@ -75,8 +59,11 @@ public class LocationViews {
     String status = "";
 
     try {
-      //           ` Class.forName(driverName);`
-      Connection con = DriverManager.getConnection(url, userName, password);
+
+//      Connection con = DriverManager.getConnection(url, userName, password);
+//      Connection con=CloudStorageConnectionHandler.getConnection();
+      Connection con = new CloudStorageConnectionHandler().getConnection();
+
       String sql =
         "select location_name,location_GPS,description,status from locations";
       PreparedStatement ps = con.prepareStatement(sql);
