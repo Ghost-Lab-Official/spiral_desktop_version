@@ -1,5 +1,6 @@
 package client.pages;
 import client.ClientMain.ClientServerConnector;
+import client.Dashboard.Dashboard;
 import server.Server.Model.Billing;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
@@ -12,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.List;
-class BillingTable extends JFrame {
+public class BillingTable extends JFrame {
     private static final Color themeColor = Color.decode("#3674D0");
     JFrame window;
     Box verticalBox;
@@ -21,8 +22,8 @@ class BillingTable extends JFrame {
     JTable table;
     JMenuItem i1, i2, i3, i4, i5;
     JPanel tablePanel, navPanel, footerPanel, buttonPanel;
-    private JButton btn;
-    BillingTable() throws Exception {
+    private JButton btn,btn2;
+    public BillingTable() throws Exception {
         super("Spiral - Billing");
         InitUI();
     }
@@ -110,9 +111,26 @@ class BillingTable extends JFrame {
                     }
                 }
         );
+        btn2 = new JButton("- Back to Dashboard");
+        btn2.setBounds(510,600,90,40);
+        btn2.setBackground(themeColor);
+        btn2.setForeground(Color.WHITE);
+        btn2.setFont(new Font("verdana", Font.PLAIN, 15));
+        btn2.addActionListener(
+                e -> {
+                    window.setVisible(false);
+                    try {
+                        new Dashboard();
+                    } catch (Exception exception) {
+                        window.setVisible(true);
+                        exception.printStackTrace();
+                    }
+                }
+        );
         otherText = new JLabel("View Billing Plans.");
         buttonPanel.add(otherText);
         buttonPanel.add(btn);
+        buttonPanel.add(btn2);
         buttonPanel.setBackground(Color.white);
         buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonPanel.getMinimumSize().height));
     }
