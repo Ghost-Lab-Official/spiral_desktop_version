@@ -277,7 +277,6 @@ class IconTextComponentHelper {
     }
 }
 
-
 class IconTextField extends JTextField {
     private IconTextComponentHelper mHelper = new IconTextComponentHelper(this);
 
