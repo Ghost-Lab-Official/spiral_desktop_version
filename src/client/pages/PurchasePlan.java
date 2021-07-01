@@ -1,39 +1,55 @@
 package client.pages;
 
-
 import client.ClientMain.ClientServerConnector;
 import server.Server.Model.Billing;
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseBody;
-import server.Server.Model.ResponseStatus;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
-public class RegisterBill extends JFrame {
-    JTextField billingNameInput;
-    JTextField amountInput;
-    JTextField periodInput;
+public class PurchasePlan extends JFrame {
+//    JTextField billingNameInput;
+    JComboBox billingNameInput;
     private static final Color themeColor = Color.decode("#3674D0");
 
-    RegisterBill(){
-        super("Create new billing plan");
+    PurchasePlan() throws Exception {
+        super("Purchase bill plan");
         setSize(1000,650);
         initUI();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-    void initUI(){
+
+
+
+    public ResponseBody billingPlans() throws Exception{
+        RequestBody requestBody = new RequestBody();
+        requestBody.setUrl("/billing");
+        requestBody.setAction("selectAllBillingPlans");
+        requestBody.setObject(null);
+
+
+        ClientServerConnector clientServerConnector = new ClientServerConnector();
+        return clientServerConnector.ConnectToServer(requestBody);
+    }
+
+
+    void initUI() throws Exception {
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JLabel spiralLabel = new JLabel("Spiral");
-        JButton createBtn = new JButton("Register");
+        JButton createBtn = new JButton("Purchase");
         JPanel CreateButtonPanel = new JPanel(new BorderLayout());
         JPanel DescriptLabelPanel = new JPanel();
 
@@ -52,30 +68,28 @@ public class RegisterBill extends JFrame {
 //      right panel
 
         //header
-        JLabel registerHeadingLabel = new JLabel("<html>Register Bill</html>");
+        JLabel registerHeadingLabel = new JLabel("<html>Purchase plan</html>");
         registerHeadingLabel.setForeground(themeColor);
         registerHeadingLabel.setFont(new Font("Nunito", Font.BOLD,25));
         rightPanel.add(registerHeadingLabel);
 
         //input fields
-        JLabel billingName = new JLabel("Billing name");
-        billingNameInput = new JTextField();
-        JLabel amount = new JLabel("Billing price");
-        amountInput = new JTextField();
+        JLabel billingName = new JLabel("Billing plan");
+//        billingNameInput = new JTextField();
+        ResponseBody responseBody = billingPlans();
 
-        
-        JLabel period = new JLabel("Billing period (months)");
-        periodInput = new JTextField();
-
-
+        Integer index = 1;
+        List <String> billing_plans = new ArrayList<>();
+        for(Object response : responseBody.getResponse()){
+            Billing response1 = (Billing) response;
+            billing_plans.add(response1.getBilling_name());
+            index++;
+        }
+//        billingNameInput = new JComboBox((String) billing_plans);
 //        styling the input labels
         billingName.setFont(new Font("Verdana",Font.PLAIN,16));
-        amount.setFont(new Font("Verdana",Font.PLAIN,16));
-        period.setFont(new Font("Verdana",Font.PLAIN,16));
 //      styling the input fields
         billingNameInput.setBorder(new RoundedBorder(15));
-        amountInput.setBorder(new RoundedBorder(15));
-        periodInput.setBorder(new RoundedBorder(15));
 
         rightPanel.setLayout(new GridLayout(9,1, 0, 10));
         rightPanel.setBackground(Color.WHITE);
@@ -86,26 +100,11 @@ public class RegisterBill extends JFrame {
         billingNameLabelPanel.setLayout(new BorderLayout());
         billingNameLabelPanel.add(billingName,BorderLayout.SOUTH);
 
-        JPanel amountPanel = new JPanel();
-        amountPanel.setBackground(Color.WHITE);
-        amountPanel.setLayout(new BorderLayout());
-        amountPanel.add(amount,BorderLayout.SOUTH);
-
-        
-        JPanel periodPanel = new JPanel();
-        periodPanel.setBackground(Color.WHITE);
-        periodPanel.setLayout(new BorderLayout());
-        periodPanel.add(period,BorderLayout.SOUTH);
 
 
 
         rightPanel.add(billingNameLabelPanel);
         rightPanel.add(billingNameInput);
-        rightPanel.add(amountPanel);
-        rightPanel.add(amountInput);
-
-        rightPanel.add(periodPanel);
-        rightPanel.add(periodInput);
 
         createBtn.setPreferredSize(new Dimension(150,50));
         createBtn.setForeground(Color.WHITE);
@@ -118,7 +117,7 @@ public class RegisterBill extends JFrame {
         ));
 
         createBtn.setActionCommand("REGISTER");
-        createBtn.addActionListener(new ActionListen());
+        createBtn.addActionListener(new PurchasePlan.ActionListen());
 
         CreateButtonPanel.setBackground(Color.WHITE);
         CreateButtonPanel.add(createBtn, BorderLayout.WEST);
@@ -132,15 +131,11 @@ public class RegisterBill extends JFrame {
     }
 
 
-    public void registerBill()throws Exception{
-        String billName = billingNameInput.getText();
-        Integer billPrice = Integer.parseInt(amountInput.getText());
-        Integer billPeriod = Integer.parseInt(periodInput.getText());
+    public void purchasePlan()throws Exception{
+//        String billName = billingNameInput.;
 
         Billing billing = new Billing();
-        billing.setBilling_name(billName);
-        billing.setPrice(billPrice);
-        billing.setBilling_period(billPeriod);
+//        billing.setBilling_name(billName);
 //        System.out.println(billName+" "+billPrice+" "+billPeriod);
 
 //        send request to backend
@@ -160,25 +155,23 @@ public class RegisterBill extends JFrame {
 
         showMessageDialog(null,"Bill is registered successfully");
 
+
     }
 
     public class ActionListen implements ActionListener{
         @Override
-                public void actionPerformed(ActionEvent e){
-            setVisible(false);
+        public void actionPerformed(ActionEvent e){
             try {
-                registerBill();
-                new BillingTable();
+//                registerBill();
             } catch (Exception exception) {
-                setVisible(true);
                 exception.printStackTrace();
             }
         }
 
     }
 
-    public static void main(String[] args) {
-        new RegisterBill();
+    public static void main(String[] args) throws Exception {
+        new PurchasePlan();
     }
+
 }
-     
