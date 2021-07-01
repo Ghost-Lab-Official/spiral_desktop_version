@@ -1,8 +1,7 @@
-package client.Location;
+package Locations;
+//import  resultDetails.CommentPanel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,18 +9,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
-import server.Server.DbController.CloudStorageConnectionHandler;
-import  client.pages.RegisterLocation;
-import client.pages.RegisterLocationLevel;
-//import  server.Server.DbController.PropertyVariables;
+
+
 
 /**
- * @Author : pauline ishimwe
- * For view location page
- * **/
-
-
-public class LocationView {
+ * Author :pauline ishimwe
+ * for location page
+ **
+ * */
+public class LocationViews {
     private JFrame  window;
     private JPanel  panelHeader;
     private JPanel  mainPanel;
@@ -29,40 +25,22 @@ public class LocationView {
     private JButton levelButton;
     private JButton locationButton;
     private JPanel panel2;
-    private JTable locationsTable;
-    private Connection con;
 
-    public LocationView() throws Exception {
+    private JTable locationsTable;
+
+
+    String url = "jdbc:mysql://localhost:3306/spiral_db";
+    String userName = "root";
+    String password = "pauline";
+
+    public LocationViews() {
         LocationsInit();
     }
 
-    public class ActionListen implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            switch (e.getActionCommand()) {
-                case "ADD LOCATION":
-                    System.out.println("location");
-                    new RegisterLocation();
-                    break;
-                case "ADD LEVEL":
-                    System.out.println("new level");
-                    try {
-                        new RegisterLocationLevel();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid action");
-                    break;
-            }
-        }
-    }
 
 
     public void loadLocationTable(){
+
 
         panel2 = new JPanel();
         panel2.setBounds(50, 110, 1175, 500);
@@ -77,17 +55,16 @@ public class LocationView {
         locationsTable.setModel(model);
 
 
+
+
         JScrollPane sp = new JScrollPane(locationsTable);
         locationsTable.setRowHeight(50);
-//        locationsTable.setCellSelectionEnabled(false);
-
         locationsTable.setBorder(new LineBorder(Color.WHITE));
         locationsTable.setShowVerticalLines(false);
         locationsTable.setIntercellSpacing(new Dimension(0,0));
         locationsTable.getTableHeader().setBackground(Color.WHITE);
-        locationsTable.getTableHeader().setPreferredSize(new Dimension(sp.getWidth(),50));
+        locationsTable.getTableHeader().setPreferredSize(new Dimension(sp.getWidth(),40));
         locationsTable.getTableHeader().setFont(new Font("Nunito",Font.BOLD,14));
-
 
         String loc_name= "";
         String gps= "";
@@ -96,10 +73,11 @@ public class LocationView {
 
         try
         {
+//           ` Class.forName(driverName);`
+            Connection con = DriverManager.getConnection(url, userName, password);
             String sql = "select location_name,location_GPS,description,status from locations";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-
             int i =0;
             while(rs.next())
             {
@@ -131,15 +109,13 @@ public class LocationView {
                     JOptionPane.ERROR_MESSAGE);
         }
 
-        sp.setPreferredSize(new Dimension(1000,400));
+        sp.setPreferredSize(new Dimension(1175,400));
 
         panel2.setBackground(Color.WHITE);
         panel2.add(sp);
     };
 
-    public void LocationsInit() throws Exception {
-        CloudStorageConnectionHandler DbHandler = new CloudStorageConnectionHandler();
-        con= DbHandler.getConnection();
+    public void LocationsInit() {
         window = new JFrame("Location buttons");
         window.setSize(1375, 735);
         window.setLayout(null);
@@ -167,12 +143,9 @@ public class LocationView {
         levelButton.setBackground(Color.gray);
         levelButton.setFocusPainted(false);
         levelButton.setBorder(BorderFactory.createCompoundBorder(
-                new CustomBorder(),
+                new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
-        levelButton.setActionCommand("ADD LEVEL");
-        levelButton.addActionListener(new ActionListen());
-
 
 
 
@@ -184,11 +157,9 @@ public class LocationView {
         locationButton.setForeground(Color.WHITE);
         locationButton.setFocusPainted(false);
         locationButton.setBorder(BorderFactory.createCompoundBorder(
-                new CustomBorder(),
+                new LocationViews.CustomBorder(),
                 new EmptyBorder(new Insets(25, 25, 25, 25))
         ));
-        locationButton.setActionCommand("ADD LOCATION");
-        locationButton.addActionListener(new ActionListen());
 
 
 
@@ -215,8 +186,9 @@ public class LocationView {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        new LocationView();
+        new LocationViews();
     }
 }
+
