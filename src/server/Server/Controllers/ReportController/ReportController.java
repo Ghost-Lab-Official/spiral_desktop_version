@@ -106,9 +106,9 @@ public class ReportController {
                 return new SpotReportsActions().getReportForAnotherDay((String) request.getObject());
 
             case "viewHighlyRatedSpots":
-                return new SpotReportsActions().viewHighlyRatedSpots();
+//                return new SpotReportsActions().viewHighlyRatedSpots();
             case "viewRecentRegisteredSpots":
-                return new SpotReportsActions().viewRecentlyAddedSpots();
+//                return new SpotReportsActions().viewRecentlyAddedSpots();
             //                OTHER ACTIONS SHOULD GO HERE
 //            --------------------------------------
         }
