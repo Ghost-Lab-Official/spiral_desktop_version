@@ -7,10 +7,10 @@ import java.util.List;
  * @description: This is user category actions controller
  */
 
-import server.Server.DbController.CloudStorageConnectionHandler;
+
+
 import server.Server.Model.RequestBody;
 import server.Server.Model.ResponseStatus;
-import server.Server.Model.SpotCategory;
 import server.Server.Model.UserCategory;
 
 public class UserCategoryController {

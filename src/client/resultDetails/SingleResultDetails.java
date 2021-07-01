@@ -1,12 +1,12 @@
 package client.resultDetails;// Java program to illustrate the GridLayout
 import client.ClientMain.ClientServerConnector;
-import server.Server.Model.Comment;
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseBody;
-import server.Server.Model.SpotRatings;
+import client.result_list.ResultDetails;
+import server.Server.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
@@ -35,8 +35,8 @@ public class SingleResultDetails extends JFrame {
 
 
         LabelClickListener(int ratings){
-            this.rates=ratings;
-        }
+    this.rates=ratings;
+}
 
 
         public void mouseClicked(MouseEvent e) {
@@ -196,38 +196,38 @@ public class SingleResultDetails extends JFrame {
         // Initialization of object
         // "one" of JLabel class.
         resultDetailsTitle = new JLabel(spotName);
-
+       
         resultDetailsTitle.setFont(new Font("Montserrat", Font.BOLD,25));
         likes = new JLabel("Likes: 38.8k");
         likes.setFont(new Font("Nunito", Font.PLAIN,12));
         resultDetailsTitle.setBounds(350,100,400,30);
-
+      
         likes.setBounds(380,135,80,20);
         likes.setForeground(Color.decode("#878787"));
         int x=430;
-        CommentPanel ratingStars = new CommentPanel();
-        ImageIcon imageY =ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 20, 20);
-        ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
-        JLabel star1 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
-        star1.setBounds(x, 135, 80, 20);
-        star1.addMouseListener(new LabelClickListener(5));
+            CommentPanel ratingStars = new CommentPanel();
+            ImageIcon imageY =ratingStars.createImageIconResizeable("/client/images/star.png", "ratings", 20, 20);
+            ImageIcon imageB =ratingStars.createImageIconResizeable("/client/images/black_star.png", "ratings", 20, 20);
+            JLabel star1 = new JLabel((getRates(searchId)>=10)?imageY:imageB);
+            star1.setBounds(x, 135, 80, 20);
+            star1.addMouseListener(new LabelClickListener(5));
 
-        p2.add(star1);
-        x+=20;
-        JLabel star2 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
-        star2.setBounds(x, 135, 80, 20);
-        star2.addMouseListener(new LabelClickListener(10));
-        p2.add(star2);
-        x+=20;
-        JLabel star3 = new JLabel((getRates(searchId)>=30)?imageY:imageB);
-        star3.addMouseListener(new LabelClickListener(15));
-        star3.setBounds(x, 135, 80, 20);
-        p2.add(star3);
-        x+=20;
-        JLabel star4 = new JLabel((getRates(searchId)>=40)?imageY:imageB);
-        star4.addMouseListener(new LabelClickListener(20));
-        star4.setBounds(x, 135, 80, 20);
-        p2.add(star4);
+            p2.add(star1);
+            x+=20;
+            JLabel star2 = new JLabel((getRates(searchId)>=20)?imageY:imageB);
+            star2.setBounds(x, 135, 80, 20);
+            star2.addMouseListener(new LabelClickListener(10));
+            p2.add(star2);
+            x+=20;
+            JLabel star3 = new JLabel((getRates(searchId)>=30)?imageY:imageB);
+           star3.addMouseListener(new LabelClickListener(15));
+            star3.setBounds(x, 135, 80, 20);
+            p2.add(star3);
+            x+=20;
+            JLabel star4 = new JLabel((getRates(searchId)>=40)?imageY:imageB);
+            star4.addMouseListener(new LabelClickListener(20));
+            star4.setBounds(x, 135, 80, 20);
+            p2.add(star4);
 
 //        for (int i = 0;i<4;i++) {
 //            CommentPanel ratingStars = new CommentPanel();

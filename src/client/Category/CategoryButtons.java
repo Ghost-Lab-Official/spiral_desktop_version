@@ -1,16 +1,16 @@
     package client.Category;
 
     import client.ClientMain.ClientServerConnector;
-import client.resultDetails.CommentPanel;
-import server.Server.Model.RequestBody;
-import server.Server.Model.ResponseBody;
+    import client.resultDetails.CommentPanel;
+    import server.Server.Model.RequestBody;
+    import server.Server.Model.ResponseBody;
     import server.Server.Model.SpotCategory;
 
     import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+    import javax.swing.border.LineBorder;
+    import javax.swing.table.DefaultTableCellRenderer;
+    import javax.swing.table.DefaultTableModel;
+    import java.awt.*;
 
     public class CategoryButtons {
         private JFrame window;
@@ -58,7 +58,7 @@ import java.awt.*;
             }
         }
 
-        public void loadCategoryTable() throws Exception{
+        public void loadCategoryTable() throws Exception {
             /* Get all registered categories */
             RequestBody requestBody = new RequestBody();
             requestBody.setUrl("/sportCategory");
@@ -68,21 +68,20 @@ import java.awt.*;
             ClientServerConnector clientServerConnector = new ClientServerConnector();
             ResponseBody responseBody=  clientServerConnector.ConnectToServer(requestBody);
 
+            String[][] locationsData = new String[responseBody.getResponse().size()][4];
+
+            int index=0;
+            for (Object response: responseBody.getResponse()){
+                SpotCategory spotCategory = (SpotCategory) response;
+                locationsData[index][0] = String.valueOf(spotCategory.getCategoryId());
+                locationsData[index][1] = String.valueOf(spotCategory.getUserId());
+                locationsData[index][2] = String.valueOf(spotCategory.getCategoryName());
+                locationsData[index][3] = String.valueOf(spotCategory.getDescription());
+            }
             panel2 = new JPanel();
             panel2.setBounds(50, 110, 1175, 400);
 
             categoriesTable = new JTable();
-            String[] columns = {"Category id","User id","Category name", "Description"};
-            DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(columns);
-            categoriesTable.setModel(model);
-
-            for (Object response: responseBody.getResponse()){
-                SpotCategory spotCategory = (SpotCategory) response;
-                ImageIcon delete = createImageIcon("/client/images/delete.png","delete");
-                model.addRow(new Object[]{String.valueOf(spotCategory.getCategoryId()),String.valueOf(spotCategory.getUserId()),String.valueOf(spotCategory.getCategoryName()),String.valueOf(spotCategory.getDescription()),delete});
-            }
-
             JScrollPane sp = new JScrollPane(categoriesTable);
             categoriesTable.setRowHeight(50);
             categoriesTable.setBorder(new LineBorder(Color.WHITE));
