@@ -46,10 +46,12 @@ public class UserTopNav extends JFrame {
         ImageIcon logoImage = new ImageIcon("src/client/images/spirallogo.png");
         JLabel logoImg = new JLabel(logoImage);
         logoPanel.add(logoImg);
+        logoPanel.setBounds(-10,-15,300,100);
         navigationPanel.add(logoPanel, BorderLayout.WEST);
 
         JPanel searchPanel = new JPanel();
-        searchPanel.setSize(600,300);
+//        searchPanel.setSize(600,300);
+        searchPanel.setBounds(250,-10,600,300);
         JTextField searchInput=new JTextField("Search",30);
         searchInput.setBorder(new RoundedBoarder(10));
         searchInput.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -76,6 +78,8 @@ public class UserTopNav extends JFrame {
         JLabel username = new JLabel("Nyirakamana");
         profilePanel.add(username);
         profilePanel.add(profileImg);
+//        navigationPanel.setLayout(null);
+//        navigationPanel.setBounds(400,0,200,200);
         navigationPanel.add(profilePanel, BorderLayout.EAST);
 
         navigationPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));

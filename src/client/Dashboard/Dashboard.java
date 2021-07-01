@@ -207,6 +207,12 @@ public class Dashboard {
         for(Object Response: responseBody.getResponse()) {
             SpotsReport SpotsReport=(server.Server.Model.SpotsReport) Response;
             displayRatesCardData(SpotsReport.getSpot_name());
+//            img8 = ImageIO.read(new File("src\\client\\images\\users2.png"));
+//            icon8 = new ImageIcon(img8.getScaledInstance(40,40,BufferedImage.SCALE_DEFAULT));
+//            users2IconLabel = new JLabel();
+//            users2IconLabel.setBounds(80,15,400,40);
+//            users2IconLabel.setIcon(icon8);
+//            recentRegisteredSpots.add(usersIconLabel);
         }
 
         JLabel recentRegisterdSpotsLabelTitle=new JLabel("Recent registered spots");
