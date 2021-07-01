@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * @author Mutoni Uwingeneye Denyse
+ * @author Mutoni Uwingeneye Denyse and Kwizera Emmanuel
  */
 public class Landing extends JFrame{
     private final Color textColor = Color.decode("#283A6D");
