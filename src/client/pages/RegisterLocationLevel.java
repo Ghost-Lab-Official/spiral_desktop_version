@@ -90,7 +90,7 @@ public class RegisterLocationLevel {
         registerLocationLevelWindow.setVisible(true);
     }
 
-    public void userRegister() throws Exception {
+    public void registerLocationLevel() throws Exception {
         String level_name = levelText.getText();
         String description = descriptionText.getText();
         String level_id = UUID.randomUUID().toString();
@@ -123,7 +123,7 @@ public class RegisterLocationLevel {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                userRegister();
+                registerLocationLevel();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
