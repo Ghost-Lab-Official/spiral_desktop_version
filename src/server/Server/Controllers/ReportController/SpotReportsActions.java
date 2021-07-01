@@ -1,7 +1,8 @@
 package server.Server.Controllers.ReportController;
 
+
+import client.DbController.CloudStorageConnectionHandler;
 import server.Server.Controllers.UserModuleControllers.CounterResponse;
-import server.Server.DbController.CloudStorageConnectionHandler;
 import server.Server.Model.SpotsReport;
 
 import java.sql.Connection;
@@ -10,307 +11,133 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
-/**
- * @author Ange Nicole Mukundwa
- * description This class is intended to define all methods that carry out each and every operation or kind of report that an admin need on spots. he she can need the list of all spots, statistical information , as well as reports according to time
- * so, in this class that's where every kind of report  related to spots is defined.
- * @throws Exception
- * @return
- */
+
+ /**
+         * @author Ange Nicole Mukundwa
+         * description This class is intended to define all methods that carry out each and every operation or kind of report that an admin need on spots. he she can need the list of all spots, statistical information , as well as reports according to time
+         * so, in this class that's where every kind of report  related to spots is defined.
+         * @throws Exception
+         * @return
+         */
 
 public class SpotReportsActions {
 
-  public List<Object> getTheTotalNumbersOfTrendingSpots() throws Exception {
-    List<Object> counts = new ArrayList<>();
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    try {
-      Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(
-        "SELECT count(*) FROM Spot_table where views > 10"
-      );
 
-      int result = 0;
-      while (rs.next()) {
-        result = rs.getInt(1);
-      }
+        public List<Object>  getTheTotalNumbersOfTrendingSpots() throws Exception {
+            List<Object> counts = new ArrayList<>();
+            CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+            Connection connection= cloudStorageConnection.getConnection();
+            try{
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT count(*) FROM Spot_table where views > 10");
 
-      CounterResponse counterResponse = new CounterResponse(result);
-      counts.add((Object) counterResponse);
+                int result = 0;
+                while(rs.next()){
+                    result=rs.getInt(1);
+                }
 
-      connection.close();
-      return counts;
-    } catch (Exception e) {
-      CounterResponse counterResponse = new CounterResponse(0);
-      counts.add((Object) counterResponse);
+                CounterResponse counterResponse = new CounterResponse(result);
+                counts.add((Object) counterResponse);
+
+                connection.close();
+                return counts;
+            }
+
+            catch (Exception e){
+                CounterResponse counterResponse = new CounterResponse(0);
+                counts.add((Object) counterResponse);
+            }
+
+            return counts;
+        }
+
+
+        public List<Object> getTheTotalNumberOfActiveSpots() throws Exception {
+
+
+                List<Object> counts = new ArrayList<>();
+                CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+                Connection connection = cloudStorageConnection.getConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("select count(spot_name) from Spot_table where status='active'");
+            try {
+                int result = 0;
+                while(rs.next()){
+                    result=rs.getInt(1);
+                }
+
+                CounterResponse counterResponse = new CounterResponse(result);
+                counts.add((Object) counterResponse);
+
+                connection.close();
+                return counts;
+            }
+
+            catch (Exception e){
+                CounterResponse counterResponse = new CounterResponse(0);
+                counts.add((Object) counterResponse);
+            }
+
+            return counts;
     }
 
-    return counts;
-  }
+        public List<Object>  getTheTotalNumberOfInactiveSpots() throws Exception {
+            List<Object> counts = new ArrayList<>();
+            CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+            Connection connection= cloudStorageConnection.getConnection();
+            try{
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT count(spot_name) FROM Spot_table where status='inactive'");
 
-  public List<Object> getTheTotalNumberOfActiveSpots() throws Exception {
-    List<Object> counts = new ArrayList<>();
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery(
-      "select count(spot_name) from Spot_table where status='active'"
-    );
-    try {
-      int result = 0;
-      while (rs.next()) {
-        result = rs.getInt(1);
-      }
+                int result = 0;
+                while(rs.next()){
+                    result=rs.getInt(1);
+                }
 
-      CounterResponse counterResponse = new CounterResponse(result);
-      counts.add((Object) counterResponse);
+                CounterResponse counterResponse = new CounterResponse(result);
+                counts.add((Object) counterResponse);
 
-      connection.close();
-      return counts;
-    } catch (Exception e) {
-      CounterResponse counterResponse = new CounterResponse(0);
-      counts.add((Object) counterResponse);
-    }
+                connection.close();
+                return counts;
+            }
 
-    return counts;
-  }
+            catch (Exception e){
+                CounterResponse counterResponse = new CounterResponse(0);
+                counts.add((Object) counterResponse);
+            }
 
-  public List<Object> getTheTotalNumberOfInactiveSpots() throws Exception {
-    List<Object> counts = new ArrayList<>();
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    try {
-      Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(
-        "SELECT count(spot_name) FROM Spot_table where status='inactive'"
-      );
+            return counts;
+        }
 
-      int result = 0;
-      while (rs.next()) {
-        result = rs.getInt(1);
-      }
 
-      CounterResponse counterResponse = new CounterResponse(result);
-      counts.add((Object) counterResponse);
+    public List<Object>  getTheTotalNumbersOfRegisteredSpots() throws Exception {
+        List<Object> counts = new ArrayList<>();
+        CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
+        Connection connection= cloudStorageConnection.getConnection();
+       try{
+           Statement stmt = connection.createStatement();
+           ResultSet rs = stmt.executeQuery("SELECT count(*) FROM Spot_table");
 
-      connection.close();
-      return counts;
-    } catch (Exception e) {
-      CounterResponse counterResponse = new CounterResponse(0);
-      counts.add((Object) counterResponse);
-    }
+           int result = 0;
+           while(rs.next()){
+               result=rs.getInt(1);
+           }
 
-    return counts;
-  }
+           CounterResponse counterResponse = new CounterResponse(result);
+           counts.add((Object) counterResponse);
 
-  public List<Object> getTheTotalNumbersOfRegisteredSpots() throws Exception {
-    List<Object> counts = new ArrayList<>();
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    try {
-      Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery("SELECT count(*) FROM Spot_table");
+           connection.close();
+           return counts;
+       }
 
-      int result = 0;
-      while (rs.next()) {
-        result = rs.getInt(1);
-      }
+       catch (Exception e){
+           CounterResponse counterResponse = new CounterResponse(0);
+            counts.add((Object) counterResponse);
+       }
 
-      CounterResponse counterResponse = new CounterResponse(result);
-      counts.add((Object) counterResponse);
-
-      connection.close();
-      return counts;
-    } catch (Exception e) {
-      CounterResponse counterResponse = new CounterResponse(0);
-      counts.add((Object) counterResponse);
-    }
-
-    return counts;
-  }
-
-  public List<Object> viewAllSpots() throws Exception {
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery(
-      "SELECT Spot_table.spot_id,users_table.user_name,spot_category.category_name," +
-      "Spot_table.spot_name,locations.location_id,Spot_table.spot_description,Spot_table.views,Spot_table.status," +
-      "Spot_table.registration_date " +
-      "FROM `Spot_table` LEFT JOIN users_table ON users_table.user_id = Spot_table.user_id " +
-      "LEFT JOIN spot_category ON " +
-      "spot_category.category_id = Spot_table.category_id LEFT JOIN locations on " +
-      getlocations() +
-      ".location_id = Spot_table.location_id"
-    );
-    List<Object> AllSpots = new ArrayList<>();
-    while (rs.next()) {
-      SpotsReport mySpots = new SpotsReport(
-        rs.getString("spot_id"),
-        rs.getString("user_name"),
-        rs.getString("category_name"),
-        rs.getString("location_id"),
-        rs.getString("spot_name"),
-        rs.getString("spot_description"),
-        rs.getDouble("views"),
-        rs.getString("status"),
-        rs.getString("registration_date")
-      );
-      AllSpots.add((Object) mySpots);
-    }
-
-    connection.close();
-
-    return AllSpots;
-  }
-
-  private static String getlocations() {
-    return "locations";
-  }
-
-  public List<Object> viewAllInactiveSpots() throws Exception {
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stmnt = connection.createStatement();
-    String query =
-      "SELECT Spot_table.spot_id,users_table.user_name,spot_category.category_name," +
-      "Spot_table.spot_name,locations.location_id,Spot_table.spot_description,Spot_table.views,Spot_table.status," +
-      "Spot_table.registration_date " +
-      "FROM `Spot_table` LEFT JOIN users_table ON users_table.user_id = Spot_table.user_id " +
-      "LEFT JOIN spot_category ON " +
-      "spot_category.category_id = Spot_table.category_id LEFT JOIN locations on " +
-      "locations.location_id = Spot_table.location_id" +
-      " WHERE Spot_table.status ='inactive'";
-    ResultSet resultset = stmnt.executeQuery(query);
-    List<Object> AllSpots = new ArrayList<>();
-
-    while (resultset.next()) {
-      SpotsReport mySpots = new SpotsReport(
-        resultset.getString("spot_id"),
-        resultset.getString("user_name"),
-        resultset.getString("category_name"),
-        resultset.getString("location_id"),
-        resultset.getString("spot_name"),
-        resultset.getString("spot_description"),
-        resultset.getDouble("views"),
-        resultset.getString("status"),
-        resultset.getString("registration_date")
-      );
-      AllSpots.add((Object) mySpots);
-    }
-
-    connection.close();
-
-    return AllSpots;
-  }
-
-  public List<Object> viewHighlyRatedSpots() throws Exception {
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stmnt = connection.createStatement();
-    String query =
-      "SELECT Spot_table.spot_id,users_table.user_name,spot_category.category_name," +
-      "Spot_table.spot_name,locations.location_id,Spot_table.spot_description,Spot_table.views,Spot_table.status," +
-      "Spot_table.registration_date " +
-      "FROM `Spot_table` LEFT JOIN users_table ON users_table.user_id = Spot_table.user_id " +
-      "LEFT JOIN spot_category ON " +
-      "spot_category.category_id = Spot_table.category_id LEFT JOIN locations on " +
-      "locations.location_id = Spot_table.location_id" +
-      "WHERE spot_table.rates in (select distinct top 5 rates from spot_table order by rates desc";
-    ResultSet resultset = stmnt.executeQuery(query);
-    List<Object> AllSpots = new ArrayList<>();
-
-    while (resultset.next()) {
-      SpotsReport mySpots = new SpotsReport(
-        resultset.getString("spot_id"),
-        resultset.getString("user_name"),
-        resultset.getString("category_name"),
-        resultset.getString("location_id"),
-        resultset.getString("spot_name"),
-        resultset.getString("spot_description"),
-        resultset.getDouble("views"),
-        resultset.getString("status"),
-        resultset.getString("registration_date")
-      );
-      AllSpots.add((Object) mySpots);
-    }
-
-    connection.close();
-
-    return AllSpots;
-  }
-
-  public List<Object> ViewHighlyVisitedSpots() throws Exception {
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stment = connection.createStatement();
-    String querry =
-      "SELECT Spot_table.spot_id , Spot_table.spot_name , Spot_table.spot_description ," +
-      " Spot_table.status , Spot_table.views  , Spot_table.registration_date ," +
-      " users_table.user_name , locations.location_name , spot_category.category_name from Spot_table " +
-      "left join users_table on Spot_table.user_id=users_table.user_id" +
-      " left join locations on Spot_table.location_id = locations.location_id" +
-      " left join spot_category on Spot_table.category_id = spot_category.category_id " +
-      "WHERE Spot_table.status ='active' AND Spot_table.views > 10 LIMIT 5";
-    ResultSet resultset = stment.executeQuery(querry);
-
-    List<Object> AllSpots = new ArrayList<>();
-    while (resultset.next()) {
-      SpotsReport mySpots = new SpotsReport(
-        resultset.getString("spot_id"),
-        resultset.getString("user_name"),
-        resultset.getString("category_name"),
-        resultset.getString("location_id"),
-        resultset.getString("spot_name"),
-        resultset.getString("spot_description"),
-        resultset.getDouble("views"),
-        resultset.getString("status"),
-        resultset.getString("registration_date")
-      );
-      AllSpots.add((Object) mySpots);
-    }
-
-    connection.close();
-
-    return AllSpots;
-  }
-
-  public List<Object> viewAllActiveSpots() throws Exception {
-    CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-    Connection connection = cloudStorageConnection.getConnection();
-    Statement stmt = connection.createStatement();
-
-    String query =
-      "SELECT Spot_table.spot_id,users_table.user_name,spot_category.category_name," +
-      "Spot_table.spot_name,locations.location_id,Spot_table.spot_description,Spot_table.views,Spot_table.status," +
-      "Spot_table.registration_date " +
-      "FROM `Spot_table` LEFT JOIN users_table ON users_table.user_id = Spot_table.user_id " +
-      "LEFT JOIN spot_category ON " +
-      "spot_category.category_id = Spot_table.category_id LEFT JOIN locations on " +
-      "locations.location_id = Spot_table.location_id" +
-      " WHERE Spot_table.status ='active'";
-    System.out.println(query);
-    ResultSet rs = stmt.executeQuery(query);
-
-    List<Object> AllSpots = new ArrayList<>();
-    while (rs.next()) {
-      SpotsReport mySpots = new SpotsReport(
-        rs.getString("spot_id"),
-        rs.getString("user_name"),
-        rs.getString("category_name"),
-        rs.getString("location_id"),
-        rs.getString("spot_name"),
-        rs.getString("spot_description"),
-        rs.getDouble("views"),
-        rs.getString("status"),
-        rs.getString("registration_date")
-      );
-      AllSpots.add((Object) mySpots);
+       return counts;
     }
 
         public List<Object> viewAllSpots() throws Exception {
@@ -384,35 +211,7 @@ public class SpotReportsActions {
 
             return AllSpots;
         }
-
-
-
-     public List<Object>  viewHighlyRatedSpots() throws Exception{
-         CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-         Connection connection= cloudStorageConnection.getConnection();
-         Statement stmnt = connection.createStatement();
-         String query= "SELECT Spot_table.spot_id,users_table.user_name,spot_category.category_name, Spot_table.spot_name,locations.location_id,Spot_table.spot_description,Spot_table.views,Spot_table.status, Spot_table.registration_date FROM `Spot_table` LEFT JOIN users_table ON users_table.user_id = Spot_table.user_id LEFT JOIN spot_category ON spot_category.category_id = Spot_table.category_id LEFT JOIN locations on locations.location_id = Spot_table.location_id ORDER BY rates DESC LIMIT 3\n";
-         ResultSet resultset=stmnt.executeQuery(query);
-         List <Object> AllSpots = new ArrayList<>();
-         while (resultset.next()) {
-             SpotsReport  mySpots = new SpotsReport(
-                     resultset.getString("spot_id"),
-                     resultset.getString("user_name"),
-                     resultset.getString("category_name"),
-                     resultset.getString("location_id"),
-                     resultset.getString("spot_name"),
-                     resultset.getString("spot_description"),
-                     resultset.getDouble("views"),
-                     resultset.getString("status"),
-                     resultset.getString("registration_date")
-             );
-             AllSpots.add((Object)mySpots);
-         }
-         connection.close();
-         return AllSpots;
-     }
-
-     public List<Object> ViewHighlyVisitedSpots() throws Exception{
+        public List<Object> ViewHighlyVisitedSpots() throws Exception{
             CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
             Connection connection = cloudStorageConnection.getConnection();
             Statement stment = connection.createStatement();
@@ -422,7 +221,7 @@ public class SpotReportsActions {
                     "left join users_table on Spot_table.user_id=users_table.user_id" +
                     " left join locations on Spot_table.location_id = locations.location_id" +
                     " left join spot_category on Spot_table.category_id = spot_category.category_id " +
-                    "WHERE Spot_table.status ='active' AND Spot_table.views > 10 LIMIT 5";
+                    "WHERE Spot_table.status ='active' AND Spot_table.views > 10";
             ResultSet resultset = stment.executeQuery(querry);
 
             List <Object> AllSpots = new ArrayList<>();
@@ -684,7 +483,7 @@ public class SpotReportsActions {
                             resultSet.getString("spot_description"),
                             resultSet.getDouble("views"),
                             resultSet.getString("status"),
-                            resultSet.getString("registration_date"));
+                            resultSet.getString("registration_date")                    );
 
                     reportForAnotherDay.add((Object)spots);
                 }
@@ -745,71 +544,5 @@ public class SpotReportsActions {
             }
 
         }
-        public static List<List> printDataOnLineChart(){
-            List<List> data = new ArrayList<List>();
-            try{
-                CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-                Connection connection = cloudStorageConnection.getConnection();
-                Statement statement = connection.createStatement();
-                String castedYear;
-                Set<Integer> years = new HashSet<Integer>();
-                List<Integer> yearsList = new ArrayList<Integer>();
-                List<Integer> spots = new ArrayList<>();
-                Set<String> castedYears = new HashSet<String>();
-                String number_of_years = "SELECT EXTRACT(YEAR FROM registration_date) FROM Spot_table";
-                ResultSet resultSet = statement.executeQuery(number_of_years);
-                while (resultSet.next()){
-                years.add(Integer.parseInt(resultSet.getString(1)));
-                }
-                yearsList.addAll(years);
-                for(Integer spotYear: yearsList) {
-                    castedYear= spotYear.toString();
-                    castedYears.add(castedYear);
-                    String spotsNumber = "SELECT COUNT(spot_id) FROM Spot_table WHERE (SELECT EXTRACT(YEAR FROM registration_date)='"+castedYear+"')";
-                    ResultSet resultSet2 = statement.executeQuery(spotsNumber);
-                   while (resultSet2.next()){
-                       spots.add(Integer.parseInt(resultSet2.getString(1)));
-                   }
-                }
-                data.add(spots);
-                data.add(yearsList);
-                System.out.println(data);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-            return data;
-        }
 
-     public List<Object> viewRecentlyAddedSpots()throws Exception{
-         CloudStorageConnectionHandler cloudStorageConnection = new CloudStorageConnectionHandler();
-         Connection connection= cloudStorageConnection.getConnection();
-         Statement stmnt = connection.createStatement();
-         String query= "SELECT * FROM `Spot_table` LIMIT 5";
-         ResultSet resultset=stmnt.executeQuery(query);
-         List <Object> AllSpots = new ArrayList<>();
-         while (resultset.next()) {
-             SpotsReport  mySpots = new SpotsReport(
-                     resultset.getString("spot_id"),
-                     resultset.getString("user_id"),
-                     resultset.getString("category_id"),
-                     resultset.getString("location_id"),
-                     resultset.getString("spot_name"),
-                     resultset.getString("spot_description"),
-                     resultset.getDouble("views"),
-                     resultset.getString("status"),
-                     resultset.getString("registration_date")
-             );
-             AllSpots.add((Object)mySpots);
-         }
-         connection.close();
-         return AllSpots;
-     }
-
-     public static void main(String[] args) {
-
-         SpotReportsActions spotReportsActions = new SpotReportsActions();
-         spotReportsActions.printDataOnLineChart();
-
-     }
 }

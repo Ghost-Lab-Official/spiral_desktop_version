@@ -13,7 +13,11 @@ import javax.swing.JMenuBar;
 
 public class CheckBoxMenuItemEx extends JFrame {
 
-    private JLabel statusBar;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel statusBar;
 
     public CheckBoxMenuItemEx() {
 
@@ -36,8 +40,8 @@ public class CheckBoxMenuItemEx extends JFrame {
 
     private void createMenuBar() {
 
-        var menuBar = new JMenuBar();
-        var fileMenu = new JMenu("File");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
         var viewMenu = new JMenu("View");
